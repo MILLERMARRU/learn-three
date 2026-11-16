@@ -1,0 +1,5 @@
+# finales de línea normalizados (LF en el repo)
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.ico binary
