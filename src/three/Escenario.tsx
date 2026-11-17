@@ -26,9 +26,11 @@ export interface EscenarioProps {
   centro?: [number, number];
   /** Cuando cambia (nuevo ejercicio), el giro hecho con el mouse vuelve suave a su sitio. */
   vista?: string;
+  /** La escena está bajo el HUD de una etapa: el corrimiento lateral (`centro[0]`) solo se aplica cuando el enunciado flota encima (escritorio ancho). */
+  hud?: boolean;
 }
 
-export function Escenario({ children, encuadre = { w: 6, h: 5 }, balanceo = 0.14, arrastrable = true, className = "", centro = [0, 0], vista = "" }: EscenarioProps) {
+export function Escenario({ children, encuadre = { w: 6, h: 5 }, balanceo = 0.14, arrastrable = true, className = "", centro = [0, 0], vista = "", hud = false }: EscenarioProps) {
   const arrastre = useRef<Arrastre>({ x: 0, y: 0, activo: false, ultimo: 0, px: 0, py: 0 });
 
   useEffect(() => {
@@ -81,7 +83,7 @@ export function Escenario({ children, encuadre = { w: 6, h: 5 }, balanceo = 0.14
         }}
       >
         <Luces />
-        <Encuadre w={encuadre.w} h={encuadre.h} centro={centro} />
+        <Encuadre w={encuadre.w} h={encuadre.h} centro={centro} hud={hud} />
         <Balanceo arrastre={arrastre} amplitud={balanceo} vista={vista}>
           {children}
         </Balanceo>
@@ -106,14 +108,20 @@ function Luces() {
 }
 
 // Aleja o acerca la cámara para que el encuadre pedido quepa en cualquier proporción de pantalla
-function Encuadre({ w, h, centro }: { w: number; h: number; centro: [number, number] }) {
+// con el enunciado al costado o debajo (≤ 1400 px) no hace falta correr la escena
+const ENUNCIADO_ENCIMA = typeof window !== "undefined" ? window.matchMedia("(min-width: 1401px)") : null;
+
+function Encuadre({ w, h, centro, hud }: { w: number; h: number; centro: [number, number]; hud: boolean }) {
   const { camera, size } = useThree();
   useFrame((_, dt) => {
     const cam = camera as THREE.PerspectiveCamera;
     const t = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2));
     const aspecto = size.width / Math.max(1, size.height);
-    const d = Math.max(h / 2 / t, w / 2 / (t * aspecto));
-    cam.position.x = THREE.MathUtils.damp(cam.position.x, centro[0], 4, dt);
+    // sin el enunciado encima la escena va centrada: un poco de aire a los costados para sus etiquetas
+    const margen = hud && !ENUNCIADO_ENCIMA?.matches ? 1.1 : 1;
+    const d = Math.max(h / 2 / t, (w * margen) / 2 / (t * aspecto));
+    const cx = hud && !ENUNCIADO_ENCIMA?.matches ? 0 : centro[0];
+    cam.position.x = THREE.MathUtils.damp(cam.position.x, cx, 4, dt);
     cam.position.y = THREE.MathUtils.damp(cam.position.y, centro[1], 4, dt);
     cam.position.z = THREE.MathUtils.damp(cam.position.z, d, 4, dt);
     cam.lookAt(cam.position.x, cam.position.y, 0);
