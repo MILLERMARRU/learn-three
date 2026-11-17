@@ -41,5 +41,8 @@ export const simularTecla = (k: string) => {
   window.dispatchEvent(new KeyboardEvent("keydown", { key: mapa[k] ?? k }));
 };
 
+/** Carrusel de pistas: la siguiente espera chica a la derecha, en el mismo plano y sin girar (la pista mide 10 u; la miniatura deja ~1,4 u de hueco). */
+export const CARRUSEL_PISTA = { paso: 8.3, escala: 0.33, fondo: 0, giro: 0 };
+
 /** Encuadre común de las escenas de pista (el contenido se corre a la derecha por el enunciado). */
 export const ESCENARIO_PISTA = { encuadre: { w: 10.5, h: 7.2 }, balanceo: 0.04, arrastrable: false, centro: [-0.8, 0.1] as [number, number] };

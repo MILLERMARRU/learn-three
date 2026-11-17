@@ -21,16 +21,20 @@ interface Props<T> {
   paso?: number;
   /** Escala del ejercicio que espera a la derecha. */
   escala?: number;
+  /** Profundidad (z) del que espera; 0 = mismo plano, así nunca se cruza con el actual por la perspectiva. */
+  fondo?: number;
+  /** Giro en Y del que espera (radianes). */
+  giro?: number;
 }
 
-export function CarruselItems<T>({ items, indice, render, paso = 6, escala = 0.42 }: Props<T>) {
+export function CarruselItems<T>({ items, indice, render, paso = 6, escala = 0.42, fondo = -3, giro = 0.45 }: Props<T>) {
   return (
     <>
       {items.map((it, i) => {
         const off = i - indice;
         if (off < -1 || off > 1) return null;
         return (
-          <Ranura key={it.clave} off={off} paso={paso} escala={escala}>
+          <Ranura key={it.clave} off={off} paso={paso} escala={escala} fondo={fondo} giro={giro}>
             {render(it.item, off === 0 ? "actual" : off > 0 ? "siguiente" : "anterior", it.r)}
           </Ranura>
         );
@@ -39,7 +43,7 @@ export function CarruselItems<T>({ items, indice, render, paso = 6, escala = 0.4
   );
 }
 
-function Ranura({ off, paso, escala, children }: { off: number; paso: number; escala: number; children: ReactNode }) {
+function Ranura({ off, paso, escala, fondo, giro, children }: { off: number; paso: number; escala: number; fondo: number; giro: number; children: ReactNode }) {
   const g = useRef<THREE.Group>(null!);
   const s = useRef({ init: false, esc: 0 });
   useFrame((_, dtCrudo) => {
@@ -48,7 +52,7 @@ function Ranura({ off, paso, escala, children }: { off: number; paso: number; es
     // actual: centro y tamaño completo · siguiente: a la derecha, chico y al fondo · anterior: sale por la izquierda
     const x = off * paso;
     const y = off === 0 ? 0 : -0.35;
-    const z = off === 0 ? 0 : -3;
+    const z = off === 0 ? 0 : fondo;
     const esc = off === 0 ? 1 : off > 0 ? escala : 0.001;
     if (!S.init) {
       S.init = true;
@@ -62,7 +66,7 @@ function Ranura({ off, paso, escala, children }: { off: number; paso: number; es
     p.z = THREE.MathUtils.damp(p.z, z, 4, dt);
     S.esc = THREE.MathUtils.damp(S.esc, esc, off < 0 ? 6 : 4, dt);
     g.current.scale.setScalar(Math.max(0.001, S.esc));
-    g.current.rotation.y = THREE.MathUtils.damp(g.current.rotation.y, off === 0 ? 0 : -0.45 * Math.sign(off), 4, dt);
+    g.current.rotation.y = THREE.MathUtils.damp(g.current.rotation.y, off === 0 ? 0 : -giro * Math.sign(off), 4, dt);
     g.current.visible = S.esc > 0.01;
   });
   return <group ref={g}>{children}</group>;

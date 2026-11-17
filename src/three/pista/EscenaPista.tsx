@@ -36,7 +36,7 @@ interface Props {
   onFin?: (x: number[]) => void;
   etiquetas?: boolean;
   exito?: boolean;
-  /** Vista previa del carrusel: sin etiquetas y con este rótulo debajo. */
+  /** Vista previa del carrusel: sin etiquetas; si el texto no está vacío, se muestra como rótulo debajo. */
   previa?: string;
 }
 
@@ -54,7 +54,7 @@ export function estado(m: Movil, t: number) {
 const fmt = (n: number, d = 1) => n.toFixed(d).replace(".", ",").replace(/,0$/, "");
 
 export function EscenaPista({ L, cada = 10, moviles, marcas = [], bandera, fantasma, corrida, onFin, etiquetas: conEtiquetas = true, exito = false, previa }: Props) {
-  const etiquetas = conEtiquetas && !previa;
+  const etiquetas = conEtiquetas && previa === undefined;
   const K = LARGO / L;
   const X = (m: number) => (m - L / 2) * K;
   const autos = useRef<(THREE.Group | null)[]>([]);
@@ -251,7 +251,7 @@ export function EscenaPista({ L, cada = 10, moviles, marcas = [], bandera, fanta
         </Etiqueta>
       )}
       {previa && (
-        <Etiqueta position={[0, -0.1, ANCHO / 2 + 2.6]} className="etq-siguiente">
+        <Etiqueta position={[0, -0.1, ANCHO / 2 + 3.2]} className="etq-siguiente">
           <span>siguiente</span> {previa}
         </Etiqueta>
       )}

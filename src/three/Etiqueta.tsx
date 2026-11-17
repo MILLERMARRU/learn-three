@@ -37,7 +37,7 @@ export function Etiqueta({ position = [0, 0, 0], children, className = "", visib
   });
 
   useFrame(() => {
-    if (!visible) {
+    if (!visible || !visibleEnArbol(ancla.current)) {
       el.style.display = "none";
       return;
     }
@@ -51,4 +51,10 @@ export function Etiqueta({ position = [0, 0, 0], children, className = "", visib
   });
 
   return <group ref={ancla} position={position} />;
+}
+
+/** true si el objeto y todos sus padres están visibles. */
+function visibleEnArbol(o: THREE.Object3D | null): boolean {
+  for (let x = o; x; x = x.parent) if (!x.visible) return false;
+  return true;
 }
