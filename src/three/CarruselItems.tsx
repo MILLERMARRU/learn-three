@@ -25,16 +25,21 @@ interface Props<T> {
   fondo?: number;
   /** Giro en Y del que espera (radianes). */
   giro?: number;
+  /**
+   * Ancho del ejercicio (unidades 3D). Si se indica, paso y escala se ajustan a lo que se ve en pantalla:
+   * el siguiente queda dentro del borde derecho y sin tocar al actual. Requiere fondo = 0.
+   */
+  ancho?: number;
 }
 
-export function CarruselItems<T>({ items, indice, render, paso = 6, escala = 0.42, fondo = -3, giro = 0.45 }: Props<T>) {
+export function CarruselItems<T>({ items, indice, render, paso = 6, escala = 0.42, fondo = -3, giro = 0.45, ancho }: Props<T>) {
   return (
     <>
       {items.map((it, i) => {
         const off = i - indice;
         if (off < -1 || off > 1) return null;
         return (
-          <Ranura key={it.clave} off={off} paso={paso} escala={escala} fondo={fondo} giro={giro}>
+          <Ranura key={it.clave} off={off} paso={paso} escala={escala} fondo={fondo} giro={giro} ancho={ancho}>
             {render(it.item, off === 0 ? "actual" : off > 0 ? "siguiente" : "anterior", it.r)}
           </Ranura>
         );
@@ -43,21 +48,35 @@ export function CarruselItems<T>({ items, indice, render, paso = 6, escala = 0.4
   );
 }
 
-function Ranura({ off, paso, escala, fondo, giro, children }: { off: number; paso: number; escala: number; fondo: number; giro: number; children: ReactNode }) {
+const HUECO = 0.5; // separación mínima entre el actual y el siguiente
+const MARGEN = 0.35; // distancia al borde derecho de la pantalla
+
+function Ranura({ off, paso, escala, fondo, giro, ancho, children }: { off: number; paso: number; escala: number; fondo: number; giro: number; ancho?: number; children: ReactNode }) {
   const g = useRef<THREE.Group>(null!);
   const s = useRef({ init: false, esc: 0 });
-  useFrame((_, dtCrudo) => {
+  useFrame((state, dtCrudo) => {
     const dt = Math.min(0.05, dtCrudo);
     const S = s.current;
+    // paso y escala que caben en lo visible (borde derecho en el plano z = 0)
+    let pasoV = paso;
+    let escV = escala;
+    if (ancho) {
+      const cam = state.camera as THREE.PerspectiveCamera;
+      const alto = 2 * Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)) * cam.position.z;
+      const borde = cam.position.x + (alto * state.size.width) / Math.max(1, state.size.height) / 2 - MARGEN;
+      const libre = borde - (ancho / 2 + HUECO);
+      escV = Math.min(escala, Math.max(0.18, libre / ancho));
+      pasoV = Math.max(ancho / 2 + HUECO + (ancho * escV) / 2, Math.min(paso, borde - (ancho * escV) / 2));
+    }
     // actual: centro y tamaño completo · siguiente: a la derecha, chico y al fondo · anterior: sale por la izquierda
-    const x = off * paso;
+    const x = off * pasoV;
     const y = off === 0 ? 0 : -0.35;
     const z = off === 0 ? 0 : fondo;
-    const esc = off === 0 ? 1 : off > 0 ? escala : 0.001;
+    const esc = off === 0 ? 1 : off > 0 ? escV : 0.001;
     if (!S.init) {
       S.init = true;
       // la que aparece por primera vez entra desde más a la derecha
-      g.current.position.set(x + (off >= 0 ? paso * 0.7 : 0), y, z);
+      g.current.position.set(x + (off >= 0 ? pasoV * 0.7 : 0), y, z);
       S.esc = off === 0 ? 1 : 0.001;
     }
     const p = g.current.position;
