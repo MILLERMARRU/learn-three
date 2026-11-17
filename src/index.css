@@ -2424,3 +2424,15 @@ kbd {
   text-wrap: balance;
   color: var(--soft);
 }
+
+/* ══ Nivel 4: tiros ─────── */
+.etq-dato.etq-izq {
+  transform: translate(calc(-100% - 6px), -50%);
+}
+.ajuste.ajuste-h {
+  flex-direction: row;
+}
+.ev-svg .ev-trazo {
+  fill: none;
+  stroke-dasharray: 3 4;
+}
