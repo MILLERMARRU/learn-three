@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Guía de contribución
+    url: https://github.com/MILLERMARRU/learn-three/blob/main/CONTRIBUTING.md
+    about: Lee cómo trabajamos (fork, ramas, commits y checklist) antes de abrir un issue o un PR.
