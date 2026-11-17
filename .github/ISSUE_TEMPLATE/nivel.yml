@@ -1,0 +1,38 @@
+name: Propuesta de nivel o etapa
+description: Un tema nuevo del curso o una etapa interactiva para un nivel.
+title: "[Nivel] "
+labels: ["nivel"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Cada nivel tiene tres etapas prácticas (rondas guiado → pista → solo) y un examen de 10 preguntas.
+        Recuerda: **los problemas deben ser propios**; los libros solo sirven como temario.
+  - type: input
+    id: tema
+    attributes:
+      label: Tema
+      placeholder: "Ej.: Nivel 6 · Movimiento circunferencial"
+    validations:
+      required: true
+  - type: textarea
+    id: etapas
+    attributes:
+      label: Etapas propuestas
+      description: Para cada etapa, indica la mecánica interactiva (qué hace el estudiante con teclado y mouse) y cómo se evalúa.
+      placeholder: |
+        6.1 Velocidad angular — ajustar ω con ↑ ↓ para que la marca de la rueda llegue al ángulo pedido · se evalúa con la simulación
+        6.2 ...
+    validations:
+      required: true
+  - type: textarea
+    id: escena
+    attributes:
+      label: Escena 3D
+      description: Qué se ve y qué se mueve (solo con primitivas de three.js).
+  - type: checkboxes
+    id: compromiso
+    attributes:
+      label: Participación
+      options:
+        - label: Me gustaría implementarlo yo (con fork y pull request).
