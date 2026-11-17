@@ -1,0 +1,44 @@
+name: Reporte de error
+description: Algo no funciona o se ve mal.
+title: "[Error] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por reportarlo. Un error que se puede reproducir se corrige mucho más rápido.
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: ¿Qué pasa?
+      description: Describe el error en una o dos frases.
+    validations:
+      required: true
+  - type: textarea
+    id: pasos
+    attributes:
+      label: Pasos para reproducirlo
+      placeholder: |
+        1. Ir a #/nivel/4/horizontal
+        2. Pulsar ↑ dos veces y Enter
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: ¿Qué esperabas que pasara?
+    validations:
+      required: true
+  - type: input
+    id: entorno
+    attributes:
+      label: Dispositivo, navegador y tamaño de pantalla
+      placeholder: "Ej.: Windows 11 · Chrome 131 · 1366×768"
+    validations:
+      required: true
+  - type: textarea
+    id: capturas
+    attributes:
+      label: Capturas o video
+      description: Arrastra aquí imágenes o un GIF. Si hay errores en la consola (F12), pégalos también.
