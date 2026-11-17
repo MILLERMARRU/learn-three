@@ -9,7 +9,7 @@ import { EscenaPista, type Movil } from "@/three/pista/EscenaPista";
 import { CascaronEtapa, descRonda, RetroLinea, type MetaEtapa } from "@/ui/CascaronEtapa";
 import { Formula, Sub, V } from "@/ui/Formula";
 import { TecladoVirtual } from "@/ui/TecladoVirtual";
-import { ESCENARIO_PISTA, fmtNum, simularTecla, TECLAS_BANDERA, ValorTexto } from "./comun";
+import { CARRUSEL_PISTA, ESCENARIO_PISTA, fmtNum, simularTecla, TECLAS_BANDERA, ValorTexto } from "./comun";
 
 const META: MetaEtapa = {
   numero: "3.2",
@@ -106,8 +106,7 @@ export default function EtapaEncuentro() {
     <CarruselItems
       items={motor.todos}
       indice={motor.indiceGlobal}
-      paso={8.2}
-      escala={0.34}
+      {...CARRUSEL_PISTA}
       render={(it, rol) =>
         rol === "actual" ? (
           <EscenaPista
@@ -121,7 +120,7 @@ export default function EtapaEncuentro() {
             exito={exito}
           />
         ) : (
-          <EscenaPista L={it.L} moviles={movilesDe(it)} previa={it.tipo} />
+          <EscenaPista L={it.L} moviles={movilesDe(it)} previa={rol === "siguiente" ? it.tipo : ""} />
         )
       }
     />
