@@ -5,7 +5,7 @@ import type { DecoTecla } from "@/ui/TecladoVirtual";
 export const fmtNum = (n: number, d = 1) => (Math.round(n * 10 ** d) / 10 ** d).toString().replace(".", ",");
 
 /** Valor grande al centro: "x = 30 m". */
-export function ValorTexto({ simbolo, valor, unidad, color = "#f0b44c", ok, mal, extra }: { simbolo: string; valor: string; unidad: string; color?: string; ok?: boolean; mal?: boolean; extra?: ReactNode }) {
+export function ValorTexto({ simbolo, valor, unidad, color = "#f0b44c", ok, mal, extra }: { simbolo: ReactNode; valor: string; unidad: string; color?: string; ok?: boolean; mal?: boolean; extra?: ReactNode }) {
   return (
     <div className={`rc-linea rc-vector ${ok ? "rc-ok" : ""} ${mal ? "sacudir" : ""}`}>
       <span className="rc-lado">

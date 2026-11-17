@@ -12,6 +12,10 @@ import EtapaEncuentro from "@/etapas/nivel-03/EtapaEncuentro";
 import EtapaExamenCinematica from "@/etapas/nivel-03/EtapaExamenCinematica";
 import EtapaFrenado from "@/etapas/nivel-03/EtapaFrenado";
 import EtapaPrediccion from "@/etapas/nivel-03/EtapaPrediccion";
+import EtapaCaida from "@/etapas/nivel-04/EtapaCaida";
+import EtapaExamenTiros from "@/etapas/nivel-04/EtapaExamenTiros";
+import EtapaHorizontal from "@/etapas/nivel-04/EtapaHorizontal";
+import EtapaParabolico from "@/etapas/nivel-04/EtapaParabolico";
 import { useRuta } from "@/lib/ruta";
 import { Mapa } from "@/paginas/Mapa";
 
@@ -19,6 +23,7 @@ const NIVELES: Record<string, Record<string, () => JSX.Element>> = {
   "1": { moleculas: EtapaMoleculas, balanza: EtapaBalanza, laboratorio: EtapaLaboratorio, examen: EtapaExamen },
   "2": { componentes: EtapaComponentes, suma: EtapaSuma, paralelogramo: EtapaParalelogramo, examen: EtapaExamenVectores },
   "3": { prediccion: EtapaPrediccion, encuentro: EtapaEncuentro, frenado: EtapaFrenado, examen: EtapaExamenCinematica },
+  "4": { caida: EtapaCaida, horizontal: EtapaHorizontal, parabolico: EtapaParabolico, examen: EtapaExamenTiros },
 };
 
 export default function App() {
