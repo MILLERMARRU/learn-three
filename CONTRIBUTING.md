@@ -191,7 +191,8 @@ Revisa esta lista. Los PRs que la cumplen se revisan mucho más rápido.
 
 ## 9. Revisión e integración
 
-- Todo PR recibe al menos una **revisión**. Los comentarios son sobre el código, nunca sobre la persona.
+- `main` está protegida: **todo cambio entra por pull request y necesita una revisión aprobada**. Si agregas commits después de la aprobación, hay que volver a aprobar, y todas las conversaciones deben quedar resueltas.
+- Los comentarios de la revisión son sobre el código, nunca sobre la persona.
 - Responde a cada comentario: con un commit que lo resuelva o con una explicación si no estás de acuerdo.
 - Cuando el PR está aprobado, se integra con **merge commit** (no *squash*) para conservar los commits atómicos.
 - Si tu PR queda sin actividad varias semanas, podemos cerrarlo; siempre podrás reabrirlo.
@@ -215,6 +216,10 @@ Queremos un espacio donde aprender sea cómodo para todos:
 - Pide ayuda cuando la necesites. Preguntar también es contribuir.
 
 Los comportamientos irrespetuosos no se toleran y pueden suponer la exclusión del proyecto.
+
+## Licencia de las contribuciones
+
+El proyecto usa la [licencia MIT](LICENSE). Al abrir un pull request confirmas que el aporte es tuyo (o que tienes derecho a compartirlo) y aceptas que se publique bajo esa licencia.
 
 ---
 

@@ -10,6 +10,7 @@
 [![three.js](https://img.shields.io/badge/three.js-r187-000000?logo=threedotjs&logoColor=white)](https://threejs.org)
 [![React Three Fiber](https://img.shields.io/badge/React%20Three%20Fiber-9-000000)](https://r3f.docs.pmnd.rs)
 [![Docker](https://img.shields.io/badge/Docker-listo-2496ed?logo=docker&logoColor=white)](#despliegue)
+[![Licencia MIT](https://img.shields.io/badge/licencia-MIT-green)](LICENSE)
 [![PRs bienvenidos](https://img.shields.io/badge/PRs-bienvenidos-d9c3a0)](CONTRIBUTING.md)
 
 [Contribuir](CONTRIBUTING.md) · [Issues](https://github.com/MILLERMARRU/learn-three/issues) · [Para empezar](https://github.com/MILLERMARRU/learn-three/issues?q=is%3Aopen+label%3A%22good+first+issue%22) · [Hoja de ruta](#hoja-de-ruta)
@@ -35,6 +36,7 @@
 - [Hoja de ruta](#hoja-de-ruta)
 - [Contribuir](#contribuir)
 - [Contenido y derechos](#contenido-y-derechos)
+- [Licencia](#licencia)
 
 ## ¿Qué es?
 
@@ -211,7 +213,17 @@ Este es un proyecto colaborativo y **toda ayuda suma**: código, niveles nuevos,
 
 - Los libros de referencia se usan **solo como temario** y para calibrar la dificultad. Los enunciados, las escenas y las explicaciones son **originales**.
 - No se suben ni se copian textos ni PDFs de terceros.
-- **Licencia:** este repositorio aún no declara una licencia; hasta que se defina, todos los derechos quedan reservados por su autor. Al contribuir aceptas que tu aporte se publique bajo la licencia que el proyecto adopte.
+
+## Licencia
+
+El código se publica bajo la **[licencia MIT](LICENSE)**. En resumen, puedes:
+
+- usarlo, copiarlo, modificarlo y distribuirlo, incluso con fines comerciales;
+- integrarlo en otros proyectos.
+
+La única condición es conservar el aviso de copyright y el texto de la licencia. El software se entrega «tal cual», sin garantías.
+
+Al enviar un pull request aceptas que tu contribución se publique bajo esta misma licencia.
 
 ---
 
