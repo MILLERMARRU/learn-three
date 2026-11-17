@@ -83,7 +83,7 @@ export const heroCinematica: Hero = (tick) => {
       <>
         <span className="hero-mag">{d.nombre}</span>
         <span className="hero-eq">
-          {d.eq}
+          <span>{d.eq}</span>
           {k >= ARRANQUE + CORRIDA && <span className="hero-res">{d.resultado}</span>}
         </span>
       </>
