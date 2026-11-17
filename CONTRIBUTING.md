@@ -70,7 +70,7 @@ git checkout main
 git pull upstream main
 
 # 2. Crea una rama con el número del issue
-git checkout -b feat/12-nivel-6-circunferencial
+git checkout -b feat/7-nivel-6-circunferencial
 
 # 3. Trabaja y haz commits pequeños (ver sección 4)
 git add src/contenido/nivel-06/circular.tsx
@@ -81,13 +81,13 @@ git fetch upstream
 git rebase upstream/main          # resuelve conflictos si los hay
 
 # 5. Sube la rama a TU fork
-git push -u origin feat/12-nivel-6-circunferencial
+git push -u origin feat/7-nivel-6-circunferencial
 ```
 
 ### 3.3 Abrir el pull request
 
 1. En GitHub, abre un **pull request** desde `tu-usuario/learn-three:tu-rama` hacia `MILLERMARRU/learn-three:main`.
-2. Completa la plantilla y escribe **`Cierra #12`** (con el número de tu issue) para enlazarlos.
+2. Completa la plantilla y escribe **`Cierra #7`** (con el número de tu issue) para enlazarlos.
 3. Si el cambio es visual, adjunta **capturas o un GIF** de escritorio y de móvil.
 4. Si aún no está listo, ábrelo como **borrador** (*Draft*) para recibir comentarios temprano.
 
@@ -97,7 +97,7 @@ git push -u origin feat/12-nivel-6-circunferencial
 git checkout main
 git pull upstream main
 git push origin main                    # mantiene tu fork al día
-git branch -d feat/12-nivel-6-circunferencial
+git branch -d feat/7-nivel-6-circunferencial
 ```
 
 ## 4. Ramas y commits
@@ -204,7 +204,7 @@ Usa las plantillas de [Issues](https://github.com/MILLERMARRU/learn-three/issues
 - **Propuesta de mejora:** el problema que resuelve y la idea de solución.
 - **Propuesta de nivel o etapa:** el tema, la mecánica interactiva y cómo se evalúa.
 
-¿Tienes dudas? Comenta en el issue fijado de **bienvenida** o abre uno con la etiqueta `question`.
+¿Tienes dudas? Comenta en el [issue de bienvenida](https://github.com/MILLERMARRU/learn-three/issues/14) (fijado en el repositorio) o abre uno con la etiqueta `question`.
 
 ## 11. Convivencia
 

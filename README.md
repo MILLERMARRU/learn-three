@@ -203,7 +203,7 @@ Las tareas abiertas están en [Issues](https://github.com/MILLERMARRU/learn-thre
 
 Este es un proyecto colaborativo y **toda ayuda suma**: código, niveles nuevos, escenas 3D, revisión de contenido de física, pruebas en dispositivos y documentación.
 
-1. Lee la [guía de contribución](CONTRIBUTING.md).
+1. Lee la [guía de contribución](CONTRIBUTING.md) y el [issue de bienvenida](https://github.com/MILLERMARRU/learn-three/issues/14).
 2. Elige un issue y comenta que lo tomas.
 3. Trabaja en tu **fork** y abre un **pull request** hacia `main`.
 
