@@ -1,4 +1,4 @@
-# Física 3D · prototipo (niveles 1 a 4)
+# Física 3D · prototipo (niveles 1 a 5)
 
 Aprende física moviéndola: cada tema es un nivel con escenas 3D que se manejan con teclado y mouse.
 
@@ -51,6 +51,25 @@ La pista (`src/three/pista/EscenaPista.tsx`) simula MRU/MRUV con cronómetro, mu
 | 4.4 Examen tipo admisión | 10 preguntas; al responder, la escena se reproduce en 3D | Una sola oportunidad |
 
 La escena de tiros (`src/three/tiro/EscenaTiro.tsx`) usa `src/lib/tiro.ts` (g = 10 m/s² y sen 37° = 0,6) y muestra estela estroboscópica, flechas de vₓ y v_y, torre o acantilado, cañón, canasta y marca de altura.
+
+## Nivel 5 · Gráficas del movimiento
+
+| Etapa | Mecánica | Cómo se evalúa |
+|---|---|---|
+| 5.1 Dibuja la x–t | Arrastrar los puntos de la x–t (o ← → para elegir y ↑ ↓ para mover) según el enunciado; el auto obedece a la gráfica junto a un fantasma con el movimiento correcto | Todos los puntos coinciden |
+| 5.2 De x–t a v–t | Con la x–t dada, armar la v–t moviendo la barra de velocidad de cada tramo; un cursor recorre las dos gráficas | Cada barra = pendiente del tramo |
+| 5.3 Área = desplazamiento | Calcular Δx en la v–t (↑ ↓); al correr, el área se pinta (verde arriba del eje, roja abajo) | Δx = área con signo |
+| 5.4 Examen tipo admisión | 10 preguntas de x–t, v–t y a–t; el cursor recorre la gráfica al responder | Una sola oportunidad |
+
+La escena de gráficas (`src/three/grafica/EscenaGrafica.tsx`) admite uno o dos paneles apilados, puntos o barras editables, áreas con signo, una pista con el auto y un cursor de tiempo; las cuentas viven en `src/lib/graficas.ts`.
+
+## Responsive
+
+- **Móvil vertical / tablet:** escena arriba y enunciado debajo; en el inicio el 3D del nivel aparece apilado si hay altura, y la página hace scroll si no cabe.
+- **Móvil horizontal:** escena a la izquierda y enunciado a la derecha con su propio scroll.
+- **Escritorio angosto (≤ 1400 px):** la escena empieza a la derecha del enunciado; sin espacio, el ejercicio siguiente del carrusel se oculta.
+- **Laptops bajas:** teclado y respuesta más compactos.
+- **2K / 4K:** la interfaz HTML escala con `zoom` (el canvas 3D se adapta solo).
 
 Todas las etapas: rondas **1 Guiado → 2 Pista → 3 Solo**, pistas que restan puntos, estrellas guardadas en `localStorage`, HUD sin panel (enunciado flotante, estadísticas, teclado virtual) y **carrusel 3D**: el siguiente ejercicio espera a la derecha y entra al centro al acertar.
 

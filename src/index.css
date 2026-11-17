@@ -2436,3 +2436,240 @@ kbd {
   fill: none;
   stroke-dasharray: 3 4;
 }
+
+/* ══ Números en vivo de las etiquetas 3D: ancho fijo para que no salten ─────── */
+.etq-num {
+  display: inline-block;
+  min-width: 5ch;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.etq-num-t {
+  min-width: 4ch;
+}
+.etq-dir {
+  display: inline-block;
+  width: 1.2ch;
+  text-align: center;
+}
+
+/* ══ Nivel 5: gráficas ─────── */
+.hud-sub {
+  margin: 4px 0 10px;
+  color: var(--mute);
+  font-size: 13px;
+}
+.etq-eje-t {
+  transform: translate(0, -50%);
+}
+.ev-svg .ev-area {
+  opacity: 0.35;
+}
+
+/* ══ Responsive 2: todas las pantallas (móvil, tablet, laptops bajas y 2K/4K) ─────── */
+
+/* ── Escritorio angosto: las estadísticas chocaban con el teclado ── */
+@media (min-width: 981px) and (max-width: 1180px) {
+  .hud-stats {
+    display: none;
+  }
+}
+
+/* ── Laptops bajas: teclado y respuesta más compactos, más alto para la escena ── */
+@media (min-width: 981px) and (max-height: 780px) {
+  .etapa,
+  .etapa-escena {
+    --h-teclado: 194px;
+    --h-resp: 104px;
+  }
+  .zona-teclado > * {
+    zoom: 0.86;
+  }
+  .rc-linea {
+    font-size: 58px;
+    min-height: 68px;
+  }
+  .hud-stat b {
+    font-size: 28px;
+  }
+}
+@media (min-width: 981px) and (max-height: 640px) {
+  .etapa,
+  .etapa-escena {
+    --h-teclado: 166px;
+    --h-resp: 92px;
+  }
+  .zona-teclado > * {
+    zoom: 0.74;
+  }
+  .rc-linea {
+    font-size: 48px;
+    min-height: 58px;
+  }
+  .hud-stats {
+    display: none;
+  }
+}
+
+/* ── Móvil y tablet (vertical): el inicio puede crecer y hacer scroll en vez de encimarse ── */
+@media (max-width: 980px) {
+  .inicio {
+    height: auto;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+  .inicio-main {
+    height: auto;
+    min-height: 100dvh;
+    padding-top: 56px;
+  }
+  .inicio-hero {
+    padding: 8px 18px 4px;
+    gap: 6px;
+  }
+  .hero-titulo {
+    font-size: clamp(34px, 9vw, 64px);
+  }
+}
+/* con altura de sobra, el 3D del nivel vuelve (apilado bajo el texto) */
+@media (max-width: 980px) and (min-height: 780px) and (orientation: portrait) {
+  .inicio-hero {
+    grid-template-rows: auto minmax(200px, 1fr);
+    align-content: stretch;
+  }
+  .hero-3d {
+    display: block;
+    height: 100%;
+    min-height: 200px;
+  }
+  .hero-eq {
+    font-size: 22px;
+  }
+}
+@media (max-width: 560px) {
+  .hero-lead {
+    display: none;
+  }
+  .hero-titulo {
+    margin-bottom: 14px;
+  }
+}
+
+/* ── Móvil horizontal: inicio compacto; etapa con escena a la izquierda y enunciado a la derecha ── */
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 600px) {
+  .inicio-hero .kicker,
+  .hero-lead,
+  .hero-3d {
+    display: none;
+  }
+  .hero-titulo {
+    font-size: 30px;
+    margin: 0 0 10px;
+  }
+  .inicio-hero .btn-l {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+  .etapa {
+    grid-template-columns: minmax(0, 1fr) min(42vw, 380px);
+    grid-template-rows: 100dvh;
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .etapa .hud-enunciado {
+    overflow-y: auto;
+    border-top: 0;
+    border-left: 1px solid var(--line);
+    padding: 14px 16px;
+    gap: 10px;
+  }
+  .etapa-escena,
+  .etapa {
+    --h-resp: 84px;
+  }
+  .rc-linea {
+    font-size: 34px;
+    min-height: 44px;
+  }
+  .rc-lado {
+    font-size: 24px;
+  }
+  .barra-sup {
+    padding: 8px 12px;
+  }
+}
+
+/* ── Pantallas grandes: el HTML escala con zoom (el canvas 3D ya se adapta solo) ── */
+@media (min-width: 1800px) and (min-height: 940px) {
+  :root {
+    --z: 1.2;
+  }
+}
+@media (min-width: 2300px) and (min-height: 1200px) {
+  :root {
+    --z: 1.45;
+  }
+}
+@media (min-width: 3200px) and (min-height: 1700px) {
+  :root {
+    --z: 1.9;
+  }
+}
+@media (min-width: 1800px) and (min-height: 940px) {
+  /* inicio */
+  .inicio-main {
+    padding-top: calc(60px * var(--z));
+  }
+  .inicio-hero {
+    max-width: calc(1280px * var(--z));
+  }
+  .barra-sup > *,
+  .hero-texto,
+  .carrusel-sec,
+  .hero-tecleo {
+    zoom: var(--z);
+  }
+  /* etapas: los altos reservados crecen con el zoom de su contenido */
+  .etapa,
+  .etapa-escena {
+    --h-teclado: calc(226px * var(--z));
+    --h-resp: calc(118px * var(--z));
+  }
+  .zona-teclado > *,
+  .zona-respuesta > *,
+  .escena-pie > span,
+  .hud-stats,
+  .hud-lateral,
+  .velo > * {
+    zoom: var(--z);
+  }
+  .hud-enunciado {
+    zoom: var(--z);
+    max-height: calc((100dvh - 12px - var(--h-teclado)) / var(--z) - 84px);
+  }
+  .con-teclado.con-respuesta .escenario {
+    top: calc(48px * var(--z));
+  }
+  .con-teclado .escena-pie {
+    top: calc(66px * var(--z));
+  }
+}
+@media (min-width: 981px) and (max-width: 1799px) {
+  /* el aviso de la escena queda bajo la cabecera (sin rozarla) */
+  .con-teclado .escena-pie {
+    top: 76px;
+  }
+}
+@media (max-width: 980px) and (orientation: landscape) and (max-height: 600px) {
+  /* la cabecera no tapa la parte alta de la escena */
+  .etapa .escenario {
+    top: 40px;
+  }
+}
+@media (min-width: 981px) and (max-width: 1400px) {
+  /* escritorio angosto: la escena empieza a la derecha del enunciado (no queda debajo) */
+  .etapa .etapa-escena .escenario {
+    left: calc(min(380px, 27vw) + 44px);
+  }
+}

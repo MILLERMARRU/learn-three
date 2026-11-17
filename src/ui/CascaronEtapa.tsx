@@ -81,7 +81,9 @@ export function CascaronEtapa<T extends { id: string }>({ meta, motor, escena, p
     <div className={`etapa ${teclado ? "con-teclado" : ""} ${respuesta ? "con-respuesta" : ""}`}>
       <section className="etapa-escena">
         <BarraSuperior migas={[{ texto: "Física", ruta: "/" }, { texto: `Nivel ${meta.nivelNum} · ${meta.nivel}` }, { texto: `${meta.numero} ${meta.titulo}` }]} centro={estado} />
-        <Escenario {...escenario}>{escena}</Escenario>
+        <Escenario {...escenario} hud>
+          {escena}
+        </Escenario>
         <div className="escena-pie">{pieEscena ?? <span>Arrastra para girar</span>}</div>
         {respuesta && (
           <div className="zona-respuesta">

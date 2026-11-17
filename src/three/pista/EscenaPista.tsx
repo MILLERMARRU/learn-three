@@ -51,7 +51,13 @@ export function estado(m: Movil, t: number) {
   return { x: m.x0 + m.v * tt + 0.5 * a * tt * tt, v: m.v + a * tt };
 }
 
-const fmt = (n: number, d = 1) => n.toFixed(d).replace(".", ",").replace(/,0$/, "");
+/** Número con un decimal fijo (ancho estable: 5,0 · −9,7 · −10,0). */
+const fmt = (n: number) => (Math.abs(n) < 0.05 ? 0 : n).toFixed(1).replace(".", ",").replace("-", "−");
+/** Escribe solo si cambió (no toca el DOM en cada cuadro). */
+const escribir = (el: HTMLElement | null, txt: string) => {
+  if (el && el.textContent !== txt) el.textContent = txt;
+};
+const CADA_ETQ = 0.08; // s entre actualizaciones de las etiquetas (~12 por segundo, legible)
 
 export function EscenaPista({ L, cada = 10, moviles, marcas = [], bandera, fantasma, corrida, onFin, etiquetas: conEtiquetas = true, exito = false, previa }: Props) {
   const etiquetas = conEtiquetas && previa === undefined;
@@ -60,7 +66,7 @@ export function EscenaPista({ L, cada = 10, moviles, marcas = [], bandera, fanta
   const autos = useRef<(THREE.Group | null)[]>([]);
   const superficie = useRef<THREE.Mesh>(null!);
   const arrastrando = useRef(false);
-  const sim = useRef({ id: -1, t: 0, fin: false, choque: [] as boolean[] });
+  const sim = useRef({ id: -1, t: 0, fin: false, choque: [] as boolean[], etq: -1 });
   const etqTiempo = useRef<HTMLSpanElement | null>(null);
   const etqVel = useRef<(HTMLSpanElement | null)[]>([]);
   const punto = useMemo(() => new THREE.Vector3(), []);
@@ -112,7 +118,7 @@ export function EscenaPista({ L, cada = 10, moviles, marcas = [], bandera, fanta
     [geo, mats],
   );
 
-  useFrame((_, dtCrudo) => {
+  useFrame((state, dtCrudo) => {
     const dt = Math.min(0.05, dtCrudo);
     const S = sim.current;
     if (corrida && corrida.id !== S.id) {
@@ -131,6 +137,10 @@ export function EscenaPista({ L, cada = 10, moviles, marcas = [], bandera, fanta
       S.t = Math.min(corrida.tFin, S.t + dt * factor);
     }
     const xs: number[] = [];
+    // etiquetas: ~12 veces por segundo y siempre el valor final exacto
+    const reloj = state.clock.elapsedTime;
+    const refrescar = !corrida || S.fin || (corrida && S.t >= corrida.tFin) || reloj - S.etq >= CADA_ETQ;
+    if (refrescar) S.etq = reloj;
     moviles.forEach((m, i) => {
       let { x, v } = estado(m, S.t);
       if (muro && x > muro.x - mitadAuto && m.v > 0) {
@@ -148,10 +158,9 @@ export function EscenaPista({ L, cada = 10, moviles, marcas = [], bandera, fanta
         g.position.x = X(x);
         g.rotation.y = m.v < 0 ? Math.PI : 0;
       }
-      const ev = etqVel.current[i];
-      if (ev) ev.textContent = `v = ${fmt(Math.abs(v))} m/s`;
+      if (refrescar) escribir(etqVel.current[i], fmt(Math.abs(v)));
     });
-    if (etqTiempo.current) etqTiempo.current.textContent = `t = ${fmt(S.t)} s`;
+    if (refrescar) escribir(etqTiempo.current, fmt(S.t));
     if (corrida && !S.fin && S.t >= corrida.tFin) {
       S.fin = true;
       onFin?.(xs);
@@ -234,27 +243,33 @@ export function EscenaPista({ L, cada = 10, moviles, marcas = [], bandera, fanta
           {etiquetas && (
             <Etiqueta position={[0, 0.85, 0]} className="etq-dato etq-centro">
               {m.etiqueta && <b className="etq-auto">{m.etiqueta}</b>}
+              v ={" "}
               <span
+                className="etq-num"
                 ref={(el) => {
                   // se ignora el null: una raíz vieja de la etiqueta puede desmontarse después de la nueva
                   if (el) etqVel.current[i] = el;
                 }}
               >
-                v = {Math.abs(m.v)} m/s
-              </span>
+                {fmt(Math.abs(m.v))}
+              </span>{" "}
+              m/s
             </Etiqueta>
           )}
         </group>
       ))}
       {etiquetas && (
         <Etiqueta position={[0, 1.15, -ANCHO / 2 - 0.3]} className="etq-dato etq-medida etq-centro etq-crono">
+          t ={" "}
           <span
+            className="etq-num etq-num-t"
             ref={(el) => {
               if (el) etqTiempo.current = el;
             }}
           >
-            t = 0 s
-          </span>
+            0,0
+          </span>{" "}
+          s
         </Etiqueta>
       )}
       {previa && (

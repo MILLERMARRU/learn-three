@@ -347,6 +347,34 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "dibuja") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <path d="M14 8 V56 H112" className="ev-tenue" />
+        <path d="M14 50 L40 26 L66 26 L96 40" />
+        <circle cx="40" cy="26" r="3.2" className="ev-relleno" />
+        <circle cx="66" cy="26" r="3.2" className="ev-relleno" />
+      </svg>
+    );
+  }
+  if (id === "velocidad") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <path d="M14 4 V28 H112 M14 36 V60 H112" className="ev-tenue" />
+        <path d="M14 26 L46 10 L78 10 L108 20" />
+        <path d="M14 42 H46 M46 50 H78 M78 56 H108" className="ev-trazo" />
+      </svg>
+    );
+  }
+  if (id === "area") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <path d="M14 8 V56 H112" className="ev-tenue" />
+        <path d="M14 56 L36 24 L84 24 L106 56 Z" className="ev-relleno ev-area" />
+        <path d="M14 56 L36 24 L84 24 L106 56" />
+      </svg>
+    );
+  }
   return (
     <span className="ev-opciones">
       {["A", "B", "C", "D", "E"].map((l) => (

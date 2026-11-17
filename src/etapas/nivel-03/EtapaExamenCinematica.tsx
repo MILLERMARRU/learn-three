@@ -34,6 +34,7 @@ export default function EtapaExamenCinematica() {
       encuadre={{ w: 10.5, h: 6.4 }}
       centro={[-1, 0.1]}
       paso={8.2}
+      ancho={10}
       pie="Al responder, la escena corre en 3D"
     />
   );

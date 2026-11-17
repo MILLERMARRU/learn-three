@@ -56,7 +56,13 @@ export function pasoBonito(rango: number, divisiones = 6) {
   return 500;
 }
 
-const fmt = (n: number, d = 1) => (Math.round(n * 10 ** d) / 10 ** d).toString().replace(".", ",").replace("-", "−");
+/** Número con un decimal fijo (ancho estable: 5,0 · −9,7 · −10,0). */
+const fmt = (n: number) => (Math.abs(n) < 0.05 ? 0 : n).toFixed(1).replace(".", ",").replace("-", "−");
+/** Escribe solo si cambió (no toca el DOM en cada cuadro). */
+const escribir = (el: HTMLElement | null, txt: string) => {
+  if (el && el.textContent !== txt) el.textContent = txt;
+};
+const CADA_ETQ = 0.08; // s entre actualizaciones de las etiquetas (~12 por segundo, legible)
 
 export function EscenaTiro({ W, H, lanz, torre = 0, canasta = null, marca = null, fantasma = null, guia = null, corrida = null, onFin, etiquetas: conEtiquetas = true, reglaX = true, exito = false, previa }: Props) {
   const etiquetas = conEtiquetas && previa === undefined;
@@ -86,7 +92,8 @@ export function EscenaTiro({ W, H, lanz, torre = 0, canasta = null, marca = null
   const etqV = useRef<HTMLSpanElement | null>(null);
   const etqVx = useRef<HTMLSpanElement | null>(null);
   const etqVy = useRef<HTMLSpanElement | null>(null);
-  const sim = useRef({ id: -1, t: 0, fin: false, toco: false });
+  const etqDir = useRef<HTMLSpanElement | null>(null);
+  const sim = useRef({ id: -1, t: 0, fin: false, toco: false, etq: -1 });
   const arrastrando = useRef(false);
   const ayuda = useMemo(() => ({ o: new THREE.Object3D(), p: new THREE.Vector3() }), []);
 
@@ -157,7 +164,7 @@ export function EscenaTiro({ W, H, lanz, torre = 0, canasta = null, marca = null
     m.instanceMatrix.needsUpdate = true;
   });
 
-  useFrame((_, dtCrudo) => {
+  useFrame((state, dtCrudo) => {
     const dt = Math.min(0.05, dtCrudo);
     const S = sim.current;
     if (corrida && corrida.id !== S.id) {
@@ -215,10 +222,16 @@ export function EscenaTiro({ W, H, lanz, torre = 0, canasta = null, marca = null
     m.instanceMatrix.needsUpdate = true;
 
     // etiquetas que cambian
-    if (etqT.current) etqT.current.textContent = `t = ${fmt(S.t)} s`;
-    if (etqV.current) etqV.current.textContent = `${fmt(Math.abs(p.vy))} m/s ${p.vy > 0.05 ? "↑" : p.vy < -0.05 ? "↓" : ""}`;
-    if (etqVx.current) etqVx.current.textContent = fmt(p.vx);
-    if (etqVy.current) etqVy.current.textContent = fmt(p.vy);
+    // etiquetas que cambian: ~12 veces por segundo y siempre el valor final exacto
+    const reloj = state.clock.elapsedTime;
+    if (!corrida || S.fin || S.t >= tMax - 1e-9 || reloj - S.etq >= CADA_ETQ) {
+      S.etq = reloj;
+      escribir(etqT.current, fmt(S.t));
+      escribir(etqV.current, fmt(Math.abs(p.vy)));
+      escribir(etqDir.current, p.vy > 0.05 ? "↑" : p.vy < -0.05 ? "↓" : "");
+      escribir(etqVx.current, fmt(p.vx));
+      escribir(etqVy.current, fmt(p.vy));
+    }
 
     // toca el suelo
     if (corrida && !S.toco && S.t >= fin - 1e-6 && fin <= corrida.tFin + 1e-6) {
@@ -297,7 +310,7 @@ export function EscenaTiro({ W, H, lanz, torre = 0, canasta = null, marca = null
           <mesh geometry={geo.vaso} material={mats.canasta} position={[0, 0.17, 0]} />
           <mesh geometry={geo.aro} material={mats.canasta} position={[0, 0.34, 0]} />
           {etiquetas && (
-            <Etiqueta position={[0, 0.85, 0]} className="etq-dato etq-acento etq-centro">
+            <Etiqueta position={[0.4, 0.2, 0]} className="etq-dato etq-acento">
               {canasta} m
             </Etiqueta>
           )}
@@ -329,17 +342,26 @@ export function EscenaTiro({ W, H, lanz, torre = 0, canasta = null, marca = null
               <>
                 v ={" "}
                 <span
+                  className="etq-num"
                   ref={(el) => {
                     if (el) etqV.current = el;
                   }}
                 >
-                  {lanz.v} m/s
-                </span>
+                  {fmt(lanz.v)}
+                </span>{" "}
+                m/s{" "}
+                <span
+                  className="etq-dir"
+                  ref={(el) => {
+                    if (el) etqDir.current = el;
+                  }}
+                />
               </>
             ) : (
               <>
                 v<sub>x</sub> ={" "}
                 <span
+                  className="etq-num"
                   ref={(el) => {
                     if (el) etqVx.current = el;
                   }}
@@ -348,6 +370,7 @@ export function EscenaTiro({ W, H, lanz, torre = 0, canasta = null, marca = null
                 </span>{" "}
                 · v<sub>y</sub> ={" "}
                 <span
+                  className="etq-num"
                   ref={(el) => {
                     if (el) etqVy.current = el;
                   }}
@@ -371,13 +394,16 @@ export function EscenaTiro({ W, H, lanz, torre = 0, canasta = null, marca = null
 
       {etiquetas && (
         <Etiqueta position={[0, Y(H) + 0.4, 0]} className="etq-dato etq-medida etq-centro etq-crono">
+          t ={" "}
           <span
+            className="etq-num etq-num-t"
             ref={(el) => {
               if (el) etqT.current = el;
             }}
           >
-            t = 0 s
-          </span>
+            0,0
+          </span>{" "}
+          s
         </Etiqueta>
       )}
       {previa && (
