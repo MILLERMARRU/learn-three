@@ -9,7 +9,7 @@ import { EscenaPista } from "@/three/pista/EscenaPista";
 import { CascaronEtapa, descRonda, RetroLinea, type MetaEtapa } from "@/ui/CascaronEtapa";
 import { Formula, Sub, V } from "@/ui/Formula";
 import { TecladoVirtual } from "@/ui/TecladoVirtual";
-import { ESCENARIO_PISTA, fmtNum, simularTecla, TECLAS_BANDERA, ValorTexto } from "./comun";
+import { CARRUSEL_PISTA, ESCENARIO_PISTA, fmtNum, simularTecla, TECLAS_BANDERA, ValorTexto } from "./comun";
 
 const META: MetaEtapa = {
   numero: "3.1",
@@ -100,8 +100,7 @@ export default function EtapaPrediccion() {
     <CarruselItems
       items={motor.todos}
       indice={motor.indiceGlobal}
-      paso={8.2}
-      escala={0.34}
+      {...CARRUSEL_PISTA}
       render={(it, rol) =>
         rol === "actual" ? (
           <EscenaPista
@@ -114,7 +113,7 @@ export default function EtapaPrediccion() {
             exito={exito}
           />
         ) : (
-          <EscenaPista L={it.L} moviles={[{ color: COLOR_AUTO.A, x0: it.x0, v: it.v }]} previa={`${it.dato ?? `${Math.abs(it.v)} m/s`} · ${it.t} s`} />
+          <EscenaPista L={it.L} moviles={[{ color: COLOR_AUTO.A, x0: it.x0, v: it.v }]} previa={rol === "siguiente" ? `${it.dato ?? `${Math.abs(it.v)} m/s`} · ${it.t} s` : ""} />
         )
       }
     />
