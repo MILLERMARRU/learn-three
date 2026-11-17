@@ -1,0 +1,29 @@
+name: Propuesta de mejora
+description: Una idea para mejorar la experiencia, el código o la documentación.
+title: "[Mejora] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problema
+    attributes:
+      label: ¿Qué problema resuelve?
+      description: Explica la situación actual y por qué conviene cambiarla.
+    validations:
+      required: true
+  - type: textarea
+    id: propuesta
+    attributes:
+      label: Propuesta
+      description: Cómo lo resolverías. Si afecta a lo visual, un boceto ayuda mucho.
+    validations:
+      required: true
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: Alternativas consideradas
+  - type: checkboxes
+    id: compromiso
+    attributes:
+      label: Participación
+      options:
+        - label: Me gustaría implementarlo yo (con fork y pull request).
