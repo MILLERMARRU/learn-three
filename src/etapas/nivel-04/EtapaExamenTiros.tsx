@@ -46,6 +46,7 @@ export default function EtapaExamenTiros() {
       encuadre={{ w: 10.6, h: 7 }}
       centro={[-0.9, 0.15]}
       paso={8.2}
+      ancho={9.6}
       pie="Al responder, la escena se reproduce en 3D"
     />
   );
