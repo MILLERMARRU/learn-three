@@ -1,8 +1,8 @@
 <div align="center">
 
-# Física 3D
+# Learn Three
 
-**Aprende física moviéndola.** Física preuniversitaria por niveles, con escenas 3D interactivas que se manejan con el teclado y el mouse.
+**Aprende haciendo.** Física y matemáticas preuniversitarias por niveles, con escenas 3D interactivas que se manejan con el teclado y el mouse.
 
 [![React 19](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)](https://react.dev)
 [![Vite 8](https://img.shields.io/badge/Vite-8-646cff?logo=vite&logoColor=white)](https://vite.dev)
@@ -17,7 +17,7 @@
 
 <br/>
 
-<img src="docs/capturas/inicio.jpg" alt="Inicio de Física 3D: hero 3D con un lanzamiento horizontal y el carrusel de niveles" width="100%"/>
+<img src="docs/capturas/inicio.jpg" alt="Inicio de Learn Three: curso de Física con un lanzamiento horizontal en 3D y el carrusel de niveles" width="100%"/>
 
 </div>
 
@@ -26,11 +26,12 @@
 ## Contenido
 
 - [¿Qué es?](#qué-es)
-- [Niveles disponibles](#niveles-disponibles)
+- [Cursos](#cursos)
+- [Física: niveles disponibles](#física-niveles-disponibles)
 - [Capturas](#capturas)
 - [Inicio rápido](#inicio-rápido)
 - [Arquitectura](#arquitectura)
-- [Añadir un nivel](#añadir-un-nivel)
+- [Añadir un nivel o un curso](#añadir-un-nivel-o-un-curso)
 - [Responsive](#responsive)
 - [Despliegue](#despliegue)
 - [Hoja de ruta](#hoja-de-ruta)
@@ -40,9 +41,11 @@
 
 ## ¿Qué es?
 
-Física 3D es una plataforma web gratuita y sin cuenta para aprender física de nivel preuniversitario **haciendo**, no leyendo. Cada tema del curso es un **nivel**, y cada nivel tiene cuatro **etapas**: tres prácticas y un examen tipo admisión.
+Learn Three es una plataforma web gratuita y sin cuenta para aprender ciencias y matemáticas de nivel preuniversitario **haciendo**, no leyendo. Se organiza en **cursos**. Cada tema de un curso es un **nivel**, y cada nivel tiene cuatro **etapas**: tres prácticas y un examen tipo admisión.
 
-En lugar de resolver ejercicios en papel, el estudiante:
+El primer curso es **Física**, con 5 de sus 23 niveles listos. Después vienen **Aritmética, Álgebra, Geometría y Trigonometría**, construidos con la misma plantilla.
+
+En el curso de Física, en lugar de resolver ejercicios en papel, el estudiante:
 
 - **predice** dónde estará un auto y lo ve correr;
 - **ajusta** la rapidez de un cañón hasta encestar;
@@ -57,7 +60,19 @@ Si falla, la simulación le muestra exactamente qué pasó.
 - **Ligero.** Solo `react`, `three` y `@react-three/fiber`. Las fórmulas, las etiquetas 3D y el router son componentes propios.
 - **Contenido propio.** Los libros sirven como temario; todos los problemas son originales.
 
-## Niveles disponibles
+## Cursos
+
+| Curso | Estado | Ideas de interacción |
+|---|---|---|
+| **Física** | Disponible · niveles 1–5 de 23 | Vectores, pistas con autos, tiros parabólicos y gráficas del movimiento en 3D |
+| **Aritmética** | Planificado | Recta numérica, fracciones como piezas, proporciones con balanzas |
+| **Álgebra** | Planificado | Balanza de ecuaciones, funciones cuya gráfica se deforma al cambiar parámetros |
+| **Geometría** | Planificado | Sólidos que se arman y se cortan en 3D, áreas y volúmenes |
+| **Trigonometría** | Planificado | Círculo unitario interactivo, ángulos notables, funciones y ondas |
+
+El inicio ya muestra las pestañas de los cinco cursos. Cada uno reutilizará el mismo motor de etapas, el HUD, el carrusel 3D y el examen.
+
+## Física: niveles disponibles
 
 | Nivel | Tema | Etapas |
 |:-:|---|---|
@@ -140,7 +155,7 @@ src/
 │   ├── tiro/       Torre, cañón, canasta, estela y flechas de velocidad (nivel 4)
 │   └── grafica/    Paneles x–t / v–t editables con área y auto (nivel 5)
 ├── lib/            Física y utilidades puras: dimensiones, vectores, tiros, gráficas, sonido
-├── contenido/      El contenido como datos: nivel-0N/*.tsx (problemas propios) y curso.ts
+├── contenido/      El contenido como datos: nivel-0N/*.tsx (problemas propios) y curso.ts (hoy, el curso de Física)
 ├── etapas/         Una etapa = contenido + escena + panel; Examen.tsx es genérico
 └── paginas/        Inicio sin scroll: hero 3D por nivel y carrusel de niveles → etapas
 ```
@@ -153,13 +168,15 @@ src/
 4. `<CarruselItems>` muestra el ejercicio actual en 3D y el siguiente esperando a la derecha.
 5. La escena 3D simula y, al terminar, la etapa evalúa con `motor.acierto()` o `motor.error()`.
 
-## Añadir un nivel
+## Añadir un nivel o un curso
 
 1. **Contenido:** crear `src/contenido/nivel-0N/*.tsx` con los ítems de cada ronda y el examen (problemas propios, con números que den resultados exactos).
 2. **Escena 3D:** crear la escena en `src/three/<tema>/`, solo con primitivas de three.js y con un modo `previa` para el carrusel.
 3. **Etapas:** crear `src/etapas/nivel-0N/` con `useEtapa()` + `<CascaronEtapa>` + `<CarruselItems>`; el examen usa `<Examen>`.
 4. **Registro:** rutas en `src/App.tsx`, etapas en `ETAPAS_POR_NIVEL` de `src/contenido/curso.ts` e ilustraciones en `VisualEtapa` de `src/paginas/Mapa.tsx`.
 5. **Hero:** agregar el hero del nivel en `src/paginas/hero/` y registrarlo en `HeroNivel.tsx`.
+
+**Un curso nuevo** (por ejemplo, Álgebra) reutiliza el mismo motor, HUD, carrusel y examen. Se propone primero en un issue, con la plantilla «Propuesta de nivel o etapa», para acordar la estructura de carpetas (`contenido/<curso>/`, `etapas/<curso>/`) y la navegación del inicio.
 
 La guía completa, con convenciones y checklist, está en [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -192,10 +209,21 @@ No necesita variables de entorno.
 
 ## Hoja de ruta
 
+**Física**
+
 - [x] Niveles 1–5: dimensional, vectorial, cinemática I y II, gráficas.
 - [ ] Nivel 6 · Movimiento circunferencial.
 - [ ] Niveles 7–23: estática, dinámica, gravitación, energía, choques, MAS, ondas, hidrostática, calor, termodinámica, electricidad, magnetismo, óptica y física moderna.
-- [ ] Cursos de Aritmética, Álgebra, Geometría y Trigonometría con la misma plantilla.
+
+**Matemáticas**
+
+- [ ] Curso de Álgebra.
+- [ ] Curso de Aritmética.
+- [ ] Curso de Geometría.
+- [ ] Curso de Trigonometría.
+
+**Plataforma**
+
 - [ ] CI con verificación de tipos, lint y build en cada PR.
 - [ ] División del bundle por nivel.
 
@@ -203,7 +231,7 @@ Las tareas abiertas están en [Issues](https://github.com/MILLERMARRU/learn-thre
 
 ## Contribuir
 
-Este es un proyecto colaborativo y **toda ayuda suma**: código, niveles nuevos, escenas 3D, revisión de contenido de física, pruebas en dispositivos y documentación.
+Este es un proyecto colaborativo y **toda ayuda suma**: código, niveles y cursos nuevos, escenas 3D, revisión de contenido de física y matemáticas, pruebas en dispositivos y documentación.
 
 1. Lee la [guía de contribución](CONTRIBUTING.md) y el [issue de bienvenida](https://github.com/MILLERMARRU/learn-three/issues/14).
 2. Elige un issue y comenta que lo tomas.
@@ -228,5 +256,5 @@ Al enviar un pull request aceptas que tu contribución se publique bajo esta mis
 ---
 
 <div align="center">
-<sub>Creado por <a href="https://github.com/MILLERMARRU">Miller</a> · Hecho con React, three.js y muchas ganas de que la física se entienda.</sub>
+<sub>Creado por <a href="https://github.com/MILLERMARRU">Miller</a> · Hecho con React, three.js y muchas ganas de que la física y las matemáticas se entiendan.</sub>
 </div>

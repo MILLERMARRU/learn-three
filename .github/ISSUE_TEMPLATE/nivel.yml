@@ -1,5 +1,5 @@
 name: Propuesta de nivel o etapa
-description: Un tema nuevo del curso o una etapa interactiva para un nivel.
+description: Un nivel o una etapa interactiva para cualquier curso (Física, Álgebra, Trigonometría…).
 title: "[Nivel] "
 labels: ["nivel"]
 body:
@@ -8,6 +8,18 @@ body:
       value: |
         Cada nivel tiene tres etapas prácticas (rondas guiado → pista → solo) y un examen de 10 preguntas.
         Recuerda: **los problemas deben ser propios**; los libros solo sirven como temario.
+  - type: dropdown
+    id: curso
+    attributes:
+      label: Curso
+      options:
+        - Física
+        - Aritmética
+        - Álgebra
+        - Geometría
+        - Trigonometría
+    validations:
+      required: true
   - type: input
     id: tema
     attributes:
