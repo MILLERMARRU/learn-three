@@ -1,116 +1,220 @@
-# Física 3D · prototipo (niveles 1 a 5)
+<div align="center">
 
-Aprende física moviéndola: cada tema es un nivel con escenas 3D que se manejan con teclado y mouse.
+# Física 3D
 
-## Ejecutar
+**Aprende física moviéndola.** Física preuniversitaria por niveles, con escenas 3D interactivas que se manejan con el teclado y el mouse.
 
+[![React 19](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)](https://react.dev)
+[![Vite 8](https://img.shields.io/badge/Vite-8-646cff?logo=vite&logoColor=white)](https://vite.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-7-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![three.js](https://img.shields.io/badge/three.js-r187-000000?logo=threedotjs&logoColor=white)](https://threejs.org)
+[![React Three Fiber](https://img.shields.io/badge/React%20Three%20Fiber-9-000000)](https://r3f.docs.pmnd.rs)
+[![Docker](https://img.shields.io/badge/Docker-listo-2496ed?logo=docker&logoColor=white)](#despliegue)
+[![PRs bienvenidos](https://img.shields.io/badge/PRs-bienvenidos-d9c3a0)](CONTRIBUTING.md)
+
+[Contribuir](CONTRIBUTING.md) · [Issues](https://github.com/MILLERMARRU/learn-three/issues) · [Para empezar](https://github.com/MILLERMARRU/learn-three/issues?q=is%3Aopen+label%3A%22good+first+issue%22) · [Hoja de ruta](#hoja-de-ruta)
+
+<br/>
+
+<img src="docs/capturas/inicio.jpg" alt="Inicio de Física 3D: hero 3D con un lanzamiento horizontal y el carrusel de niveles" width="100%"/>
+
+</div>
+
+---
+
+## Contenido
+
+- [¿Qué es?](#qué-es)
+- [Niveles disponibles](#niveles-disponibles)
+- [Capturas](#capturas)
+- [Inicio rápido](#inicio-rápido)
+- [Arquitectura](#arquitectura)
+- [Añadir un nivel](#añadir-un-nivel)
+- [Responsive](#responsive)
+- [Despliegue](#despliegue)
+- [Hoja de ruta](#hoja-de-ruta)
+- [Contribuir](#contribuir)
+- [Contenido y derechos](#contenido-y-derechos)
+
+## ¿Qué es?
+
+Física 3D es una plataforma web gratuita y sin cuenta para aprender física de nivel preuniversitario **haciendo**, no leyendo. Cada tema del curso es un **nivel**, y cada nivel tiene cuatro **etapas**: tres prácticas y un examen tipo admisión.
+
+En lugar de resolver ejercicios en papel, el estudiante:
+
+- **predice** dónde estará un auto y lo ve correr;
+- **ajusta** la rapidez de un cañón hasta encestar;
+- **dibuja** una gráfica x–t y ve cómo el auto la obedece.
+
+Si falla, la simulación le muestra exactamente qué pasó.
+
+**Principios de diseño:**
+
+- **Aprender con las manos.** Cada respuesta se comprueba con una simulación, no con un «correcto/incorrecto» seco.
+- **Andamiaje en tres rondas.** *Guiado* (con fantasma y tecla resaltada) → *Pista* (con la fórmula) → *Solo*. Las pistas restan estrellas.
+- **Ligero.** Solo `react`, `three` y `@react-three/fiber`. Las fórmulas, las etiquetas 3D y el router son componentes propios.
+- **Contenido propio.** Los libros sirven como temario; todos los problemas son originales.
+
+## Niveles disponibles
+
+| Nivel | Tema | Etapas |
+|:-:|---|---|
+| 1 | Análisis dimensional | Moléculas dimensionales · Balanza de homogeneidad · Laboratorio de fórmulas · Examen |
+| 2 | Análisis vectorial | Arma el vector · Suma de vectores · Regla del paralelogramo · Examen |
+| 3 | Cinemática I · MRU y MRUV | Predice la posición · Encuentro y alcance · Frena a tiempo · Examen |
+| 4 | Cinemática II · Caída libre y tiro parabólico | Caída libre · Lanzamiento horizontal · Tiro parabólico · Examen |
+| 5 | Gráficas del movimiento | Dibuja la x–t · De x–t a v–t · Área = desplazamiento · Examen |
+
+<details>
+<summary><b>Detalle de las mecánicas por nivel</b></summary>
+
+| Etapa | Mecánica | Cómo se evalúa |
+|---|---|---|
+| 1.1 Moléculas dimensionales | Escribir la ecuación dimensional; la molécula se arma en 3D | Dimensión exacta |
+| 1.2 Balanza de homogeneidad | Escribir la dimensión de la incógnita hasta nivelar la balanza | El término iguala al de referencia |
+| 1.3 Laboratorio de fórmulas | Ajustar exponentes mientras se experimenta (péndulo, caída, circular, onda) | Sistema de ecuaciones por base |
+| 2.1 Arma el vector | Colocar la punta en la cuadrícula (clic, arrastre o flechas) | Punto exacto |
+| 2.2 Suma de vectores | Ubicar la resultante con el método del polígono | Punto exacto |
+| 2.3 Regla del paralelogramo | Escribir el módulo de R (ley de cosenos) | Valor con tolerancia |
+| 3.1 Predice la posición | Poner la bandera y ver correr el auto (MRU) | El auto se detiene en la bandera |
+| 3.2 Encuentro y alcance | Bandera donde se juntan dos autos | Punto exacto |
+| 3.3 Frena a tiempo | Ajustar la aceleración (MRUV) | La simulación lo comprueba |
+| 4.1 Caída libre | Marca de altura; la pelota se suelta, sube o baja | Llega a la marca |
+| 4.2 Lanzamiento horizontal | Rapidez del cañón desde el acantilado | Cae en la canasta |
+| 4.3 Tiro parabólico | Rapidez (ángulo fijo) o ángulo (30°–60°) | Da en el blanco (37° y 53° valen si igualan el alcance) |
+| 5.1 Dibuja la x–t | Arrastrar los puntos según el enunciado | El auto coincide con el fantasma |
+| 5.2 De x–t a v–t | Barras de velocidad por tramo (pendiente) | Cada barra = pendiente |
+| 5.3 Área = desplazamiento | Calcular Δx; el área se pinta al correr | Área con signo |
+| N.4 Examen tipo admisión | 10 preguntas, 45 s cada una; la escena se reproduce en 3D | Una sola oportunidad |
+
+</details>
+
+## Capturas
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/capturas/nivel-1.jpg" alt="Nivel 1: laboratorio con un péndulo"/><br/><sub><b>Nivel 1 · Laboratorio de fórmulas.</b> El péndulo responde a − + y M mientras se ajustan los exponentes.</sub></td>
+    <td width="50%"><img src="docs/capturas/nivel-2.jpg" alt="Nivel 2: suma de vectores en el plano cartesiano"/><br/><sub><b>Nivel 2 · Suma de vectores.</b> Método del polígono sobre un plano cartesiano 3D.</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/capturas/nivel-3.jpg" alt="Nivel 3: encuentro de dos autos en la pista"/><br/><sub><b>Nivel 3 · Encuentro y alcance.</b> Dos autos corren hacia la bandera del estudiante.</sub></td>
+    <td><img src="docs/capturas/nivel-4.jpg" alt="Nivel 4: tiro parabólico con estela estroboscópica"/><br/><sub><b>Nivel 4 · Tiro parabólico.</b> Estela estroboscópica y flechas de vₓ y v_y.</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/capturas/nivel-5.jpg" alt="Nivel 5: gráficas x–t y v–t con el cursor de tiempo"/><br/><sub><b>Nivel 5 · De x–t a v–t.</b> Un cursor recorre ambas gráficas mientras el auto avanza.</sub></td>
+    <td align="center"><img src="docs/capturas/movil.jpg" alt="Vista en móvil del inicio y de una etapa" width="78%"/><br/><sub><b>Móvil.</b> Inicio con el 3D del nivel y etapa con el enunciado debajo.</sub></td>
+  </tr>
+</table>
+
+## Inicio rápido
+
+**Requisitos:** Node.js 22.12 o superior (recomendado: 24) y npm.
+
+```bash
+git clone https://github.com/MILLERMARRU/learn-three.git
+cd learn-three
+npm ci
+npm run dev        # http://localhost:5173
 ```
-npm install
-npm run dev        → http://localhost:5173
-npm run build      → producción (carpeta dist/)
-```
 
-Dependencias: `react`, `react-dom`, `three` y `@react-three/fiber`. Nada más.
+| Script | Qué hace |
+|---|---|
+| `npm run dev` | Servidor de desarrollo con recarga en caliente |
+| `npm run build` | Verifica tipos (`tsc -b`) y genera `dist/` |
+| `npm run preview` | Sirve el build de producción en local |
+| `npm run lint` | Revisa el código con oxlint |
 
-## Nivel 1 · Análisis dimensional
+Las rutas usan hash: `#/nivel/{n}/{etapa}`. Por ejemplo, `#/nivel/4/parabolico`.
 
-| Etapa | Mecánica | Cómo se evalúa |
-|---|---|---|
-| 1.1 Moléculas dimensionales | Escribir la ecuación dimensional (`MLT-2`) y verla armarse con objetos 3D (regla, pesa, reloj de arena…) | Texto convertido a exponentes y comparado |
-| 1.2 Balanza de homogeneidad | Escribir la dimensión de la incógnita hasta nivelar la balanza | El término debe igualar al de referencia |
-| 1.3 Laboratorio de fórmulas | Ajustar exponentes con flechas mientras se experimenta con − + y M (péndulo, caída, circular, onda) | Sistema de ecuaciones por base (M, L, T) |
-| 1.4 Examen tipo admisión | Opción múltiple A–E con 45 s y vista previa 3D | Una sola oportunidad |
-
-## Nivel 2 · Análisis vectorial
-
-| Etapa | Mecánica | Cómo se evalúa |
-|---|---|---|
-| 2.1 Arma el vector | Clic, arrastre o flechas para colocar la punta en la cuadrícula; componentes y luego módulo + ángulo (37°, 53°, 45°) | Punta en el punto exacto |
-| 2.2 Suma de vectores | Ubicar la punta de R = A + B (+ C) o A − B con el método del polígono | Punta en el punto exacto (incluye polígono cerrado, R = 0) |
-| 2.3 Regla del paralelogramo | Escribir el módulo de R (ley de cosenos, resultante máxima y mínima) | Valor numérico con tolerancia |
-| 2.4 Examen tipo admisión | 10 preguntas con los vectores dibujados en 3D | Una sola oportunidad |
-
-## Nivel 3 · Cinemática I (MRU y MRUV)
-
-| Etapa | Mecánica | Cómo se evalúa |
-|---|---|---|
-| 3.1 Predice la posición | Poner la bandera en la pista (clic, arrastre o ← →) y pulsar Enter: el auto corre en MRU | El auto se detiene en la bandera (x = x₀ + v·t) |
-| 3.2 Encuentro y alcance | Dos autos: bandera donde se juntan; Enter y corren | Punto de encuentro/alcance exacto |
-| 3.3 Frena a tiempo | Ajustar la aceleración con ↑ ↓ y correr: frenar antes del muro, cruzar la meta a cierta rapidez o llegar a la marca a tiempo | La simulación lo comprueba (choque, rapidez o distancia) |
-| 3.4 Examen tipo admisión | 10 preguntas; al responder, la escena se reproduce en 3D | Una sola oportunidad |
-
-La pista (`src/three/pista/EscenaPista.tsx`) simula MRU/MRUV con cronómetro, muros, metas y bandera arrastrable; sirve para los niveles de gráficas y caída libre.
-
-## Nivel 4 · Cinemática II (caída libre y tiro parabólico)
-
-| Etapa | Mecánica | Cómo se evalúa |
-|---|---|---|
-| 4.1 Caída libre | Poner la marca de altura (clic, arrastre o ↑ ↓) y lanzar: la pelota se suelta, sube o baja | La pelota llega a la marca (altura en t o altura máxima) |
-| 4.2 Lanzamiento horizontal | Ajustar la rapidez con ↑ ↓ y disparar desde el acantilado | La pelota cae en la canasta (MRU + caída libre) |
-| 4.3 Tiro parabólico | Ajustar la rapidez (ángulo fijo) o elegir el ángulo con ← → (30°, 37°, 45°, 53°, 60°) | Da en el blanco; 37° y 53° valen cuando dan el mismo alcance |
-| 4.4 Examen tipo admisión | 10 preguntas; al responder, la escena se reproduce en 3D | Una sola oportunidad |
-
-La escena de tiros (`src/three/tiro/EscenaTiro.tsx`) usa `src/lib/tiro.ts` (g = 10 m/s² y sen 37° = 0,6) y muestra estela estroboscópica, flechas de vₓ y v_y, torre o acantilado, cañón, canasta y marca de altura.
-
-## Nivel 5 · Gráficas del movimiento
-
-| Etapa | Mecánica | Cómo se evalúa |
-|---|---|---|
-| 5.1 Dibuja la x–t | Arrastrar los puntos de la x–t (o ← → para elegir y ↑ ↓ para mover) según el enunciado; el auto obedece a la gráfica junto a un fantasma con el movimiento correcto | Todos los puntos coinciden |
-| 5.2 De x–t a v–t | Con la x–t dada, armar la v–t moviendo la barra de velocidad de cada tramo; un cursor recorre las dos gráficas | Cada barra = pendiente del tramo |
-| 5.3 Área = desplazamiento | Calcular Δx en la v–t (↑ ↓); al correr, el área se pinta (verde arriba del eje, roja abajo) | Δx = área con signo |
-| 5.4 Examen tipo admisión | 10 preguntas de x–t, v–t y a–t; el cursor recorre la gráfica al responder | Una sola oportunidad |
-
-La escena de gráficas (`src/three/grafica/EscenaGrafica.tsx`) admite uno o dos paneles apilados, puntos o barras editables, áreas con signo, una pista con el auto y un cursor de tiempo; las cuentas viven en `src/lib/graficas.ts`.
-
-## Responsive
-
-- **Móvil vertical / tablet:** escena arriba y enunciado debajo; en el inicio el 3D del nivel aparece apilado si hay altura, y la página hace scroll si no cabe.
-- **Móvil horizontal:** escena a la izquierda y enunciado a la derecha con su propio scroll.
-- **Escritorio angosto (≤ 1400 px):** la escena empieza a la derecha del enunciado; sin espacio, el ejercicio siguiente del carrusel se oculta.
-- **Laptops bajas:** teclado y respuesta más compactos.
-- **2K / 4K:** la interfaz HTML escala con `zoom` (el canvas 3D se adapta solo).
-
-Todas las etapas: rondas **1 Guiado → 2 Pista → 3 Solo**, pistas que restan puntos, estrellas guardadas en `localStorage`, HUD sin panel (enunciado flotante, estadísticas, teclado virtual) y **carrusel 3D**: el siguiente ejercicio espera a la derecha y entra al centro al acertar.
-
-## Estructura (la plantilla para los demás niveles)
+## Arquitectura
 
 ```
 src/
-  motor/etapa.ts            ← rondas, pistas, puntos, estrellas, estadísticas, lista para el carrusel
-  motor/useEntradaDim.ts    ← entrada por teclado de dimensiones
-  motor/useEntradaNumero.ts ← entrada numérica con tolerancia
-  ui/CascaronEtapa.tsx      ← HUD: barra superior, enunciado, respuesta central, teclado, transiciones
-  ui/TecladoVirtual.tsx     ← teclado en pantalla (resalta la siguiente tecla)
-  three/Escenario.tsx       ← canvas, luces, encuadre, balanceo y giro con el mouse
-  three/CarruselItems.tsx   ← carrusel 3D de ejercicios
-  three/vectores/           ← flecha 3D, plano cartesiano interactivo, paralelogramo
-  three/…                   ← piezas, moléculas, balanza, escenas de laboratorio
-  contenido/nivel-0N/       ← el contenido como datos (problemas propios)
-  etapas/                   ← una etapa = contenido + escena + panel (etapas/Examen.tsx es genérico)
+├── motor/          Motor de etapas: rondas, pistas, puntos, estrellas y entradas por teclado
+├── ui/             HUD común (CascaronEtapa), teclado virtual, fórmulas sin KaTeX
+├── three/          Escenario (canvas, luces, encuadre), carrusel 3D, etiquetas HTML ancladas
+│   ├── vectores/   Plano cartesiano y flechas (nivel 2)
+│   ├── pista/      Pista con autos, MRU/MRUV (nivel 3)
+│   ├── tiro/       Torre, cañón, canasta, estela y flechas de velocidad (nivel 4)
+│   └── grafica/    Paneles x–t / v–t editables con área y auto (nivel 5)
+├── lib/            Física y utilidades puras: dimensiones, vectores, tiros, gráficas, sonido
+├── contenido/      El contenido como datos: nivel-0N/*.tsx (problemas propios) y curso.ts
+├── etapas/         Una etapa = contenido + escena + panel; Examen.tsx es genérico
+└── paginas/        Inicio sin scroll: hero 3D por nivel y carrusel de niveles → etapas
 ```
 
-### Añadir un nivel nuevo
+**Cómo se arma una etapa:**
 
-1. Crear `src/contenido/nivel-0N/*.tsx` con los ítems de cada ronda (`RondaDef<T>[]`).
-2. Crear la escena 3D en `src/three/` (primitivas de three.js, sin modelos pesados) con un modo de vista previa para el carrusel.
-3. Crear las etapas en `src/etapas/nivel-0N/` con `useEtapa()` + `<CascaronEtapa>` + `<CarruselItems>`; el examen usa `<Examen>`.
-4. Registrar las rutas en `src/App.tsx` y las etapas en `ETAPAS_POR_NIVEL` de `src/contenido/curso.ts`.
+1. `contenido/nivel-0N/` define los ejercicios de cada ronda como datos (`RondaDef<T>[]`).
+2. `useEtapa()` (en `motor/etapa.ts`) lleva el estado: ronda, ítem, pistas, aciertos, estrellas y progreso en `localStorage`.
+3. `<CascaronEtapa>` pinta el HUD: cabecera, enunciado flotante, respuesta central, teclado virtual y transiciones.
+4. `<CarruselItems>` muestra el ejercicio actual en 3D y el siguiente esperando a la derecha.
+5. La escena 3D simula y, al terminar, la etapa evalúa con `motor.acierto()` o `motor.error()`.
 
-Los libros de referencia solo sirven como temario: los enunciados son propios.
+## Añadir un nivel
 
-## Despliegue en Dokploy
+1. **Contenido:** crear `src/contenido/nivel-0N/*.tsx` con los ítems de cada ronda y el examen (problemas propios, con números que den resultados exactos).
+2. **Escena 3D:** crear la escena en `src/three/<tema>/`, solo con primitivas de three.js y con un modo `previa` para el carrusel.
+3. **Etapas:** crear `src/etapas/nivel-0N/` con `useEtapa()` + `<CascaronEtapa>` + `<CarruselItems>`; el examen usa `<Examen>`.
+4. **Registro:** rutas en `src/App.tsx`, etapas en `ETAPAS_POR_NIVEL` de `src/contenido/curso.ts` e ilustraciones en `VisualEtapa` de `src/paginas/Mapa.tsx`.
+5. **Hero:** agregar el hero del nivel en `src/paginas/hero/` y registrarlo en `HeroNivel.tsx`.
 
-El repo trae un `Dockerfile` multi-etapa (Node compila con Vite → nginx sirve `dist/`) y `nginx.conf` con gzip, caché larga para `/assets/` y chequeo de salud en `/salud`.
+La guía completa, con convenciones y checklist, está en [CONTRIBUTING.md](CONTRIBUTING.md).
 
-1. En Dokploy: **Create Application** → proveedor **GitHub** (conectar la GitHub App si el repo es privado) → repo `fisica-3d`, rama `main`.
-2. **Build Type:** `Dockerfile` · **Dockerfile Path:** `Dockerfile` · **Docker Context Path:** `.`
-3. **Deploy**.
-4. **Domains:** generar o asignar dominio con **Container Port `80`** (HTTPS con Let's Encrypt si es dominio propio).
+## Responsive
 
-No necesita variables de entorno. Para probar la imagen en local:
+| Pantalla | Comportamiento |
+|---|---|
+| Móvil vertical / tablet | Escena arriba y enunciado debajo; en el inicio, el 3D del nivel aparece apilado si hay altura |
+| Móvil horizontal | Escena a la izquierda y enunciado a la derecha con scroll propio |
+| Escritorio ≤ 1400 px | La escena empieza a la derecha del enunciado; el ejercicio siguiente se oculta si no cabe |
+| Laptops bajas | Teclado y respuesta compactos |
+| 2K / 4K | La interfaz HTML escala con `zoom`; el canvas 3D se adapta solo |
 
+## Despliegue
+
+El repo incluye un `Dockerfile` multi-etapa (Node compila con Vite y nginx sirve `dist/`) y un `nginx.conf` con gzip, caché larga para `/assets/` y chequeo de salud en `/salud`.
+
+```bash
+docker build -t learn-three .
+docker run --rm -p 8080:80 learn-three   # http://localhost:8080
 ```
-docker build -t fisica-3d .
-docker run --rm -p 8080:80 fisica-3d   → http://localhost:8080
-```
+
+**Dokploy:**
+
+1. Crear una aplicación con proveedor GitHub, repo `learn-three`, rama `main`.
+2. Configurar **Build Type** `Dockerfile` · **Dockerfile Path** `Dockerfile` · **Context** `.`.
+3. Asignar un dominio con **Container Port** `80`.
+
+No necesita variables de entorno.
+
+## Hoja de ruta
+
+- [x] Niveles 1–5: dimensional, vectorial, cinemática I y II, gráficas.
+- [ ] Nivel 6 · Movimiento circunferencial.
+- [ ] Niveles 7–23: estática, dinámica, gravitación, energía, choques, MAS, ondas, hidrostática, calor, termodinámica, electricidad, magnetismo, óptica y física moderna.
+- [ ] Cursos de Aritmética, Álgebra, Geometría y Trigonometría con la misma plantilla.
+- [ ] CI con verificación de tipos, lint y build en cada PR.
+- [ ] División del bundle por nivel.
+
+Las tareas abiertas están en [Issues](https://github.com/MILLERMARRU/learn-three/issues). Las marcadas con [`good first issue`](https://github.com/MILLERMARRU/learn-three/issues?q=is%3Aopen+label%3A%22good+first+issue%22) son ideales para empezar.
+
+## Contribuir
+
+Este es un proyecto colaborativo y **toda ayuda suma**: código, niveles nuevos, escenas 3D, revisión de contenido de física, pruebas en dispositivos y documentación.
+
+1. Lee la [guía de contribución](CONTRIBUTING.md).
+2. Elige un issue y comenta que lo tomas.
+3. Trabaja en tu **fork** y abre un **pull request** hacia `main`.
+
+## Contenido y derechos
+
+- Los libros de referencia se usan **solo como temario** y para calibrar la dificultad. Los enunciados, las escenas y las explicaciones son **originales**.
+- No se suben ni se copian textos ni PDFs de terceros.
+- **Licencia:** este repositorio aún no declara una licencia; hasta que se defina, todos los derechos quedan reservados por su autor. Al contribuir aceptas que tu aporte se publique bajo la licencia que el proyecto adopte.
+
+---
+
+<div align="center">
+<sub>Creado por <a href="https://github.com/MILLERMARRU">Miller</a> · Hecho con React, three.js y muchas ganas de que la física se entienda.</sub>
+</div>
