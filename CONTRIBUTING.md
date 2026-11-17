@@ -1,6 +1,6 @@
 # Guía de contribución
 
-¡Gracias por tu interés en **Física 3D**! Es un proyecto colaborativo para que la física preuniversitaria se aprenda **haciendo**: cada tema es un nivel con escenas 3D interactivas. Esta guía explica cómo sumarte, cómo trabajamos y qué revisamos antes de integrar un cambio.
+¡Gracias por tu interés en **Learn Three**! Es un proyecto colaborativo para que la física y las matemáticas preuniversitarias se aprendan **haciendo**: cada tema es un nivel con escenas 3D interactivas. Hoy está en marcha el curso de **Física**, y después vienen **Aritmética, Álgebra, Geometría y Trigonometría**. Esta guía explica cómo sumarte, cómo trabajamos y qué revisamos antes de integrar un cambio.
 
 > **¿Es tu primera contribución a un proyecto open source?** No hay problema: la guía va paso a paso y los issues con la etiqueta [`good first issue`](https://github.com/MILLERMARRU/learn-three/issues?q=is%3Aopen+label%3A%22good+first+issue%22) están pensados para empezar.
 
@@ -22,13 +22,13 @@
 
 ## 1. Formas de contribuir
 
-No hace falta ser experto en 3D ni en física: hay trabajo para distintos perfiles.
+No hace falta ser experto en 3D, física ni matemáticas: hay trabajo para distintos perfiles.
 
 | Perfil | Ejemplos de aporte |
 |---|---|
 | **Frontend (React / TypeScript)** | Etapas nuevas, mejoras del HUD, accesibilidad, rendimiento, pruebas |
 | **3D (three.js / React Three Fiber)** | Escenas nuevas, animaciones, materiales, optimización |
-| **Física / docencia** | Proponer niveles, redactar problemas propios, revisar explicaciones |
+| **Física o matemáticas / docencia** | Proponer niveles y cursos, redactar problemas propios, revisar explicaciones |
 | **Diseño / UX** | Flujo de las etapas, legibilidad, móvil |
 | **QA** | Probar en dispositivos y navegadores, reportar errores reproducibles |
 | **Documentación** | README, guías y comentarios del código |
@@ -223,4 +223,4 @@ El proyecto usa la [licencia MIT](LICENSE). Al abrir un pull request confirmas q
 
 ---
 
-¡Gracias por sumar tu tiempo y tu talento a Física 3D! 🧪
+¡Gracias por sumar tu tiempo y tu talento a Learn Three! 🧪
