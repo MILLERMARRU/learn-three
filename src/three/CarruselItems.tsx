@@ -65,7 +65,8 @@ function Ranura({ off, paso, escala, fondo, giro, ancho, children }: { off: numb
       const alto = 2 * Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)) * cam.position.z;
       const borde = cam.position.x + (alto * state.size.width) / Math.max(1, state.size.height) / 2 - MARGEN;
       const libre = borde - (ancho / 2 + HUECO);
-      escV = Math.min(escala, Math.max(0.18, libre / ancho));
+      // sin espacio a la derecha (pantallas angostas) el siguiente no se muestra
+      escV = libre < ancho * 0.22 ? 0.001 : Math.min(escala, libre / ancho);
       pasoV = Math.max(ancho / 2 + HUECO + (ancho * escV) / 2, Math.min(paso, borde - (ancho * escV) / 2));
     }
     // actual: centro y tamaño completo · siguiente: a la derecha, chico y al fondo · anterior: sale por la izquierda
