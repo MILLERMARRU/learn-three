@@ -28,12 +28,14 @@ interface Props<Q extends PreguntaBase> {
   paso?: number;
   pie?: string;
   centro?: [number, number];
+  /** Ancho de la escena (u): si se indica, la pregunta siguiente espera en el mismo plano y ajustada al ancho visible. */
+  ancho?: number;
 }
 
 const SEGUNDOS = 45;
 const LETRAS = ["A", "B", "C", "D", "E"];
 
-export function Examen<Q extends PreguntaBase>({ meta, clave: claveEtapa, rondas, vista3D, encuadre = { w: 4.6, h: 3.1 }, paso = 4.6, pie = "Pasa el mouse por una opción para verla en 3D", centro }: Props<Q>) {
+export function Examen<Q extends PreguntaBase>({ meta, clave: claveEtapa, rondas, vista3D, encuadre = { w: 4.6, h: 3.1 }, paso = 4.6, pie = "Pasa el mouse por una opción para verla en 3D", centro, ancho }: Props<Q>) {
   const motor = useEtapa<Q>({ clave: claveEtapa, rondas, avanceMs: 2200 });
   const q = motor.item;
   const clave = q.id;
@@ -85,6 +87,7 @@ export function Examen<Q extends PreguntaBase>({ meta, clave: claveEtapa, rondas
       items={motor.todos}
       indice={motor.indiceGlobal}
       paso={paso}
+      {...(ancho ? { ancho, fondo: 0, giro: 0, escala: 0.42 } : {})}
       render={(x, rol) => (rol === "actual" ? vista3D(q, vista !== null && vista >= 0 ? vista : null, respondida, fase, motor.faseId) : rol === "siguiente" ? <Incognita nombre={`pregunta ${motor.todos.findIndex((t) => t.item === x) + 1}`} /> : null)}
     />
   );
