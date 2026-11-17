@@ -1,4 +1,4 @@
-# Física 3D · prototipo (niveles 1, 2 y 3)
+# Física 3D · prototipo (niveles 1 a 4)
 
 Aprende física moviéndola: cada tema es un nivel con escenas 3D que se manejan con teclado y mouse.
 
@@ -40,6 +40,17 @@ Dependencias: `react`, `react-dom`, `three` y `@react-three/fiber`. Nada más.
 | 3.4 Examen tipo admisión | 10 preguntas; al responder, la escena se reproduce en 3D | Una sola oportunidad |
 
 La pista (`src/three/pista/EscenaPista.tsx`) simula MRU/MRUV con cronómetro, muros, metas y bandera arrastrable; sirve para los niveles de gráficas y caída libre.
+
+## Nivel 4 · Cinemática II (caída libre y tiro parabólico)
+
+| Etapa | Mecánica | Cómo se evalúa |
+|---|---|---|
+| 4.1 Caída libre | Poner la marca de altura (clic, arrastre o ↑ ↓) y lanzar: la pelota se suelta, sube o baja | La pelota llega a la marca (altura en t o altura máxima) |
+| 4.2 Lanzamiento horizontal | Ajustar la rapidez con ↑ ↓ y disparar desde el acantilado | La pelota cae en la canasta (MRU + caída libre) |
+| 4.3 Tiro parabólico | Ajustar la rapidez (ángulo fijo) o elegir el ángulo con ← → (30°, 37°, 45°, 53°, 60°) | Da en el blanco; 37° y 53° valen cuando dan el mismo alcance |
+| 4.4 Examen tipo admisión | 10 preguntas; al responder, la escena se reproduce en 3D | Una sola oportunidad |
+
+La escena de tiros (`src/three/tiro/EscenaTiro.tsx`) usa `src/lib/tiro.ts` (g = 10 m/s² y sen 37° = 0,6) y muestra estela estroboscópica, flechas de vₓ y v_y, torre o acantilado, cañón, canasta y marca de altura.
 
 Todas las etapas: rondas **1 Guiado → 2 Pista → 3 Solo**, pistas que restan puntos, estrellas guardadas en `localStorage`, HUD sin panel (enunciado flotante, estadísticas, teclado virtual) y **carrusel 3D**: el siguiente ejercicio espera a la derecha y entra al centro al acertar.
 
