@@ -17,7 +17,7 @@ interface Props<T> {
 
 export function Carrusel<T>({ items, actual, setActual, clave, render, onElegir, clase, paso = 300 }: Props<T>) {
   const rueda = useRef(0);
-  const arrastre = useRef<{ x: number; activo: boolean }>({ x: 0, activo: false });
+  const arrastre = useRef<{ x: number; activo: boolean; movio: boolean }>({ x: 0, activo: false, movio: false });
   const mover = (d: number) => {
     const n = Math.max(0, Math.min(items.length - 1, actual + d));
     if (n !== actual) {
@@ -36,12 +36,15 @@ export function Carrusel<T>({ items, actual, setActual, clave, render, onElegir,
         rueda.current = ahora;
         mover(d > 0 ? 1 : -1);
       }}
-      onPointerDown={(e) => (arrastre.current = { x: e.clientX, activo: true })}
+      onPointerDown={(e) => (arrastre.current = { x: e.clientX, activo: true, movio: false })}
       onPointerUp={(e) => {
         if (!arrastre.current.activo) return;
         arrastre.current.activo = false;
         const dx = e.clientX - arrastre.current.x;
-        if (Math.abs(dx) > 40) mover(dx < 0 ? 1 : -1);
+        if (Math.abs(dx) > 40) {
+          arrastre.current.movio = true; // que el clic de este gesto no mueva otra vez
+          mover(dx < 0 ? 1 : -1);
+        }
       }}
     >
       {items.map((it, i) => {
@@ -58,7 +61,12 @@ export function Carrusel<T>({ items, actual, setActual, clave, render, onElegir,
               pointerEvents: a > 3 ? "none" : "auto",
               animationDelay: `${Math.min(i, 6) * 0.07}s`,
             }}
-            onClick={() => (off !== 0 ? mover(off) : onElegir(i))}
+            onClick={() => {
+              if (arrastre.current.movio) return void (arrastre.current.movio = false);
+              if (off !== 0) mover(off);
+              else onElegir(i);
+            }}
+            title={off !== 0 ? "Clic para ver este nivel" : undefined}
           >
             {render(it, i, off === 0)}
           </article>

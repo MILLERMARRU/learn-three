@@ -1,6 +1,6 @@
 // ══ Etiqueta HTML anclada a un punto 3D (reemplazo mínimo de drei <Html>) ───────
 import { useFrame, useThree } from "@react-three/fiber";
-import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useLayoutEffect, useMemo, useRef, type ReactNode } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import * as THREE from "three";
 
@@ -14,29 +14,35 @@ interface Props {
 export function Etiqueta({ position = [0, 0, 0], children, className = "", visible = true }: Props) {
   const ancla = useRef<THREE.Group>(null!);
   const { gl, camera, size } = useThree();
-  const [el] = useState(() => document.createElement("div"));
+  const caja = useRef<HTMLDivElement | null>(null);
   const raiz = useRef<Root | null>(null);
   const v = useMemo(() => new THREE.Vector3(), []);
 
   useLayoutEffect(() => {
+    // contenedor nuevo en cada montaje: si React monta → desmonta → monta (StrictMode),
+    // la raíz vieja no comparte nodo con la nueva y no puede borrarle el contenido
+    const el = document.createElement("div");
     el.className = "etq-ancla";
-    const padre = gl.domElement.parentElement;
-    padre?.appendChild(el);
-    raiz.current = createRoot(el);
+    gl.domElement.parentElement?.appendChild(el);
+    const r = createRoot(el);
+    caja.current = el;
+    raiz.current = r;
     return () => {
-      const r = raiz.current;
-      raiz.current = null;
-      // desmontar fuera del ciclo de render actual
-      setTimeout(() => r?.unmount(), 0);
+      if (raiz.current === r) raiz.current = null;
+      if (caja.current === el) caja.current = null;
       el.remove();
+      // desmontar fuera del ciclo de render actual
+      setTimeout(() => r.unmount(), 0);
     };
-  }, [gl, el]);
+  }, [gl]);
 
   useLayoutEffect(() => {
     raiz.current?.render(<div className={`etq ${className}`}>{children}</div>);
   });
 
   useFrame(() => {
+    const el = caja.current;
+    if (!el) return;
     if (!visible || !visibleEnArbol(ancla.current)) {
       el.style.display = "none";
       return;

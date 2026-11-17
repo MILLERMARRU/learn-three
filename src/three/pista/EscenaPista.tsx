@@ -236,7 +236,8 @@ export function EscenaPista({ L, cada = 10, moviles, marcas = [], bandera, fanta
               {m.etiqueta && <b className="etq-auto">{m.etiqueta}</b>}
               <span
                 ref={(el) => {
-                  etqVel.current[i] = el;
+                  // se ignora el null: una raíz vieja de la etiqueta puede desmontarse después de la nueva
+                  if (el) etqVel.current[i] = el;
                 }}
               >
                 v = {Math.abs(m.v)} m/s
@@ -247,7 +248,13 @@ export function EscenaPista({ L, cada = 10, moviles, marcas = [], bandera, fanta
       ))}
       {etiquetas && (
         <Etiqueta position={[0, 1.15, -ANCHO / 2 - 0.3]} className="etq-dato etq-medida etq-centro etq-crono">
-          <span ref={etqTiempo}>t = 0 s</span>
+          <span
+            ref={(el) => {
+              if (el) etqTiempo.current = el;
+            }}
+          >
+            t = 0 s
+          </span>
         </Etiqueta>
       )}
       {previa && (

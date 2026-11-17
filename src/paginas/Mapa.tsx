@@ -9,7 +9,7 @@ import { useTeclas } from "@/lib/teclado";
 import { BarraSuperior } from "@/ui/BarraSuperior";
 import { Estrellas } from "@/ui/Estrellas";
 import { Carrusel } from "./Carrusel";
-import { HeroMolecula } from "./HeroMolecula";
+import { HeroNivel } from "./hero/HeroNivel";
 
 type Modo = "niveles" | "etapas";
 const disponible = (i: number) => !!ETAPAS_POR_NIVEL[i + 1];
@@ -77,7 +77,7 @@ export function Mapa() {
               {empezado ? "Continuar" : "Empezar"} · {sig.etapa.numero} {sig.etapa.titulo}
             </button>
           </div>
-          <HeroMolecula />
+          <HeroNivel nivel={nivel} />
         </section>
 
         <section className="carrusel-sec">
@@ -123,7 +123,7 @@ export function Mapa() {
               clave={(t) => t}
               clase={(_, i) => (disponible(i) ? "" : "nc-bloqueada")}
               onElegir={entrarNivel}
-              render={(titulo, i) => <TarjetaNivel titulo={titulo} i={i} prog={prog} onEtapa={(e) => jugar(i + 1, e)} />}
+              render={(titulo, i, activa) => <TarjetaNivel titulo={titulo} i={i} activa={activa} prog={prog} onEtapa={(e) => jugar(i + 1, e)} />}
             />
           ) : (
             <Carrusel
@@ -145,7 +145,7 @@ export function Mapa() {
 }
 
 // ══ Tarjetas ───────
-function TarjetaNivel({ titulo, i, prog, onEtapa }: { titulo: string; i: number; prog: Progreso; onEtapa: (e: EtapaInfo) => void }) {
+function TarjetaNivel({ titulo, i, activa, prog, onEtapa }: { titulo: string; i: number; activa: boolean; prog: Progreso; onEtapa: (e: EtapaInfo) => void }) {
   const etapas = ETAPAS_POR_NIVEL[i + 1];
   const estrellas = etapas ? etapas.reduce((s, e) => s + (prog[e.clave]?.estrellas ?? 0), 0) : 0;
   return (
@@ -164,9 +164,12 @@ function TarjetaNivel({ titulo, i, prog, onEtapa }: { titulo: string; i: number;
                 key={e.id}
                 className={`nc-etapa ${prog[e.clave] ? "hecha" : ""}`}
                 onClick={(ev) => {
+                  // en una tarjeta lateral el clic solo la trae al centro
+                  if (!activa) return;
                   ev.stopPropagation();
                   onEtapa(e);
                 }}
+                tabIndex={activa ? 0 : -1}
               >
                 <span>{e.numero}</span> {e.titulo}
                 <Estrellas n={prog[e.clave]?.estrellas ?? 0} />

@@ -148,7 +148,7 @@ export default function EtapaFrenado() {
             exito={exito}
           />
         ) : (
-          <EscenaPista L={it.L} moviles={[{ color: COLOR_AUTO.A, x0: 0, v: it.v0 }]} marcas={marcasDe(it)} previa={rol !== "siguiente" ? "" : it.tipo === "frenar" ? "frena antes del muro" : it.tipo === "meta" ? "cruza la meta" : "llega a la marca"} />
+          <EscenaPista L={it.L} moviles={[{ color: COLOR_AUTO.A, x0: 0, v: it.v0 }]} marcas={marcasDe(it)} previa={rol !== "siguiente" ? "" : it.tipo === "frenar" ? "frenar" : it.tipo === "meta" ? "meta" : "a tiempo"} />
         )
       }
     />
