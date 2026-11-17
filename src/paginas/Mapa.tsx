@@ -315,6 +315,38 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "caida") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="8" y1="58" x2="112" y2="58" className="ev-tenue" />
+        <rect x="34" y="12" width="16" height="46" className="ev-tenue" />
+        <circle cx="62" cy="14" r="3.2" className="ev-relleno" />
+        <circle cx="62" cy="19" r="2.4" />
+        <circle cx="62" cy="30" r="2.4" />
+        <circle cx="62" cy="48" r="2.4" />
+      </svg>
+    );
+  }
+  if (id === "horizontal") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="8" y1="58" x2="112" y2="58" className="ev-tenue" />
+        <rect x="10" y="16" width="20" height="42" className="ev-tenue" />
+        <path d="M30 16 Q70 16 88 54" className="ev-trazo" />
+        <path d="M82 50 L96 50 L93 58 L85 58 Z" className="ev-relleno" />
+      </svg>
+    );
+  }
+  if (id === "parabolico") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="8" y1="58" x2="112" y2="58" className="ev-tenue" />
+        <path d="M14 56 Q58 -6 102 56" className="ev-trazo" />
+        <path d="M14 56 L26 44" />
+        <path d="M96 50 L110 50 L107 58 L99 58 Z" className="ev-relleno" />
+      </svg>
+    );
+  }
   return (
     <span className="ev-opciones">
       {["A", "B", "C", "D", "E"].map((l) => (
