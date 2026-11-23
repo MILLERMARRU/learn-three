@@ -27,6 +27,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡suelta! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/9/gravedad", titulo: "Etapa 9.2 · Gravedad en la altura y en otros planetas" },
   descRondas: {
     guiado: "Un solo cambio. La tecla que brilla te guía.",
     pista: "Dos cambios a la vez: multiplica sus efectos.",
