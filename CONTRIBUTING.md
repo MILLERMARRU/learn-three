@@ -169,7 +169,7 @@ Sigue la plantilla de los niveles existentes; el más completo de referencia es 
 3. **Etapas:** `src/etapas/nivel-0N/` con `useEtapa()` + `<CascaronEtapa>` + `<CarruselItems>`. El examen usa `<Examen>`.
 4. **Registro:**
    - `ETAPAS_N` y `ETAPAS_POR_NIVEL` en `src/contenido/curso.ts`;
-   - las rutas en `src/App.tsx`;
+   - las rutas en `src/App.tsx`, con `lazy(() => import("@/etapas/nivel-0N/Etapa…"))` para que se descarguen solo al entrar;
    - las ilustraciones de las tarjetas en `VisualEtapa` de `src/paginas/Mapa.tsx`.
 5. **Hero del inicio:** `src/paginas/hero/<tema>.tsx` y su registro en `HEROES` de `HeroNivel.tsx`.
 6. **Documentación:** agrega el nivel a la tabla del README.
