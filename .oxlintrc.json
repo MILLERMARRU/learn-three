@@ -3,6 +3,11 @@
   "plugins": ["react", "typescript", "oxc"],
   "rules": {
     "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+    // Los módulos de contenido y de escenas exportan componentes junto con datos y utilidades.
+    // Esta regla solo afecta al recargado en caliente (Fast Refresh) en desarrollo: el módulo se recarga entero.
+    "react/only-export-components": "off",
+    // En React Three Fiber es idiomático mutar objetos de three.js (cámara, materiales, mallas)
+    // dentro de useFrame y useEffect; esta regla del compilador de React lo marca como error.
+    "react/immutability": "off"
   }
 }
