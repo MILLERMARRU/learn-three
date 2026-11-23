@@ -27,6 +27,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡suelta! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/7/momento", titulo: "Etapa 7.3 · Momento de una fuerza" },
   descRondas: {
     guiado: "Cuenta los tramos de cuerda que sostienen la polea móvil. La tecla que brilla te guía.",
     pista: "Cada polea móvil divide la fuerza entre dos.",
