@@ -454,6 +454,16 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "plano") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <path d="M14 56 H106 L14 14 Z" className="ev-tenue" />
+        <rect x="36" y="18" width="16" height="12" rx="2" transform="rotate(24.5 44 24)" className="ev-acento" />
+        <rect x="60" y="30" width="16" height="12" rx="2" transform="rotate(24.5 68 36)" className="ev-tenue" />
+        <line x1="50" y1="38" x2="74" y2="49" className="ev-flecha" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
