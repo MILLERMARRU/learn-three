@@ -20,7 +20,10 @@ export interface EscenarioProps {
   encuadre?: { w: number; h: number };
   /** Amplitud del balanceo en reposo (radianes). */
   balanceo?: number;
+  /** Se puede girar la escena arrastrando con el mouse o el dedo. */
   arrastrable?: boolean;
+  /** Hay objetos que se arrastran con el dedo (bandera, punta del vector, puntos de una gráfica): el gesto no debe desplazar la página. */
+  tactil?: boolean;
   className?: string;
   /** Desplaza el punto que mira la cámara. */
   centro?: [number, number];
@@ -30,7 +33,7 @@ export interface EscenarioProps {
   hud?: boolean;
 }
 
-export function Escenario({ children, encuadre = { w: 6, h: 5 }, balanceo = 0.14, arrastrable = true, className = "", centro = [0, 0], vista = "", hud = false }: EscenarioProps) {
+export function Escenario({ children, encuadre = { w: 6, h: 5 }, balanceo = 0.14, arrastrable = true, tactil = false, className = "", centro = [0, 0], vista = "", hud = false }: EscenarioProps) {
   const arrastre = useRef<Arrastre>({ x: 0, y: 0, activo: false, ultimo: 0, px: 0, py: 0 });
 
   useEffect(() => {
@@ -62,7 +65,7 @@ export function Escenario({ children, encuadre = { w: 6, h: 5 }, balanceo = 0.14
 
   return (
     <div
-      className={`escenario ${arrastrable ? "es-arrastrable" : ""} ${className}`}
+      className={`escenario ${arrastrable ? "es-arrastrable" : ""} ${arrastrable || tactil ? "es-tactil" : ""} ${className}`}
       onPointerDown={(e) => {
         if (!arrastrable || e.button !== 0) return;
         const a = arrastre.current;
