@@ -1,7 +1,7 @@
 // ══ Pruebas de dinámica: segunda ley, rozamiento y movimiento con aceleración constante ───────
 import assert from "node:assert/strict";
 import { describe, test } from "node:test";
-import { aceleracion, aceleracionEnPiso, aceleracionPara, aceleracionPlano, fuerzaPara, posicion, rozamiento } from "../src/lib/dinamica.ts";
+import { aceleracion, aceleracionEnPiso, aceleracionPara, aceleracionPlano, atwood, fuerzaPara, mesaColgante, posicion, rozamiento } from "../src/lib/dinamica.ts";
 
 describe("segunda ley de Newton", () => {
   test("40 N sobre 10 kg dan 4 m/s²", () => {
@@ -32,6 +32,24 @@ describe("plano inclinado", () => {
   test("si μ ≥ tan θ el bloque no baja", () => {
     assert.equal(aceleracionPlano(37, 0.75), 0);
     assert.equal(aceleracionPlano(37, 0.9), 0);
+  });
+});
+
+describe("sistemas de bloques", () => {
+  test("máquina de Atwood: 6 kg y 2 kg aceleran a 5 m/s² con 30 N de tensión", () => {
+    assert.deepEqual(atwood(6, 2), { a: 5, T: 30 });
+  });
+
+  test("bloque en la mesa lisa con pesa colgante: 5 kg y 5 kg → 5 m/s² y 25 N", () => {
+    assert.deepEqual(mesaColgante(5, 5), { a: 5, T: 25 });
+  });
+
+  test("con rozamiento: 5 kg y 5 kg con μ = 0,2 → 4 m/s² y 30 N", () => {
+    assert.deepEqual(mesaColgante(5, 5, 0.2), { a: 4, T: 30 });
+  });
+
+  test("si el rozamiento alcanza, el sistema no se mueve y la tensión iguala al peso colgado", () => {
+    assert.deepEqual(mesaColgante(10, 2, 0.3), { a: 0, T: 20 });
   });
 });
 
