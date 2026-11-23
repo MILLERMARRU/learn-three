@@ -87,8 +87,8 @@ export default function EtapaArea() {
 
   useTeclas((e) => {
     if (!motor.jugando) return;
-    if (e.key === "ArrowUp") (e.preventDefault(), cambiar(PASO));
-    else if (e.key === "ArrowDown") (e.preventDefault(), cambiar(-PASO));
+    if (e.key === "ArrowUp") { e.preventDefault(); cambiar(PASO); }
+    else if (e.key === "ArrowDown") { e.preventDefault(); cambiar(-PASO); }
     else if (e.key === "Enter") correr();
     else if (e.key.toLowerCase() === "h" || e.key === "?") pedirPista();
   });
