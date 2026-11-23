@@ -31,6 +31,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡gira! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/6/curva", titulo: "Etapa 6.3 · Aceleración centrípeta" },
   descRondas: {
     guiado: "Una faja o engranaje: aplica ωA·RA = ωB·RB. La tecla que brilla te guía.",
     pista: "La rapidez del borde se conserva; con el mismo eje se conserva ω.",
