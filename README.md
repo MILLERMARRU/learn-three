@@ -140,7 +140,8 @@ npm run dev        # http://localhost:5173
 | `npm run dev` | Servidor de desarrollo con recarga en caliente |
 | `npm run build` | Verifica tipos (`tsc -b`) y genera `dist/` |
 | `npm run preview` | Sirve el build de producción en local |
-| `npm run lint` | Revisa el código con oxlint |
+| `npm run lint` | Revisa el código con oxlint (falla con cualquier aviso) |
+| `npm test` | Ejecuta las pruebas de la física (`tests/`) con el runner nativo de Node |
 
 Las rutas usan hash: `#/nivel/{n}/{etapa}`. Por ejemplo, `#/nivel/4/parabolico`.
 
@@ -159,6 +160,7 @@ src/
 ├── contenido/      El contenido como datos: nivel-0N/*.tsx (problemas propios) y curso.ts (hoy, el curso de Física)
 ├── etapas/         Una etapa = contenido + escena + panel; Examen.tsx es genérico
 └── paginas/        Inicio sin scroll: hero 3D por nivel y carrusel de niveles → etapas
+tests/              Pruebas de src/lib con node:test (sin dependencias)
 ```
 
 **Cómo se arma una etapa:**

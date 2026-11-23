@@ -1,4 +1,4 @@
-# ══ Integración continua: tipos, lint, build e imagen Docker en cada PR y en cada push a main ───────
+# ══ Integración continua: tipos, lint, pruebas, build e imagen Docker en cada PR y en cada push a main ───────
 name: CI
 
 on:
@@ -35,6 +35,9 @@ jobs:
 
       - name: Lint
         run: npm run lint
+
+      - name: Pruebas
+        run: npm test
 
       - name: Build de producción
         run: npm run build
