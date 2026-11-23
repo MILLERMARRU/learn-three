@@ -373,6 +373,17 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "angular") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <circle cx="60" cy="32" r="24" className="ev-tenue" />
+        <line x1="60" y1="32" x2="84" y2="32" className="ev-tenue" />
+        <path d="M72 32 A12 12 0 0 0 54 21.6" />
+        <line x1="60" y1="32" x2="48" y2="11.2" className="ev-flecha" />
+        <circle cx="48" cy="11.2" r="4" className="ev-acento" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
