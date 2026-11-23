@@ -50,8 +50,12 @@ export const ETAPAS_N6: EtapaInfo[] = [
   { id: "examen", clave: "n6-examen", numero: "6.4", titulo: "Examen tipo admisión", resumen: "10 preguntas de MCU, transmisión y aceleración centrípeta con la escena en 3D.", tipo: "Opción múltiple" },
 ];
 
+export const ETAPAS_N7: EtapaInfo[] = [
+  { id: "equilibrio", clave: "n7-equilibrio", numero: "7.1", titulo: "Primera condición de equilibrio", resumen: "Ajusta la fuerza que falta: si ΣF ≠ 0, el cuerpo se mueve.", tipo: "Flechas ↑ ↓" },
+];
+
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
-export const ETAPAS_POR_NIVEL: Record<number, EtapaInfo[]> = { 1: ETAPAS_N1, 2: ETAPAS_N2, 3: ETAPAS_N3, 4: ETAPAS_N4, 5: ETAPAS_N5, 6: ETAPAS_N6 };
+export const ETAPAS_POR_NIVEL: Record<number, EtapaInfo[]> = { 1: ETAPAS_N1, 2: ETAPAS_N2, 3: ETAPAS_N3, 4: ETAPAS_N4, 5: ETAPAS_N5, 6: ETAPAS_N6, 7: ETAPAS_N7 };
 
 /** Primera etapa sin terminar de todo el curso (para el botón "Continuar"). */
 export function siguienteEtapa(hechas: (clave: string) => boolean): { nivel: number; etapa: EtapaInfo } {

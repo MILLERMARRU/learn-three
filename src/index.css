@@ -337,6 +337,11 @@ kbd {
   color: var(--amber);
   border-color: rgba(240, 180, 76, 0.35);
 }
+/* resultante que no se anula (estática) */
+.etq-mal {
+  color: #ff7a6b;
+  border-color: rgba(255, 122, 107, 0.4);
+}
 .etq-tenue {
   opacity: 0.28;
 }

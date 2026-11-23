@@ -407,6 +407,17 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "equilibrio") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="40" y1="6" x2="80" y2="6" className="ev-tenue" />
+        <line x1="60" y1="6" x2="60" y2="26" />
+        <rect x="50" y="26" width="20" height="16" rx="2" className="ev-acento" />
+        <line x1="60" y1="34" x2="60" y2="12" className="ev-flecha" />
+        <line x1="60" y1="34" x2="60" y2="60" className="ev-flecha" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
