@@ -26,6 +26,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡suelta! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/8/examen", titulo: "Etapa 8.4 · Examen tipo admisión" },
   descRondas: {
     guiado: "Los fantasmas se mueven con tu aceleración. La tecla que brilla te guía.",
     pista: "Fuerza neta entre masa total.",
