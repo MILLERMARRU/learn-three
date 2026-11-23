@@ -27,6 +27,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡suelta! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/8/sistemas", titulo: "Etapa 8.3 · Sistemas de bloques" },
   descRondas: {
     guiado: "Sin rozamiento: a = g sen θ. La tecla que brilla te guía.",
     pista: "Con rozamiento: resta μ cos θ al seno.",
