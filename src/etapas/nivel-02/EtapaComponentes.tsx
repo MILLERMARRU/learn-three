@@ -81,10 +81,10 @@ export default function EtapaComponentes() {
 
   useTeclas((e) => {
     if (!motor.jugando) return;
-    if (e.key === "ArrowLeft") (e.preventDefault(), mover(-1, 0));
-    else if (e.key === "ArrowRight") (e.preventDefault(), mover(1, 0));
-    else if (e.key === "ArrowUp") (e.preventDefault(), mover(0, 1));
-    else if (e.key === "ArrowDown") (e.preventDefault(), mover(0, -1));
+    if (e.key === "ArrowLeft") { e.preventDefault(); mover(-1, 0); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); mover(1, 0); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); mover(0, 1); }
+    else if (e.key === "ArrowDown") { e.preventDefault(); mover(0, -1); }
     else if (e.key === "Enter") comprobar();
     else if (e.key.toLowerCase() === "h" || e.key === "?") pedirPista();
   });
