@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import { emitirPolvo } from "@/lib/polvo";
 import { sfx } from "@/lib/sonido";
+import { puntoDelPuntero, useArrastre } from "@/three/arrastre";
 import { Etiqueta } from "../Etiqueta";
 import { Auto } from "./Auto";
 
@@ -65,7 +66,7 @@ export function EscenaPista({ L, cada = 10, moviles, marcas = [], bandera, fanta
   const X = (m: number) => (m - L / 2) * K;
   const autos = useRef<(THREE.Group | null)[]>([]);
   const superficie = useRef<THREE.Mesh>(null!);
-  const arrastrando = useRef(false);
+  const arrastrando = useArrastre(false);
   const sim = useRef({ id: -1, t: 0, fin: false, choque: [] as boolean[], etq: -1 });
   const etqTiempo = useRef<HTMLSpanElement | null>(null);
   const etqVel = useRef<(HTMLSpanElement | null)[]>([]);
@@ -169,7 +170,7 @@ export function EscenaPista({ L, cada = 10, moviles, marcas = [], bandera, fanta
 
   const actualizar = (e: ThreeEvent<PointerEvent>) => {
     if (!bandera?.editable || !bandera.onCambio) return;
-    punto.copy(e.point);
+    puntoDelPuntero(e, punto);
     superficie.current.worldToLocal(punto);
     const m = Math.max(0, Math.min(L, Math.round((punto.x / K + L / 2) / bandera.paso) * bandera.paso));
     if (m !== bandera.x) {

@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { emitirPolvo } from "@/lib/polvo";
 import { sfx } from "@/lib/sonido";
 import { componentes, posicion, tSuelo, type Lanzamiento } from "@/lib/tiro";
+import { puntoDelPuntero, useArrastre } from "@/three/arrastre";
 import { Etiqueta } from "../Etiqueta";
 
 export interface MarcaAltura {
@@ -94,7 +95,7 @@ export function EscenaTiro({ W, H, lanz, torre = 0, canasta = null, marca = null
   const etqVy = useRef<HTMLSpanElement | null>(null);
   const etqDir = useRef<HTMLSpanElement | null>(null);
   const sim = useRef({ id: -1, t: 0, fin: false, toco: false, etq: -1 });
-  const arrastrando = useRef(false);
+  const arrastrando = useArrastre(false);
   const ayuda = useMemo(() => ({ o: new THREE.Object3D(), p: new THREE.Vector3() }), []);
 
   const geo = useMemo(
@@ -247,7 +248,7 @@ export function EscenaTiro({ W, H, lanz, torre = 0, canasta = null, marca = null
   // marca de altura con el mouse
   const actualizar = (e: ThreeEvent<PointerEvent>) => {
     if (!marca?.editable || !marca.onCambio) return;
-    ayuda.p.copy(e.point);
+    puntoDelPuntero(e, ayuda.p);
     raiz.current.worldToLocal(ayuda.p);
     const m = Math.max(0, Math.min(H, Math.round((ayuda.p.y / K + H / 2) / marca.paso) * marca.paso));
     if (m !== marca.y) {

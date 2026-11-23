@@ -142,7 +142,7 @@ export default function EtapaComponentes() {
       retro={retro ? <RetroLinea tipo={retro.tipo}>{retro.texto}</RetroLinea> : null}
       respuesta={<VectorTexto nombre={p.nombre} v={v} color={COLOR.R} ok={exito} mal={retro?.tipo === "mal"} />}
       teclado={<TecladoVirtual activas={TECLAS_VECTOR} siguiente={guiado && motor.jugando ? teclaHacia(v, p.objetivo) : null} onTecla={simularTecla} flechas />}
-      escenario={{ encuadre: { w: 16, h: 12.4 }, balanceo: 0.05, arrastrable: false, vista: clave }}
+      escenario={{ encuadre: { w: 16, h: 12.4 }, balanceo: 0.05, arrastrable: false, tactil: true, vista: clave }}
       pieEscena={<span>Haz clic en la cuadrícula o usa las flechas</span>}
     />
   );

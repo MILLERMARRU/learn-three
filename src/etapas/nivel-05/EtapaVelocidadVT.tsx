@@ -195,7 +195,7 @@ export default function EtapaVelocidadVT() {
         />
       }
       teclado={<TecladoVirtual activas={TECLAS_EDITAR} siguiente={siguienteTecla} onTecla={simularTecla} flechas />}
-      escenario={{ ...ESCENARIO_GRAFICA, vista: clave }}
+      escenario={{ ...ESCENARIO_GRAFICA, tactil: true, vista: clave }}
       pieEscena={<span>Arrastra las barras de la v–t o usa las flechas · Enter para correr</span>}
     />
   );

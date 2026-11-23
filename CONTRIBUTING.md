@@ -148,6 +148,7 @@ style(inicio): ajusta el carrusel en móvil horizontal
 - **Sin dependencias nuevas sin acordarlo.** El proyecto se mantiene ligero: `react`, `three` y `@react-three/fiber`. Si necesitas una librería, propónla primero en el issue.
 - **3D con primitivas.** Construye las escenas con geometrías de three.js, sin modelos pesados. Libera geometrías y materiales en el `useEffect` de limpieza.
 - **Física consistente.** Usa `g = 10 m/s²` y los ángulos notables del curso (`senCos()` de `src/lib/tiro.ts`: sen 37° = 0,6), para que la simulación coincida con las respuestas.
+- **Objetos arrastrables (mouse y dedo).** Guarda el estado con `useArrastre` y calcula la posición con `puntoDelPuntero` (`src/three/arrastre.ts`), en lugar de `e.point`. Si la etapa tiene objetos que se arrastran, pasa `tactil: true` en su `escenario` para que el dedo no desplace la página.
 - **Etiquetas 3D con `<Etiqueta>`.** Para números que cambian, usa spans con `className="etq-num"` y actualízalos desde `useFrame`, sin re-renderizar React.
 - **Accesibilidad básica:** botones con `aria-label` si no tienen texto, foco visible y que todo se pueda hacer con el teclado.
 

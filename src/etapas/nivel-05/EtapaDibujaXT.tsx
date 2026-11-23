@@ -197,7 +197,7 @@ export default function EtapaDibujaXT() {
         />
       }
       teclado={<TecladoVirtual activas={TECLAS_EDITAR} siguiente={siguienteTecla} onTecla={simularTecla} flechas />}
-      escenario={{ ...ESCENARIO_GRAFICA, vista: clave }}
+      escenario={{ ...ESCENARIO_GRAFICA, tactil: true, vista: clave }}
       pieEscena={<span>Arrastra los puntos o usa las flechas · Enter para correr</span>}
     />
   );

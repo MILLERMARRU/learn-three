@@ -232,7 +232,16 @@ kbd {
 }
 .es-arrastrable {
   cursor: grab;
+}
+/* escena que recibe arrastres con el dedo (giro u objetos): el navegador no se queda con el gesto para hacer
+   scroll (si lo hiciera, cancelaría el puntero tras el primer movimiento), sin menú de pulsación larga,
+   sin selección y sin resaltado de toque */
+.es-tactil {
   touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .escenario canvas {
   -webkit-mask-image: radial-gradient(ellipse 78% 82% at 50% 50%, #000 62%, transparent 100%);
@@ -2727,4 +2736,30 @@ kbd {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ══ Pantallas táctiles: objetivos de al menos 44 px ─────── */
+@media (pointer: coarse) {
+  .btn {
+    height: 44px;
+    min-width: 44px;
+    justify-content: center;
+  }
+  .cn-btn {
+    width: 44px;
+    height: 44px;
+  }
+  .ajuste,
+  .ajuste.ajuste-h {
+    flex-direction: row;
+    gap: 6px;
+  }
+  .ajuste .slot-arr {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 14px;
+  }
 }

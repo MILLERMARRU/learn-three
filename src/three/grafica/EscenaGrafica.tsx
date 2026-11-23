@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, type ReactNode } from "react";
 import * as THREE from "three";
 import { escalones, interpolar, puntosDe, type Punto } from "@/lib/graficas";
 import { sfx } from "@/lib/sonido";
+import { puntoDelPuntero, useArrastre } from "@/three/arrastre";
 import { Etiqueta } from "../Etiqueta";
 import { Auto } from "../pista/Auto";
 import { pasoBonito } from "../tiro/EscenaTiro";
@@ -129,7 +130,7 @@ export function EscenaGrafica({ T, paneles, pista = null, corrida = null, onFin,
   const etqX = useRef<HTMLSpanElement | null>(null);
   const etqL = useRef<HTMLSpanElement | null>(null);
   const sim = useRef({ id: -1, t: 0, fin: false, etq: -1 });
-  const arrastre = useRef<{ k: number; i: number } | null>(null);
+  const arrastre = useArrastre<{ k: number; i: number } | null>(null);
   const ayuda = useMemo(() => new THREE.Vector3(), []);
 
   const mats = useMemo(
@@ -297,7 +298,7 @@ export function EscenaGrafica({ T, paneles, pista = null, corrida = null, onFin,
 
   // edición con el mouse
   const leer = (e: ThreeEvent<PointerEvent>, k: number) => {
-    ayuda.copy(e.point);
+    puntoDelPuntero(e, ayuda);
     raiz.current.worldToLocal(ayuda);
     const p = paneles[k];
     const t = ((ayuda.x + ANCHO / 2) / ANCHO) * T;

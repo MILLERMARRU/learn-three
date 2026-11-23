@@ -192,6 +192,9 @@ La guía completa, con convenciones y checklist, está en [CONTRIBUTING.md](CONT
 | Escritorio ≤ 1400 px | La escena empieza a la derecha del enunciado; el ejercicio siguiente se oculta si no cabe |
 | Laptops bajas | Teclado y respuesta compactos |
 | 2K / 4K | La interfaz HTML escala con `zoom`; el canvas 3D se adapta solo |
+| Pantallas táctiles | Los objetos se arrastran con el dedo sin desplazar la página; botones y flechas de al menos 44 px |
+
+<p align="center"><img src="docs/capturas/arrastre-tactil.gif" width="300" alt="Arrastre con el dedo en móvil: la bandera, los puntos de la gráfica x–t y la punta del vector siguen al dedo"></p>
 
 ## Despliegue
 
