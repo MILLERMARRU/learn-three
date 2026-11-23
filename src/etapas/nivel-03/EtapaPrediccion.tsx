@@ -87,8 +87,8 @@ export default function EtapaPrediccion() {
 
   useTeclas((e) => {
     if (!motor.jugando) return;
-    if (e.key === "ArrowLeft") (e.preventDefault(), poner(x - PASO), sfx.tecla());
-    else if (e.key === "ArrowRight") (e.preventDefault(), poner(x + PASO), sfx.tecla());
+    if (e.key === "ArrowLeft") { e.preventDefault(); poner(x - PASO); sfx.tecla(); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); poner(x + PASO); sfx.tecla(); }
     else if (e.key === "Enter") correr();
     else if (e.key.toLowerCase() === "h" || e.key === "?") pedirPista();
   });
