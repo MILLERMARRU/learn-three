@@ -14,6 +14,8 @@ export function useTeclas(manejador: (e: KeyboardEvent) => void, activo = true) 
       if (e.defaultPrevented) return;
       const t = e.target as HTMLElement | null;
       if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      // con foco de teclado en un botón o enlace, Enter y Espacio lo activan a él (nativo) y no al atajo global
+      if ((e.key === "Enter" || e.key === " ") && t?.closest("button, a[href], select, summary")?.matches(":focus-visible")) return;
       ref.current(e);
     };
     window.addEventListener("keydown", h);

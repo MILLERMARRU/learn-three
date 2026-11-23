@@ -14,6 +14,14 @@ window.addEventListener('vite:preloadError', (evento) => {
   window.location.reload()
 })
 
+// ══ Foco tras un clic de mouse o táctil: el botón lo suelta para que Enter siga siendo el atajo de la etapa ───────
+// Los clics generados con Enter o Espacio (detail === 0) conservan el foco: quien navega con teclado no lo pierde.
+document.addEventListener('click', (evento) => {
+  if (evento.detail === 0) return
+  const boton = (evento.target as Element | null)?.closest('button')
+  if (boton && boton === document.activeElement) boton.blur()
+})
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />

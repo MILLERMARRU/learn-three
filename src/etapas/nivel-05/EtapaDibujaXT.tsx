@@ -155,16 +155,16 @@ export default function EtapaDibujaXT() {
       </p>
       <div className="solo-movil">
         <div className="acciones">
-          <button className="btn" onClick={() => fijar(xs, sel - 1)} disabled={!motor.jugando}>
+          <button className="btn" onClick={() => fijar(xs, sel - 1)} disabled={!motor.jugando} aria-label="Punto anterior">
             ◀
           </button>
-          <button className="btn" onClick={() => cambiar(sel, xs[sel] - PASO)} disabled={!motor.jugando}>
+          <button className="btn" onClick={() => cambiar(sel, xs[sel] - PASO)} disabled={!motor.jugando} aria-label="Bajar el punto 5 m">
             −
           </button>
-          <button className="btn" onClick={() => cambiar(sel, xs[sel] + PASO)} disabled={!motor.jugando}>
+          <button className="btn" onClick={() => cambiar(sel, xs[sel] + PASO)} disabled={!motor.jugando} aria-label="Subir el punto 5 m">
             +
           </button>
-          <button className="btn" onClick={() => fijar(xs, sel + 1)} disabled={!motor.jugando}>
+          <button className="btn" onClick={() => fijar(xs, sel + 1)} disabled={!motor.jugando} aria-label="Punto siguiente">
             ▶
           </button>
           <button className="btn btn-pri" onClick={correr} disabled={!motor.jugando || corriendo}>
