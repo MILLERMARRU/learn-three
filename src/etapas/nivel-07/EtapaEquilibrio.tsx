@@ -27,6 +27,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡suelta! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/7/aparejo", titulo: "Etapa 7.2 · Poleas fijas y móviles" },
   descRondas: {
     guiado: "La flecha roja es la resultante: llévala a cero. La tecla que brilla te guía.",
     pista: "Descompón las fuerzas en x e y; cada suma debe dar cero.",
