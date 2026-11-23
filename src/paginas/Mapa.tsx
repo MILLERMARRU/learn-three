@@ -487,6 +487,17 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "gravedad") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <circle cx="38" cy="42" r="18" className="ev-tenue" />
+        <line x1="38" y1="24" x2="38" y2="10" />
+        <rect x="35" y="5" width="6" height="6" rx="1" className="ev-acento" />
+        <rect x="80" y="8" width="12" height="48" rx="6" className="ev-tenue" />
+        <circle cx="86" cy="34" r="4" className="ev-acento" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
