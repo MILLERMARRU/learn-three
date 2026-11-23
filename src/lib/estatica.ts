@@ -60,6 +60,18 @@ export function fuerzaPoleas(W: number, moviles: number, P = 0): number {
   return T;
 }
 
+/** Una fuerza vertical sobre una barra horizontal: posición x (m) y componente Fy (N, positiva hacia arriba). */
+export interface FuerzaEnBarra {
+  x: number;
+  Fy: number;
+}
+
+/**
+ * Suma de momentos respecto del apoyo en xp (N·m), positiva en sentido antihorario: M = Fy · (x − xp).
+ * Un peso (Fy < 0) a la derecha del apoyo hace girar en sentido horario.
+ */
+export const sumaMomentos = (fs: FuerzaEnBarra[], xp: number) => fs.reduce((m, f) => m + f.Fy * (f.x - xp), 0);
+
 /** Componentes del peso en un plano inclinado θ: paralela al plano (W sen θ) y perpendicular (W cos θ). */
 export function enPlano(W: number, theta: number): { paralela: number; normal: number } {
   const [s, c] = senCos(theta);
