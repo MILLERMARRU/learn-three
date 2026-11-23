@@ -3,23 +3,48 @@ import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import * as THREE from "three";
 import { Escenario } from "@/three/Escenario";
-import { heroCinematica } from "./cinematica";
-import { heroCircular } from "./circular";
+import { NIVELES_FISICA } from "@/contenido/curso";
 import { heroDimensional } from "./dimensional";
-import { heroDinamica } from "./dinamica";
-import { heroEstatica } from "./estatica";
-import { heroGraficas } from "./graficas";
 import { heroPronto } from "./pronto";
-import { heroTiros } from "./tiros";
 import { PASO_MS, type Hero } from "./tipos";
-import { heroVectorial } from "./vectorial";
 
-/** Hero de cada nivel (clave = número de nivel). Los que no estén usan el de "pronto". */
-const HEROES: Record<number, Hero> = { 1: heroDimensional, 2: heroVectorial, 3: heroCinematica, 4: heroTiros, 5: heroGraficas, 6: heroCircular, 7: heroEstatica, 8: heroDinamica };
+/**
+ * Hero de cada nivel (clave = número de nivel). El del nivel 1 viene en el inicio; los demás se descargan al elegirlos
+ * (cada uno trae sus escenas 3D): así el chunk principal no crece con cada nivel nuevo.
+ */
+const CARGAR: Record<number, () => Promise<Hero>> = {
+  2: () => import("./vectorial").then((m) => m.heroVectorial),
+  3: () => import("./cinematica").then((m) => m.heroCinematica),
+  4: () => import("./tiros").then((m) => m.heroTiros),
+  5: () => import("./graficas").then((m) => m.heroGraficas),
+  6: () => import("./circular").then((m) => m.heroCircular),
+  7: () => import("./estatica").then((m) => m.heroEstatica),
+  8: () => import("./dinamica").then((m) => m.heroDinamica),
+};
+
+/** Mientras se descarga el hero: el nombre del tema, sin escena. */
+const heroCargando: Hero = (_tick, nivel) => ({ escena: null, pie: <span className="hero-mag">{NIVELES_FISICA[nivel]}</span>, encuadre: { w: 9, h: 7 } });
 
 export function HeroNivel({ nivel }: { nivel: number }) {
-  const hero = HEROES[nivel + 1] ?? heroPronto;
-  const tipo = HEROES[nivel + 1] ? `n${nivel + 1}` : "pronto";
+  const n = nivel + 1;
+  const [cargados, setCargados] = useState<Record<number, Hero>>({ 1: heroDimensional });
+  // descarga el del nivel elegido y precarga los vecinos, para que pasar al siguiente sea instantáneo
+  useEffect(() => {
+    let vivo = true;
+    for (const k of [n, n + 1, n - 1]) {
+      const cargar = CARGAR[k];
+      if (!cargar) continue;
+      cargar().then((h) => {
+        if (vivo) setCargados((c) => (c[k] ? c : { ...c, [k]: h }));
+      });
+    }
+    return () => {
+      vivo = false;
+    };
+  }, [n]);
+  const disponible = n === 1 || !!CARGAR[n];
+  const hero = cargados[n] ?? (disponible ? heroCargando : heroPronto);
+  const tipo = cargados[n] ? `n${n}` : disponible ? `cargando-${n}` : "pronto";
 
   // reloj que vuelve a 0 cada vez que cambia el tipo de hero
   const tipoActual = useRef(tipo);
