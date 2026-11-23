@@ -61,6 +61,7 @@ export const ETAPAS_N8: EtapaInfo[] = [
   { id: "newton", clave: "n8-newton", numero: "8.1", titulo: "Segunda ley de Newton", resumen: "Empuja con la fuerza justa para que el bloque llegue a la bandera a tiempo: ΣF = m·a.", tipo: "Flechas ↑ ↓" },
   { id: "plano", clave: "n8-plano", numero: "8.2", titulo: "Plano inclinado con rozamiento", resumen: "Predice cómo acelera el bloque que baja: un fantasma con tu aceleración corre junto al real.", tipo: "Flechas ↑ ↓" },
   { id: "sistemas", clave: "n8-sistemas", numero: "8.3", titulo: "Sistemas de bloques", resumen: "Atwood y la mesa con pesa colgante: aceleración del sistema y tensión de la cuerda.", tipo: "Flechas ↑ ↓" },
+  { id: "examen", clave: "n8-examen", numero: "8.4", titulo: "Examen tipo admisión", resumen: "10 preguntas de segunda ley, rozamiento, planos, sistemas y tensión con la escena en 3D.", tipo: "Opción múltiple" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
