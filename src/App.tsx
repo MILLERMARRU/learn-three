@@ -54,6 +54,9 @@ const NIVELES: Record<string, Record<string, Etapa>> = {
     sistemas: lazy(() => import("@/etapas/nivel-08/EtapaSistemas")),
     examen: lazy(() => import("@/etapas/nivel-08/EtapaExamenDinamica")),
   },
+  "9": {
+    atraccion: lazy(() => import("@/etapas/nivel-09/EtapaAtraccion")),
+  },
 };
 
 /** Pantalla breve mientras se descarga la etapa. */
