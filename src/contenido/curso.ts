@@ -66,6 +66,7 @@ export const ETAPAS_N8: EtapaInfo[] = [
 
 export const ETAPAS_N9: EtapaInfo[] = [
   { id: "atraccion", clave: "n9-atraccion", numero: "9.1", titulo: "Ley de gravitación universal", resumen: "Cambian las masas o la distancia: ajusta la nueva fuerza de atracción (F ∝ m₁m₂/d²).", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "gravedad", clave: "n9-gravedad", numero: "9.2", titulo: "Gravedad en la altura y en otros planetas", resumen: "Predice g lejos de la superficie o en otro planeta: una bola fantasma cae con tu valor.", tipo: "Flechas ↑ ↓ ← →" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
