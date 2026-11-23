@@ -2,7 +2,7 @@
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, type RefObject } from "react";
 import * as THREE from "three";
-import type { FuerzaDib, TipoEquilibrio } from "@/contenido/nivel-07/equilibrio";
+import type { FuerzaDib, TipoEquilibrio } from "@/contenido/nivel-07/modelo";
 import { modulo, proyectar, senCos, sumar, type Vec2 } from "@/lib/estatica";
 import { emitirPolvo } from "@/lib/polvo";
 import { Etiqueta } from "../Etiqueta";
