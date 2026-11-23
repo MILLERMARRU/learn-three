@@ -1,7 +1,7 @@
 // ══ Pruebas de dinámica: segunda ley, rozamiento y movimiento con aceleración constante ───────
 import assert from "node:assert/strict";
 import { describe, test } from "node:test";
-import { aceleracion, aceleracionEnPiso, aceleracionPara, fuerzaPara, posicion, rozamiento } from "../src/lib/dinamica.ts";
+import { aceleracion, aceleracionEnPiso, aceleracionPara, aceleracionPlano, fuerzaPara, posicion, rozamiento } from "../src/lib/dinamica.ts";
 
 describe("segunda ley de Newton", () => {
   test("40 N sobre 10 kg dan 4 m/s²", () => {
@@ -15,6 +15,23 @@ describe("segunda ley de Newton", () => {
   test("si la fuerza no vence al rozamiento, no hay aceleración", () => {
     assert.equal(aceleracionEnPiso(15, 10, 0.2), 0);
     assert.equal(aceleracionEnPiso(40, 10, 0.2), 2);
+  });
+});
+
+describe("plano inclinado", () => {
+  test("sin rozamiento: g sen θ (6 m/s² a 37°, 8 m/s² a 53°)", () => {
+    assert.equal(aceleracionPlano(37), 6);
+    assert.equal(aceleracionPlano(53), 8);
+  });
+
+  test("con rozamiento: g (sen θ − μ cos θ)", () => {
+    assert.equal(aceleracionPlano(37, 0.25), 4);
+    assert.equal(aceleracionPlano(53, 0.5), 5);
+  });
+
+  test("si μ ≥ tan θ el bloque no baja", () => {
+    assert.equal(aceleracionPlano(37, 0.75), 0);
+    assert.equal(aceleracionPlano(37, 0.9), 0);
   });
 });
 
