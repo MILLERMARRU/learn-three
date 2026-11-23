@@ -50,6 +50,16 @@ export function dosCuerdas(W: number, alfa: number, beta: number): Vec2 {
   return [(W * senCos(beta)[1]) / s, (W * senCos(alfa)[1]) / s];
 }
 
+/**
+ * Fuerza para sostener un peso W con un aparejo potencial de `moviles` poleas móviles (0 = solo una polea fija).
+ * Cada polea móvil cuelga de dos tramos de cuerda: T = (T + P) / 2, con P el peso de cada polea móvil.
+ */
+export function fuerzaPoleas(W: number, moviles: number, P = 0): number {
+  let T = W;
+  for (let i = 0; i < moviles; i++) T = (T + P) / 2;
+  return T;
+}
+
 /** Componentes del peso en un plano inclinado θ: paralela al plano (W sen θ) y perpendicular (W cos θ). */
 export function enPlano(W: number, theta: number): { paralela: number; normal: number } {
   const [s, c] = senCos(theta);

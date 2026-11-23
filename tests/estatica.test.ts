@@ -1,7 +1,7 @@
 // ══ Pruebas de estática: ángulos notables exactos, suma de fuerzas, equilibrio, cuerdas y plano inclinado ───────
 import assert from "node:assert/strict";
 import { describe, test } from "node:test";
-import { dosCuerdas, enEquilibrio, enPlano, fuerza, modulo, proyectar, senCos, sumar } from "../src/lib/estatica.ts";
+import { dosCuerdas, enEquilibrio, enPlano, fuerza, fuerzaPoleas, modulo, proyectar, senCos, sumar } from "../src/lib/estatica.ts";
 
 describe("senCos con ángulos notables", () => {
   test("37° y 53° son exactos en los cuatro cuadrantes", () => {
@@ -44,6 +44,17 @@ describe("cuerdas y plano inclinado", () => {
     assert.equal(t2, 40);
     // las tres fuerzas cierran el polígono
     assert.ok(enEquilibrio([fuerza(t1, 180 - 37), fuerza(t2, 53), fuerza(50, 270)]));
+  });
+
+  test("poleas: la fija no ahorra fuerza; cada móvil la divide entre dos", () => {
+    assert.equal(fuerzaPoleas(60, 0), 60);
+    assert.equal(fuerzaPoleas(80, 1), 40);
+    assert.equal(fuerzaPoleas(160, 3), 20);
+  });
+
+  test("poleas con peso propio: (W + P) / 2 en cada etapa", () => {
+    assert.equal(fuerzaPoleas(80, 1, 20), 50);
+    assert.equal(fuerzaPoleas(100, 2, 20), 40);
   });
 
   test("bloque de 100 N en un plano de 37°: 60 N paralelos y 80 N perpendiculares", () => {
