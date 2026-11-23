@@ -10,6 +10,13 @@ export const TECLAS_OMEGA: Record<string, DecoTecla> = {
   h: { sub: "pista" },
 };
 
+export const TECLAS_CURVA: Record<string, DecoTecla> = {
+  "↑": { sub: "+5 m/s" },
+  "↓": { sub: "−5 m/s" },
+  intro: { sub: "¡arranca!" },
+  h: { sub: "pista" },
+};
+
 /** Radio de la rueda principal (unidades 3D). */
 export const RADIO_RUEDA = 1.9;
 
@@ -22,3 +29,7 @@ export const CARRUSEL_RUEDA = { paso: 8.3, escala: 0.33, fondo: 0, giro: 0, anch
 /** Poleas y engranajes: una fila de ruedas más ancha que alta. */
 export const ESCENARIO_POLEAS = { encuadre: { w: 9.2, h: 5.6 }, balanceo: 0.04, arrastrable: false, centro: [-0.6, 0.1] as [number, number] };
 export const CARRUSEL_POLEAS = { paso: 8.3, escala: 0.33, fondo: 0, giro: 0, ancho: 8.4 };
+
+/** Curva en U vista desde arriba: se sale por la derecha si va muy rápido. */
+export const ESCENARIO_CURVA = { encuadre: { w: 7.6, h: 7 }, balanceo: 0.04, arrastrable: false, centro: [-0.6, 0.25] as [number, number] };
+export const CARRUSEL_CURVA = { paso: 8.3, escala: 0.33, fondo: 0, giro: 0, ancho: 5.8 };

@@ -396,6 +396,17 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "curva") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <path d="M84 60 V36 A24 24 0 0 0 36 36 V60" className="ev-tenue" />
+        <circle cx="60" cy="36" r="2.5" className="ev-tenue" />
+        <line x1="60" y1="36" x2="76.9" y2="19.1" className="ev-flecha" />
+        <path d="M84 36 Q92 14 104 6" />
+        <rect x="80" y="40" width="8" height="12" rx="2" className="ev-acento" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
