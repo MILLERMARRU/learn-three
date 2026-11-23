@@ -101,10 +101,10 @@ export default function EtapaParabolico() {
   useTeclas((e) => {
     if (!motor.jugando) return;
     const k = e.key;
-    if (!porAngulo && k === "ArrowUp") (e.preventDefault(), fijar(v + 5, ai));
-    else if (!porAngulo && k === "ArrowDown") (e.preventDefault(), fijar(v - 5, ai));
-    else if (porAngulo && k === "ArrowRight") (e.preventDefault(), fijar(v, ai + 1));
-    else if (porAngulo && k === "ArrowLeft") (e.preventDefault(), fijar(v, ai - 1));
+    if (!porAngulo && k === "ArrowUp") { e.preventDefault(); fijar(v + 5, ai); }
+    else if (!porAngulo && k === "ArrowDown") { e.preventDefault(); fijar(v - 5, ai); }
+    else if (porAngulo && k === "ArrowRight") { e.preventDefault(); fijar(v, ai + 1); }
+    else if (porAngulo && k === "ArrowLeft") { e.preventDefault(); fijar(v, ai - 1); }
     else if (k === "Enter") disparar();
     else if (k.toLowerCase() === "h" || k === "?") pedirPista();
   });
