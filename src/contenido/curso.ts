@@ -64,8 +64,12 @@ export const ETAPAS_N8: EtapaInfo[] = [
   { id: "examen", clave: "n8-examen", numero: "8.4", titulo: "Examen tipo admisión", resumen: "10 preguntas de segunda ley, rozamiento, planos, sistemas y tensión con la escena en 3D.", tipo: "Opción múltiple" },
 ];
 
+export const ETAPAS_N9: EtapaInfo[] = [
+  { id: "atraccion", clave: "n9-atraccion", numero: "9.1", titulo: "Ley de gravitación universal", resumen: "Cambian las masas o la distancia: ajusta la nueva fuerza de atracción (F ∝ m₁m₂/d²).", tipo: "Flechas ↑ ↓ ← →" },
+];
+
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
-export const ETAPAS_POR_NIVEL: Record<number, EtapaInfo[]> = { 1: ETAPAS_N1, 2: ETAPAS_N2, 3: ETAPAS_N3, 4: ETAPAS_N4, 5: ETAPAS_N5, 6: ETAPAS_N6, 7: ETAPAS_N7, 8: ETAPAS_N8 };
+export const ETAPAS_POR_NIVEL: Record<number, EtapaInfo[]> = { 1: ETAPAS_N1, 2: ETAPAS_N2, 3: ETAPAS_N3, 4: ETAPAS_N4, 5: ETAPAS_N5, 6: ETAPAS_N6, 7: ETAPAS_N7, 8: ETAPAS_N8, 9: ETAPAS_N9 };
 
 /** Primera etapa sin terminar de todo el curso (para el botón "Continuar"). */
 export function siguienteEtapa(hechas: (clave: string) => boolean): { nivel: number; etapa: EtapaInfo } {
