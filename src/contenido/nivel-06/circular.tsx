@@ -1,7 +1,7 @@
 // ══ Nivel 6 · Movimiento circunferencial: contenido de la etapa 6.1 (problemas propios, ω en múltiplos de π/4) ───────
 import { fmtPi } from "@/lib/circular";
 import type { RondaDef } from "@/motor/etapa";
-import { Frac, Op, V } from "@/ui/Formula";
+import { Frac, Op, Sub, V } from "@/ui/Formula";
 
 /** Paso del ajuste de ω: un cuarto de π rad/s. */
 export const CUARTO = Math.PI / 4;
@@ -70,7 +70,91 @@ export function textoObjetivo(p: ProblemaAngular): string {
   return Number.isInteger(Math.round(vueltas * 1e9) / 1e9) ? `${Math.round(vueltas)} ${Math.round(vueltas) === 1 ? "vuelta" : "vueltas"}` : `${fmtPi(p.objetivo / CUARTO, 4)} rad`;
 }
 
+// ══ 6.2 Poleas y engranajes ───────
+export type TipoUnion = "faja" | "engranaje" | "eje";
+
+export interface ProblemaPoleas {
+  id: string;
+  /** Radios (cm) en orden de transmisión; la primera rueda es la motriz y la última es la incógnita. */
+  radios: number[];
+  /** Cómo se une cada rueda con la siguiente (radios.length − 1 uniones). */
+  uniones: TipoUnion[];
+  /** ω de cada rueda en cuartos de π rad/s, con signo (positivo = antihorario). */
+  ks: number[];
+  /** |ω| de la última rueda en cuartos de π rad/s. */
+  respuesta: number;
+  pistas: [string, string];
+}
+
+export const NOMBRES_RUEDA = ["A", "B", "C", "D"];
+
+function poleas(id: string, radios: number[], uniones: TipoUnion[], k0: number, pistas: [string, string]): ProblemaPoleas {
+  const ks = [k0];
+  uniones.forEach((u, i) => {
+    const k = ks[i];
+    // faja y engranaje conservan la rapidez del borde (ω₁R₁ = ω₂R₂); el engranaje invierte el sentido; el eje comparte ω
+    ks.push(u === "eje" ? k : ((u === "engranaje" ? -1 : 1) * k * radios[i]) / radios[i + 1]);
+  });
+  const r = Math.abs(ks[ks.length - 1]);
+  if (Math.abs(r - Math.round(r)) > 1e-9 || Math.round(r) < K_MIN || Math.round(r) > K_MAX) throw new Error(`6.2 ${id}: ω = ${r}·π/4 fuera del ajuste`);
+  return { id, radios, uniones, ks, respuesta: Math.round(r), pistas };
+}
+
+export const RONDAS_POLEAS: RondaDef<ProblemaPoleas>[] = [
+  {
+    ronda: "guiado",
+    items: [
+      poleas("g1", [30, 15], ["faja"], 4, ["Con faja, los bordes avanzan a la misma rapidez: ωA·RA = ωB·RB.", "π · 30 = ωB · 15 → ωB = 2π rad/s."]),
+      poleas("g2", [30, 12], ["eje"], 2, ["Las ruedas fijas al mismo eje giran juntas.", "Tienen la misma ω: π/2 rad/s."]),
+      poleas("g3", [20, 40], ["engranaje"], 8, ["Los dientes en contacto avanzan igual: ωA·RA = ωB·RB.", "2π · 20 = ωB · 40 → ωB = π rad/s (y gira al revés)."]),
+    ],
+  },
+  {
+    ronda: "pista",
+    items: [
+      poleas("p1", [10, 40], ["faja"], 8, ["La rueda grande gira más lento.", "2π · 10 = ωB · 40 → ωB = π/2 rad/s."]),
+      poleas("p2", [45, 15], ["engranaje"], 2, ["El engranaje chico gira más rápido.", "(π/2) · 45 = ωB · 15 → ωB = 3π/2 rad/s."]),
+      poleas("p3", [24, 32], ["faja"], 4, ["ωB = ωA · R_A / R_B.", "π · 24 / 32 = 3π/4 rad/s."]),
+    ],
+  },
+  {
+    ronda: "solo",
+    items: [
+      poleas("s1", [20, 40, 10, 20], ["faja", "eje", "faja"], 8, ["Paso a paso: A → B por faja; B y C comparten eje; C → D por faja.", "ωB = 2π · 20/40 = π; ωC = π; ωD = π · 10/20 = π/2 rad/s."]),
+      poleas("s2", [30, 10], ["engranaje"], 1, ["ωA·RA = ωB·RB.", "(π/4) · 30 / 10 = 3π/4 rad/s."]),
+      poleas("s3", [40, 20, 10, 15], ["engranaje", "eje", "faja"], 3, ["A → B engranados; B y C en el mismo eje; C → D por faja.", "ωB = (3π/4) · 40/20 = 3π/2; ωC = 3π/2; ωD = (3π/2) · 10/15 = π rad/s."]),
+    ],
+  },
+];
+
+/** Explicación de la última transmisión, para la retroalimentación. */
+export function explicarPoleas(p: ProblemaPoleas, k: number): string {
+  const n = p.radios.length - 1;
+  const u = p.uniones[n - 1];
+  const a = NOMBRES_RUEDA[n - 1];
+  const b = NOMBRES_RUEDA[n];
+  const kPrev = Math.abs(p.ks[n - 1]);
+  if (u === "eje") return `${a} y ${b} comparten eje: giran con la misma ω = ${fmtPi(kPrev, 4)} rad/s.`;
+  const vPrev = fmtPi(kPrev * p.radios[n - 1], 4);
+  const vEste = fmtPi(k * p.radios[n], 4);
+  return `El borde de ${a} va a ${vPrev} cm/s y el de ${b} a ${vEste} cm/s${k === p.respuesta ? "" : `: ${u === "faja" ? "la faja patina" : "los dientes chocan"}`}.`;
+}
+
 // ══ Fórmulas ───────
+export const F_TRANSMISION = (
+  <>
+    <V>ω</V>
+    <Sub>A</Sub>
+    <V>R</V>
+    <Sub>A</Sub>
+    <Op>=</Op>
+    <V>ω</V>
+    <Sub>B</Sub>
+    <V>R</V>
+    <Sub>B</Sub>
+  </>
+);
+
 export const F_OMEGA = (
   <>
     <V>ω</V>

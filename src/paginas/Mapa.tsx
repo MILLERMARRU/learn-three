@@ -384,6 +384,18 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "poleas") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <circle cx="38" cy="32" r="20" className="ev-tenue" />
+        <circle cx="92" cy="32" r="10" className="ev-tenue" />
+        <line x1="34.6" y1="12.3" x2="90.3" y2="22.1" />
+        <line x1="34.6" y1="51.7" x2="90.3" y2="41.9" />
+        <circle cx="38" cy="32" r="3.5" className="ev-acento" />
+        <circle cx="92" cy="32" r="3.5" className="ev-acento" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>

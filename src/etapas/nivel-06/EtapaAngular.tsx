@@ -27,6 +27,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡gira! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/6/poleas", titulo: "Etapa 6.2 · Poleas y engranajes" },
   descRondas: {
     guiado: "La espiral punteada muestra el giro correcto y la tecla que brilla te guía.",
     pista: "Tienes la fórmula: pasa el dato a radianes y divide entre el tiempo.",
@@ -157,7 +158,7 @@ export default function EtapaAngular() {
       {...CARRUSEL_RUEDA}
       render={(it, rol) =>
         rol === "actual" ? (
-          <EscenaRuedas ruedas={ruedaDe(p, k)} guia={guiado ? p.objetivo : null} corrida={enCurso ? { id: enCurso.id, tFin: p.t } : null} onFin={alTerminar} exito={exito} />
+          <EscenaRuedas medirGiro ruedas={ruedaDe(p, k)} guia={guiado ? p.objetivo : null} corrida={enCurso ? { id: enCurso.id, tFin: p.t } : null} onFin={alTerminar} exito={exito} />
         ) : (
           <EscenaRuedas ruedas={ruedaDe(it, K_MIN)} previa={rol === "siguiente" ? textoCorto(it) : ""} />
         )
