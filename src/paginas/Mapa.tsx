@@ -443,6 +443,17 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "newton") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="8" y1="50" x2="112" y2="50" className="ev-tenue" />
+        <rect x="18" y="32" width="22" height="18" rx="2" className="ev-acento" />
+        <line x1="40" y1="41" x2="66" y2="41" className="ev-flecha" />
+        <line x1="96" y1="50" x2="96" y2="24" />
+        <path d="M96 24 L108 28 L96 32 Z" className="ev-relleno" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
