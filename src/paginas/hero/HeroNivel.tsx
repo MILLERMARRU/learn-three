@@ -6,6 +6,7 @@ import { Escenario } from "@/three/Escenario";
 import { heroCinematica } from "./cinematica";
 import { heroCircular } from "./circular";
 import { heroDimensional } from "./dimensional";
+import { heroEstatica } from "./estatica";
 import { heroGraficas } from "./graficas";
 import { heroPronto } from "./pronto";
 import { heroTiros } from "./tiros";
@@ -13,7 +14,7 @@ import { PASO_MS, type Hero } from "./tipos";
 import { heroVectorial } from "./vectorial";
 
 /** Hero de cada nivel (clave = número de nivel). Los que no estén usan el de "pronto". */
-const HEROES: Record<number, Hero> = { 1: heroDimensional, 2: heroVectorial, 3: heroCinematica, 4: heroTiros, 5: heroGraficas, 6: heroCircular };
+const HEROES: Record<number, Hero> = { 1: heroDimensional, 2: heroVectorial, 3: heroCinematica, 4: heroTiros, 5: heroGraficas, 6: heroCircular, 7: heroEstatica };
 
 export function HeroNivel({ nivel }: { nivel: number }) {
   const hero = HEROES[nivel + 1] ?? heroPronto;

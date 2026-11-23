@@ -1,11 +1,11 @@
 // ══ Etapa 7.3 · Momento de una fuerza: ajusta una fuerza o un brazo para que ΣM = 0 y la barra quede horizontal ───────
 import { useState, type ReactNode } from "react";
-import { F_MOMENTO, MEDIA_BARRA, RONDAS_MOMENTO, type ProblemaMomento } from "@/contenido/nivel-07/momento";
+import { cargasBarra, escalaBarra, F_MOMENTO, MEDIA_BARRA, RONDAS_MOMENTO, type ProblemaMomento } from "@/contenido/nivel-07/momento";
 import { sfx } from "@/lib/sonido";
 import { useTeclas } from "@/lib/teclado";
 import { useEtapa } from "@/motor/etapa";
 import { CarruselItems } from "@/three/CarruselItems";
-import { EscenaPalanca, type Carga } from "@/three/estatica/EscenaPalanca";
+import { EscenaPalanca } from "@/three/estatica/EscenaPalanca";
 import { CascaronEtapa, descRonda, RetroLinea, type MetaEtapa } from "@/ui/CascaronEtapa";
 import { Formula, V } from "@/ui/Formula";
 import { TecladoVirtual, type DecoTecla } from "@/ui/TecladoVirtual";
@@ -26,6 +26,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡suelta! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/7/examen", titulo: "Etapa 7.4 · Examen tipo admisión" },
   descRondas: {
     guiado: "El momento neto ΣM aparece bajo el apoyo: llévalo a cero. La tecla que brilla te guía.",
     pista: "Iguala los momentos que giran hacia cada lado.",
@@ -38,16 +39,6 @@ type Retro = { clave: string; tipo: "ok" | "mal" | "info"; texto: string };
 const lado = (x: number, p: ProblemaMomento) => (x < p.pivote ? "a la izquierda" : "a la derecha");
 const brazo = (x: number, p: ProblemaMomento) => fmtNum(Math.abs(x - p.pivote));
 const fmtV = (p: ProblemaMomento, v: number) => (p.unidad === "m" ? fmtNum(v) : String(v));
-
-function cargasDe(p: ProblemaMomento, v: number): Carga[] {
-  const cs: Carga[] = p.pesas.map((q) => ({ x: q.x, F: q.W, tipo: "pesa" }));
-  if (p.barra > 0) cs.push({ x: 0, F: p.barra, tipo: "barra" });
-  if (p.tipo === "fuerza") cs.push({ x: p.fuerzaX, F: v, tipo: "mano", incognita: true });
-  else if (p.movil) cs.push({ x: p.pivote + p.movil.lado * v, F: p.movil.W, tipo: "pesa", incognita: true });
-  return cs;
-}
-
-const escalaDe = (p: ProblemaMomento) => 1.15 / Math.max(...cargasDe(p, p.respuesta).map((c) => c.F));
 
 function enunciado(p: ProblemaMomento): ReactNode {
   const barra = p.barra > 0 ? `Una barra homogénea de 8 m que pesa ${p.barra} N se apoya a ${fmtNum(MEDIA_BARRA + p.pivote)} m de su extremo izquierdo.` : "Una barra ligera de 8 m se apoya en su punto medio.";
@@ -113,7 +104,7 @@ export default function EtapaMomento() {
     if (!motor.jugando) return;
     if (equilibrio) {
       motor.acierto();
-      const giraIzq = cargasDe(p, v)
+      const giraIzq = cargasBarra(p, v)
         .filter((c) => c.x < p.pivote)
         .reduce((s, c) => s + c.F * (p.pivote - c.x), 0);
       setFb({ clave, tipo: "ok", texto: `¡Equilibrio! Con ${simbolo} = ${fmtV(p, v)} ${p.unidad}, los momentos de cada lado valen ${fmtNum(giraIzq)} N·m: ΣM = 0.` });
@@ -154,9 +145,9 @@ export default function EtapaMomento() {
         rol === "actual" ? (
           <EscenaPalanca
             pivote={p.pivote}
-            cargas={cargasDe(p, v)}
+            cargas={cargasBarra(p, v)}
             media={MEDIA_BARRA}
-            escala={escalaDe(p)}
+            escala={escalaBarra(p)}
             medios={p.unidad === "m"}
             verMomento={guiado || !!enCurso?.fin}
             corrida={enCurso ? { id: enCurso.id } : null}
@@ -164,7 +155,7 @@ export default function EtapaMomento() {
             exito={exito}
           />
         ) : (
-          <EscenaPalanca pivote={it.pivote} cargas={cargasDe(it, it.respuesta)} media={MEDIA_BARRA} escala={escalaDe(it)} previa={rol === "siguiente" ? textoCorto(it) : ""} />
+          <EscenaPalanca pivote={it.pivote} cargas={cargasBarra(it, it.respuesta)} media={MEDIA_BARRA} escala={escalaBarra(it)} previa={rol === "siguiente" ? textoCorto(it) : ""} />
         )
       }
     />

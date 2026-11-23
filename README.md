@@ -83,6 +83,7 @@ El inicio ya muestra las pestañas de los cinco cursos. Cada uno reutilizará el
 | 4 | Cinemática II · Caída libre y tiro parabólico | Caída libre · Lanzamiento horizontal · Tiro parabólico · Examen |
 | 5 | Gráficas del movimiento | Dibuja la x–t · De x–t a v–t · Área = desplazamiento · Examen |
 | 6 | Movimiento circunferencial | Velocidad angular · Poleas y engranajes · Aceleración centrípeta · Examen |
+| 7 | Estática | Primera condición de equilibrio · Poleas fijas y móviles · Momento de una fuerza · Examen |
 
 <details>
 <summary><b>Detalle de las mecánicas por nivel</b></summary>
@@ -107,6 +108,9 @@ El inicio ya muestra las pestañas de los cinco cursos. Cada uno reutilizará el
 | 6.1 Velocidad angular | Ajustar ω (en pasos de π/4) para que la marca de la rueda llegue a la meta | θ = ωt; la estela en espiral cuenta las vueltas |
 | 6.2 Poleas y engranajes | Ajustar la ω de la última rueda (faja, engranajes, mismo eje, trenes de 4 ruedas) | La faja no patina y los dientes no chocan |
 | 6.3 Aceleración centrípeta | Rapidez máxima para tomar la curva | Si v²/R supera a máx, el auto se sale por fuera |
+| 7.1 Primera condición de equilibrio | Ajustar la fuerza que falta (colgado, piso, plano, dos cuerdas) | Si ΣF ≠ 0 el cuerpo se mueve; el polígono de fuerzas cierra |
+| 7.2 Poleas fijas y móviles | Fuerza para sostener un peso con un aparejo potencial | La carga sube o baja; F = W/2ⁿ |
+| 7.3 Momento de una fuerza | Ajustar una fuerza o un brazo en un balancín | La barra gira si ΣM ≠ 0 |
 | N.4 Examen tipo admisión | 10 preguntas, 45 s cada una; la escena se reproduce en 3D | Una sola oportunidad |
 
 </details>
@@ -221,8 +225,8 @@ No necesita variables de entorno.
 
 **Física**
 
-- [x] Niveles 1–6: dimensional, vectorial, cinemática I y II, gráficas y movimiento circunferencial.
-- [ ] Niveles 7–23: estática, dinámica, gravitación, energía, choques, MAS, ondas, hidrostática, calor, termodinámica, electricidad, magnetismo, óptica y física moderna.
+- [x] Niveles 1–7: dimensional, vectorial, cinemática I y II, gráficas, movimiento circunferencial y estática.
+- [ ] Niveles 8–23: dinámica, gravitación, energía, choques, MAS, ondas, hidrostática, calor, termodinámica, electricidad, magnetismo, óptica y física moderna.
 
 **Matemáticas**
 

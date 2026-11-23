@@ -1,6 +1,6 @@
 // ══ Etapa 7.1 · Primera condición de equilibrio: ajusta la fuerza que falta para que ΣF = 0 y el cuerpo quede en reposo ───────
 import { useState, type ReactNode } from "react";
-import { direccionLibre, F_EQUILIBRIO, F_MAX, F_MIN, F_PASO, fuerzasDe, nombreFuerza, RONDAS_EQUILIBRIO, type ProblemaEquilibrio } from "@/contenido/nivel-07/equilibrio";
+import { direccionLibre, escalaFuerzas, F_EQUILIBRIO, F_MAX, F_MIN, F_PASO, fuerzasDe, nombreFuerza, RONDAS_EQUILIBRIO, type ProblemaEquilibrio } from "@/contenido/nivel-07/equilibrio";
 import { modulo, sumar } from "@/lib/estatica";
 import { sfx } from "@/lib/sonido";
 import { useTeclas } from "@/lib/teclado";
@@ -88,8 +88,6 @@ function haciaDonde(p: ProblemaEquilibrio, rx: number, ry: number): string {
   return `se mueve ${[v, h].filter(Boolean).join(" y ")}`;
 }
 
-/** Escala de las flechas: la fuerza más grande del equilibrio mide ~1,5 u. */
-const escalaDe = (p: ProblemaEquilibrio) => 1.65 / Math.max(...fuerzasDe(p, p.respuesta).map((f) => modulo(f.vec)));
 
 export default function EtapaEquilibrio() {
   const motor = useEtapa<ProblemaEquilibrio>({ clave: "n7-equilibrio", rondas: RONDAS_EQUILIBRIO, avanceMs: 1900 });
@@ -168,14 +166,14 @@ export default function EtapaEquilibrio() {
             angulo2={p.angulo2}
             fuerzas={fuerzas}
             libre={direccionLibre(p)}
-            escala={escalaDe(p)}
+            escala={escalaFuerzas(p)}
             verResultante={guiado || !!enCurso?.fin}
             corrida={enCurso ? { id: enCurso.id } : null}
             onFin={alTerminar}
             exito={exito}
           />
         ) : (
-          <EscenaFuerzas tipo={it.tipo} angulo={it.angulo} angulo2={it.angulo2} fuerzas={fuerzasDe(it, it.respuesta)} libre={direccionLibre(it)} escala={escalaDe(it)} previa={rol === "siguiente" ? textoCorto(it) : ""} />
+          <EscenaFuerzas tipo={it.tipo} angulo={it.angulo} angulo2={it.angulo2} fuerzas={fuerzasDe(it, it.respuesta)} libre={direccionLibre(it)} escala={escalaFuerzas(it)} previa={rol === "siguiente" ? textoCorto(it) : ""} />
         )
       }
     />
