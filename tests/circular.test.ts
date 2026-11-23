@@ -1,7 +1,7 @@
 // ══ Pruebas del movimiento circunferencial: MCU, transmisión, aceleración centrípeta y formato con π ───────
 import assert from "node:assert/strict";
 import { describe, test } from "node:test";
-import { aCentripeta, angulo, fmtPi, fmtRadPi, frecuencia, grados, omegaDeRpm, omegaTransmitida, periodo, vTangencial } from "../src/lib/circular.ts";
+import { aCentripeta, angulo, fmtPi, fmtRadPi, frecuencia, grados, omegaDeRpm, omegaTransmitida, periodo, radioConAceleracion, vMaxCurva, vTangencial } from "../src/lib/circular.ts";
 
 const PI = Math.PI;
 const cerca = (a: number, b: number, tol = 1e-9) => assert.ok(Math.abs(a - b) < tol, `${a} ≠ ${b}`);
@@ -35,6 +35,16 @@ describe("transmisión y aceleración centrípeta", () => {
 
   test("a꜀ = v² / R: 20 m/s en una curva de 40 m da 10 m/s²", () => {
     assert.equal(aCentripeta(20, 40), 10);
+  });
+
+  test("rapidez máxima en una curva: con a_máx = 10 m/s² y R = 90 m, 30 m/s", () => {
+    assert.equal(vMaxCurva(10, 90), 30);
+    assert.equal(vMaxCurva(0.4 * 10, 100), 20);
+  });
+
+  test("al doble de la rapidez máxima la curva que logra es 4 veces más abierta", () => {
+    assert.equal(radioConAceleracion(40, 10), 160);
+    assert.equal(radioConAceleracion(40, 10) / radioConAceleracion(20, 10), 4);
   });
 });
 
