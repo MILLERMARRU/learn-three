@@ -40,6 +40,7 @@ const NIVELES: Record<string, Record<string, Etapa>> = {
     angular: lazy(() => import("@/etapas/nivel-06/EtapaAngular")),
     poleas: lazy(() => import("@/etapas/nivel-06/EtapaPoleas")),
     curva: lazy(() => import("@/etapas/nivel-06/EtapaCurva")),
+    examen: lazy(() => import("@/etapas/nivel-06/EtapaExamenCircular")),
   },
 };
 
