@@ -176,7 +176,7 @@ tests/              Pruebas de src/lib con node:test (sin dependencias)
 1. **Contenido:** crear `src/contenido/nivel-0N/*.tsx` con los ítems de cada ronda y el examen (problemas propios, con números que den resultados exactos).
 2. **Escena 3D:** crear la escena en `src/three/<tema>/`, solo con primitivas de three.js y con un modo `previa` para el carrusel.
 3. **Etapas:** crear `src/etapas/nivel-0N/` con `useEtapa()` + `<CascaronEtapa>` + `<CarruselItems>`; el examen usa `<Examen>`.
-4. **Registro:** rutas en `src/App.tsx`, etapas en `ETAPAS_POR_NIVEL` de `src/contenido/curso.ts` e ilustraciones en `VisualEtapa` de `src/paginas/Mapa.tsx`.
+4. **Registro:** rutas en `src/App.tsx` con `lazy(() => import(...))`, para que cada etapa se descargue solo al entrar; etapas en `ETAPAS_POR_NIVEL` de `src/contenido/curso.ts` e ilustraciones en `VisualEtapa` de `src/paginas/Mapa.tsx`.
 5. **Hero:** agregar el hero del nivel en `src/paginas/hero/` y registrarlo en `HeroNivel.tsx`.
 
 **Un curso nuevo** (por ejemplo, Álgebra) reutiliza el mismo motor, HUD, carrusel y examen. Se propone primero en un issue, con la plantilla «Propuesta de nivel o etapa», para acordar la estructura de carpetas (`contenido/<curso>/`, `etapas/<curso>/`) y la navegación del inicio.
@@ -228,7 +228,7 @@ No necesita variables de entorno.
 **Plataforma**
 
 - [x] CI con verificación de tipos, lint, build e imagen Docker en cada PR.
-- [ ] División del bundle por nivel.
+- [x] Carga diferida por etapa y librerías (React, React Three Fiber, three.js) en chunks propios.
 
 Las tareas abiertas están en [Issues](https://github.com/MILLERMARRU/learn-three/issues). Las marcadas con [`good first issue`](https://github.com/MILLERMARRU/learn-three/issues?q=is%3Aopen+label%3A%22good+first+issue%22) son ideales para empezar.
 
