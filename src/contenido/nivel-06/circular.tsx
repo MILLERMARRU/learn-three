@@ -1,5 +1,5 @@
 // ══ Nivel 6 · Movimiento circunferencial: contenido de la etapa 6.1 (problemas propios, ω en múltiplos de π/4) ───────
-import { fmtPi } from "@/lib/circular";
+import { fmtPi, NOMBRES_RUEDA } from "@/lib/circular";
 import type { RondaDef } from "@/motor/etapa";
 import { Frac, Op, Sub, Sup, V } from "@/ui/Formula";
 
@@ -86,7 +86,7 @@ export interface ProblemaPoleas {
   pistas: [string, string];
 }
 
-export const NOMBRES_RUEDA = ["A", "B", "C", "D"];
+export { NOMBRES_RUEDA };
 
 function poleas(id: string, radios: number[], uniones: TipoUnion[], k0: number, pistas: [string, string]): ProblemaPoleas {
   const ks = [k0];
