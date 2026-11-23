@@ -87,7 +87,7 @@ git push -u origin feat/7-nivel-6-circunferencial
 ### 3.3 Abrir el pull request
 
 1. En GitHub, abre un **pull request** desde `tu-usuario/learn-three:tu-rama` hacia `MILLERMARRU/learn-three:main`.
-2. Completa la plantilla y escribe **`Cierra #7`** (con el número de tu issue) para enlazarlos.
+2. Completa la plantilla y escribe **`Closes #7`** (con el número de tu issue). GitHub solo reconoce las palabras clave en inglés (`Closes`, `Fixes`, `Resolves`); con ellas, el issue se cierra solo al integrar el PR.
 3. Si el cambio es visual, adjunta **capturas o un GIF** de escritorio y de móvil.
 4. Si aún no está listo, ábrelo como **borrador** (*Draft*) para recibir comentarios temprano.
 
@@ -188,7 +188,7 @@ Revisa esta lista. Los PRs que la cumplen se revisan mucho más rápido.
 - [ ] Probado en escritorio (≈ 1440 × 900) y en móvil (DevTools ≈ 390 × 844).
 - [ ] La consola del navegador no muestra errores.
 - [ ] Los cambios visuales incluyen capturas o GIF.
-- [ ] La descripción enlaza el issue (`Cierra #N`) y explica cómo probarlo.
+- [ ] La descripción enlaza el issue (`Closes #N`) y explica cómo probarlo.
 - [ ] Los commits siguen la convención y la rama está al día con `upstream/main`.
 
 ## 9. Revisión e integración

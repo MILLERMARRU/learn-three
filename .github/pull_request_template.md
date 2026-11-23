@@ -2,7 +2,8 @@
 
 <!-- Describe el cambio en pocas líneas: qué hace y por qué. -->
 
-Cierra #
+<!-- GitHub solo cierra el issue con la palabra clave en inglés: «Closes #N». -->
+Closes #
 
 ## Cómo probarlo
 
