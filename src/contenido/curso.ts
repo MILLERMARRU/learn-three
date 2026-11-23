@@ -47,6 +47,7 @@ export const ETAPAS_N6: EtapaInfo[] = [
   { id: "angular", clave: "n6-angular", numero: "6.1", titulo: "Velocidad angular", resumen: "Ajusta ω para que la marca de la rueda llegue a la meta: θ = ωt.", tipo: "Flechas ↑ ↓" },
   { id: "poleas", clave: "n6-poleas", numero: "6.2", titulo: "Poleas y engranajes", resumen: "Fajas, engranajes y ejes: sincroniza la última rueda con ωA·RA = ωB·RB.", tipo: "Flechas ↑ ↓" },
   { id: "curva", clave: "n6-curva", numero: "6.3", titulo: "Aceleración centrípeta", resumen: "¿A qué rapidez se sale el auto de la curva? a꜀ = v²/R no puede pasar de a máx.", tipo: "Flechas ↑ ↓" },
+  { id: "examen", clave: "n6-examen", numero: "6.4", titulo: "Examen tipo admisión", resumen: "10 preguntas de MCU, transmisión y aceleración centrípeta con la escena en 3D.", tipo: "Opción múltiple" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */

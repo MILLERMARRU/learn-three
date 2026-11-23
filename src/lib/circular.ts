@@ -27,6 +27,9 @@ export const radioConAceleracion = (v: number, aMax: number) => (v * v) / aMax;
 /** Transmisión por faja o por contacto (engranajes): la rapidez del borde se conserva, ω₁R₁ = ω₂R₂. */
 export const omegaTransmitida = (w1: number, R1: number, R2: number) => (w1 * R1) / R2;
 
+/** Nombres de las ruedas de un tren, en orden de transmisión. */
+export const NOMBRES_RUEDA = ["A", "B", "C", "D"];
+
 /** Grados a partir de radianes. */
 export const grados = (rad: number) => (rad * 180) / Math.PI;
 
