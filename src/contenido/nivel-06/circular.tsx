@@ -1,7 +1,7 @@
 // ══ Nivel 6 · Movimiento circunferencial: contenido de la etapa 6.1 (problemas propios, ω en múltiplos de π/4) ───────
 import { fmtPi } from "@/lib/circular";
 import type { RondaDef } from "@/motor/etapa";
-import { Frac, Op, Sub, V } from "@/ui/Formula";
+import { Frac, Op, Sub, Sup, V } from "@/ui/Formula";
 
 /** Paso del ajuste de ω: un cuarto de π rad/s. */
 export const CUARTO = Math.PI / 4;
@@ -140,7 +140,100 @@ export function explicarPoleas(p: ProblemaPoleas, k: number): string {
   return `El borde de ${a} va a ${vPrev} cm/s y el de ${b} a ${vEste} cm/s${k === p.respuesta ? "" : `: ${u === "faja" ? "la faja patina" : "los dientes chocan"}`}.`;
 }
 
+// ══ 6.3 Aceleración centrípeta ───────
+/** Paso y rango del ajuste de rapidez (m/s). */
+export const V_PASO = 5;
+export const V_MIN = 5;
+export const V_MAX = 40;
+
+export interface ProblemaCurva {
+  id: string;
+  /** Radio de la curva (m). */
+  R: number;
+  /** Aceleración centrípeta máxima que dan los neumáticos (m/s²). */
+  aMax: number;
+  /** Coeficiente de rozamiento, si el dato viene así (aMax = μg, g = 10 m/s²). */
+  mu: number | null;
+  /** Rapidez máxima para no salirse (m/s). */
+  respuesta: number;
+  pistas: [string, string];
+}
+
+function curva(id: string, R: number, dato: { a: number } | { mu: number }, pistas: [string, string]): ProblemaCurva {
+  const mu = "mu" in dato ? dato.mu : null;
+  const aMax = mu !== null ? Math.round(mu * 10 * 1e9) / 1e9 : (dato as { a: number }).a;
+  const v = Math.sqrt(aMax * R);
+  // la rapidez máxima es exacta y cae en el ajuste (múltiplo de 5 m/s): si no, falla al cargar
+  if (Math.abs(v - Math.round(v)) > 1e-9 || Math.round(v) % V_PASO !== 0 || v < V_MIN || v > V_MAX - V_PASO) throw new Error(`6.3 ${id}: v = ${v} fuera del ajuste`);
+  return { id, R, aMax, mu, respuesta: Math.round(v), pistas };
+}
+
+export const RONDAS_CURVA: RondaDef<ProblemaCurva>[] = [
+  {
+    ronda: "guiado",
+    items: [
+      curva("g1", 40, { a: 10 }, ["La aceleración centrípeta a꜀ = v²/R no puede superar a máx.", "v² = a máx · R = 10 · 40 = 400 → v = 20 m/s."]),
+      curva("g2", 90, { a: 10 }, ["v² = a máx · R.", "10 · 90 = 900 → v = 30 m/s."]),
+      curva("g3", 25, { a: 4 }, ["v² = 4 · 25.", "v² = 100 → v = 10 m/s."]),
+    ],
+  },
+  {
+    ronda: "pista",
+    items: [
+      curva("p1", 50, { a: 8 }, ["v² = a máx · R = 8 · 50.", "v² = 400 → v = 20 m/s."]),
+      curva("p2", 45, { a: 5 }, ["v² = 5 · 45.", "v² = 225 → v = 15 m/s."]),
+      curva("p3", 125, { a: 5 }, ["v² = 5 · 125.", "v² = 625 → v = 25 m/s."]),
+    ],
+  },
+  {
+    ronda: "solo",
+    items: [
+      curva("s1", 100, { mu: 0.4 }, ["Sin peralte, el rozamiento da la fuerza centrípeta: a máx = μg.", "a máx = 0,4 · 10 = 4 m/s²; v² = 4 · 100 = 400 → v = 20 m/s."]),
+      curva("s2", 25, { mu: 0.9 }, ["a máx = μg.", "a máx = 9 m/s²; v² = 9 · 25 = 225 → v = 15 m/s."]),
+      curva("s3", 90, { mu: 1 }, ["a máx = μg = 1 · 10.", "v² = 10 · 90 = 900 → v = 30 m/s."]),
+      curva("s4", 125, { mu: 0.5 }, ["a máx = 0,5 · 10 = 5 m/s².", "v² = 5 · 125 = 625 → v = 25 m/s."]),
+    ],
+  },
+];
+
 // ══ Fórmulas ───────
+export const F_CENTRIPETA = (
+  <>
+    <V>a</V>
+    <Sub>c</Sub>
+    <Op>=</Op>
+    <Frac
+      n={
+        <>
+          <V>v</V>
+          <Sup>2</Sup>
+        </>
+      }
+      d={<V>R</V>}
+    />
+    <Op>≤</Op>
+    <V>a</V>
+    <Sub>máx</Sub>
+  </>
+);
+
+export const F_ROZAMIENTO = (
+  <>
+    <V>a</V>
+    <Sub>máx</Sub>
+    <Op>=</Op>
+    <V>μ</V>
+    <V>g</V>
+    <Op>·</Op>
+    <V>v</V>
+    <Sup>2</Sup>
+    <Op>=</Op>
+    <V>a</V>
+    <Sub>máx</Sub>
+    <V>R</V>
+  </>
+);
+
 export const F_TRANSMISION = (
   <>
     <V>ω</V>
