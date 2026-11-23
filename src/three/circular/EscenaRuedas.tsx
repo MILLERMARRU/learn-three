@@ -270,7 +270,8 @@ export function EscenaRuedas({ ruedas, fajas = [], medirGiro = false, corrida = 
   });
 
   // alto de la escena: el cronómetro va sobre la rueda más alta
-  const techo = ruedas.reduce((m, w) => Math.max(m, w.y + w.r), 0);
+  // si hay rótulos encima de una rueda (ruedas del mismo eje), el cronómetro sube para no pegarse a ellos
+  const techo = ruedas.reduce((m, w) => Math.max(m, w.y + (w.rotuloArriba ? (w.rotuloDist ?? w.r) + 0.5 : w.r)), 0);
   const conEstela = medirGiro && principal;
 
   return (
