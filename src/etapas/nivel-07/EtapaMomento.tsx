@@ -28,7 +28,7 @@ const META: MetaEtapa = {
   ],
   siguiente: { ruta: "/nivel/7/examen", titulo: "Etapa 7.4 · Examen tipo admisión" },
   descRondas: {
-    guiado: "El momento neto ΣM aparece bajo el apoyo: llévalo a cero. La tecla que brilla te guía.",
+    guiado: "El momento neto ΣM aparece sobre la barra: llévalo a cero. La tecla que brilla te guía.",
     pista: "Iguala los momentos que giran hacia cada lado.",
     solo: "La barra también pesa: su peso actúa en el centro.",
   },
