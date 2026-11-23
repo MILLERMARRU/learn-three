@@ -27,6 +27,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡empuja! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/8/plano", titulo: "Etapa 8.2 · Plano inclinado con rozamiento" },
   descRondas: {
     guiado: "Primero la aceleración, luego F = m·a. La tecla que brilla te guía.",
     pista: "Piso liso: toda la fuerza acelera al bloque.",
