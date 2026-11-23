@@ -159,7 +159,7 @@ export default function EtapaPrediccion() {
       retro={retro ? <RetroLinea tipo={retro.tipo}>{retro.texto}</RetroLinea> : null}
       respuesta={<ValorTexto simbolo="x" valor={String(x)} unidad="m" ok={exito} mal={retro?.tipo === "mal"} />}
       teclado={<TecladoVirtual activas={TECLAS_BANDERA} siguiente={siguienteTecla} onTecla={simularTecla} flechas />}
-      escenario={{ ...ESCENARIO_PISTA, vista: clave }}
+      escenario={{ ...ESCENARIO_PISTA, tactil: true, vista: clave }}
       pieEscena={<span>Haz clic en la pista para poner la bandera · Enter para correr</span>}
     />
   );
