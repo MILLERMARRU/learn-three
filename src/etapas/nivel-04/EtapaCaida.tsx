@@ -192,7 +192,7 @@ export default function EtapaCaida() {
       retro={retro ? <RetroLinea tipo={retro.tipo}>{retro.texto}</RetroLinea> : null}
       respuesta={<ValorTexto simbolo="y" valor={String(y)} unidad="m" ok={exito} mal={retro?.tipo === "mal"} />}
       teclado={<TecladoVirtual activas={TECLAS_MARCA} siguiente={siguienteTecla} onTecla={simularTecla} flechas />}
-      escenario={{ ...ESCENARIO_TIRO, vista: clave }}
+      escenario={{ ...ESCENARIO_TIRO, tactil: true, vista: clave }}
       pieEscena={<span>Haz clic en la escena para poner la marca · Enter para lanzar</span>}
     />
   );
