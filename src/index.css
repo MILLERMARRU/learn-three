@@ -8,7 +8,7 @@
   --ink: #f4f1ea;
   --soft: #d8d3c9;
   --mute: #8b939e;
-  --ghost: #4b535e;
+  --ghost: #757d89; /* ≈ 4,6:1 sobre el fondo: cumple WCAG AA para texto */
   --accent: #d9c3a0;
   --amber: #f0b44c;
   --ok: #8fdcaa;
@@ -2703,4 +2703,28 @@ kbd {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+/* ══ Accesibilidad: foco visible y texto solo para lectores de pantalla ─────── */
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+.nivel-card:focus-visible {
+  outline-offset: 6px;
+}
+.tv-tecla:focus-visible,
+.slot-arr:focus-visible {
+  outline-offset: 1px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
