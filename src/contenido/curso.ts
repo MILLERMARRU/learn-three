@@ -59,6 +59,7 @@ export const ETAPAS_N7: EtapaInfo[] = [
 
 export const ETAPAS_N8: EtapaInfo[] = [
   { id: "newton", clave: "n8-newton", numero: "8.1", titulo: "Segunda ley de Newton", resumen: "Empuja con la fuerza justa para que el bloque llegue a la bandera a tiempo: ΣF = m·a.", tipo: "Flechas ↑ ↓" },
+  { id: "plano", clave: "n8-plano", numero: "8.2", titulo: "Plano inclinado con rozamiento", resumen: "Predice cómo acelera el bloque que baja: un fantasma con tu aceleración corre junto al real.", tipo: "Flechas ↑ ↓" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
