@@ -18,3 +18,7 @@ export const ESCENARIO_RUEDA = { encuadre: { w: 8.4, h: 6.9 }, balanceo: 0.05, a
 
 /** Carrusel: la siguiente rueda espera chica a la derecha, en el mismo plano, ajustada al ancho visible. */
 export const CARRUSEL_RUEDA = { paso: 8.3, escala: 0.33, fondo: 0, giro: 0, ancho: 6.4 };
+
+/** Poleas y engranajes: una fila de ruedas más ancha que alta. */
+export const ESCENARIO_POLEAS = { encuadre: { w: 9.2, h: 5.6 }, balanceo: 0.04, arrastrable: false, centro: [-0.6, 0.1] as [number, number] };
+export const CARRUSEL_POLEAS = { paso: 8.3, escala: 0.33, fondo: 0, giro: 0, ancho: 8.4 };
