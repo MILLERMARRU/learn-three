@@ -94,10 +94,10 @@ export default function EtapaDibujaXT() {
   useTeclas((e) => {
     if (!motor.jugando) return;
     const k = e.key;
-    if (k === "ArrowLeft") (e.preventDefault(), fijar(xs, sel - 1), sfx.tecla());
-    else if (k === "ArrowRight") (e.preventDefault(), fijar(xs, sel + 1), sfx.tecla());
-    else if (k === "ArrowUp") (e.preventDefault(), cambiar(sel, xs[sel] + PASO), sfx.tecla());
-    else if (k === "ArrowDown") (e.preventDefault(), cambiar(sel, xs[sel] - PASO), sfx.tecla());
+    if (k === "ArrowLeft") { e.preventDefault(); fijar(xs, sel - 1); sfx.tecla(); }
+    else if (k === "ArrowRight") { e.preventDefault(); fijar(xs, sel + 1); sfx.tecla(); }
+    else if (k === "ArrowUp") { e.preventDefault(); cambiar(sel, xs[sel] + PASO); sfx.tecla(); }
+    else if (k === "ArrowDown") { e.preventDefault(); cambiar(sel, xs[sel] - PASO); sfx.tecla(); }
     else if (k === "Enter") correr();
     else if (k.toLowerCase() === "h" || k === "?") pedirPista();
   });

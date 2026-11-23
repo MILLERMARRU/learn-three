@@ -89,7 +89,7 @@ export function Balanza({ izq, der, inclinacion, equilibrada, fase, faseId, etiq
     [],
   );
   useEffect(() => () => Object.values(geo).forEach((x) => x.dispose()), [geo]);
-  const hilos = useMemo(cuerdas, []);
+  const hilos = useMemo(() => cuerdas(), []);
 
   // altura de cada molécula para apoyarla sobre el plato
   const altoI = izq.unidad ? 0.84 : layoutMolecula(izq.dim).alto + 0.3;

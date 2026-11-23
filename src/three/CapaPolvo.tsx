@@ -28,7 +28,7 @@ function texturaPunto() {
 export function CapaPolvo() {
   const grupo = useRef<THREE.Group>(null!);
   const vivos = useRef<Vivo[]>([]);
-  const tex = useMemo(texturaPunto, []);
+  const tex = useMemo(() => texturaPunto(), []);
   useEffect(() => () => tex.dispose(), [tex]);
 
   useFrame((_, dtCrudo) => {

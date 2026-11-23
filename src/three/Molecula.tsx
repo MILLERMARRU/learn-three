@@ -53,7 +53,7 @@ export function Molecula({ dim, unidad = false, variante = "solida", marcas, fas
   );
 }
 
-let GEO_BARRA: THREE.BufferGeometry | null = null;
+const GEO_BARRA = new RoundedBoxGeometry(1, 0.07, 0.07, 2, 0.03);
 
 function Barra({ ancho, y, variante, fase, faseId }: { ancho: number; y: number; variante: Variante; fase: FaseAnim; faseId: number }) {
   const m = useRef<THREE.Mesh>(null!);
@@ -62,7 +62,6 @@ function Barra({ ancho, y, variante, fase, faseId }: { ancho: number; y: number;
     [],
   );
   useEffect(() => () => mat.dispose(), [mat]);
-  if (!GEO_BARRA) GEO_BARRA = new RoundedBoxGeometry(1, 0.07, 0.07, 2, 0.03);
   const a = useRef({ w: 0, faseId, t0: -10 });
   useFrame((st, dt) => {
     const A = a.current;

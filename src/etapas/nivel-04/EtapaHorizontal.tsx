@@ -91,8 +91,8 @@ export default function EtapaHorizontal() {
 
   useTeclas((e) => {
     if (!motor.jugando) return;
-    if (e.key === "ArrowUp") (e.preventDefault(), cambiar(5));
-    else if (e.key === "ArrowDown") (e.preventDefault(), cambiar(-5));
+    if (e.key === "ArrowUp") { e.preventDefault(); cambiar(5); }
+    else if (e.key === "ArrowDown") { e.preventDefault(); cambiar(-5); }
     else if (e.key === "Enter") disparar();
     else if (e.key.toLowerCase() === "h" || e.key === "?") pedirPista();
   });

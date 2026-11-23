@@ -103,8 +103,8 @@ export default function EtapaCaida() {
 
   useTeclas((e) => {
     if (!motor.jugando) return;
-    if (e.key === "ArrowUp") (e.preventDefault(), poner(y + PASO), sfx.tecla());
-    else if (e.key === "ArrowDown") (e.preventDefault(), poner(y - PASO), sfx.tecla());
+    if (e.key === "ArrowUp") { e.preventDefault(); poner(y + PASO); sfx.tecla(); }
+    else if (e.key === "ArrowDown") { e.preventDefault(); poner(y - PASO); sfx.tecla(); }
     else if (e.key === "Enter") lanzar();
     else if (e.key.toLowerCase() === "h" || e.key === "?") pedirPista();
   });
