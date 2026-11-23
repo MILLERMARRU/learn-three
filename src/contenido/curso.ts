@@ -52,6 +52,7 @@ export const ETAPAS_N6: EtapaInfo[] = [
 
 export const ETAPAS_N7: EtapaInfo[] = [
   { id: "equilibrio", clave: "n7-equilibrio", numero: "7.1", titulo: "Primera condición de equilibrio", resumen: "Ajusta la fuerza que falta: si ΣF ≠ 0, el cuerpo se mueve.", tipo: "Flechas ↑ ↓" },
+  { id: "aparejo", clave: "n7-aparejo", numero: "7.2", titulo: "Poleas fijas y móviles", resumen: "Sostén el peso tirando de la cuerda: cada polea móvil divide la fuerza entre dos.", tipo: "Flechas ↑ ↓" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
