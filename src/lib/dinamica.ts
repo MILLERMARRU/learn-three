@@ -29,6 +29,26 @@ export function aceleracionPlano(theta: number, mu = 0): number {
   return a > 1e-9 ? Math.round(a * 1e9) / 1e9 : 0;
 }
 
+/** Un sistema de dos bloques unidos por una cuerda ideal: su aceleración (m/s²) y la tensión de la cuerda (N). */
+export interface Sistema {
+  a: number;
+  T: number;
+}
+
+/** Máquina de Atwood: m₁ y m₂ cuelgan de una polea; m₁ baja si es más pesada. a = (m₁ − m₂)g/(m₁ + m₂), T = 2m₁m₂g/(m₁ + m₂). */
+export function atwood(m1: number, m2: number): Sistema {
+  return { a: (Math.abs(m1 - m2) * G) / (m1 + m2), T: (2 * m1 * m2 * G) / (m1 + m2) };
+}
+
+/**
+ * Bloque m₁ sobre una mesa (rozamiento μ) unido a m₂ que cuelga por el borde: a = (m₂g − μm₁g)/(m₁ + m₂), T = m₂(g − a).
+ * Si el rozamiento alcanza a sostenerlo, no se mueve (a = 0, T = m₂g).
+ */
+export function mesaColgante(m1: number, m2: number, mu = 0): Sistema {
+  const a = Math.max(0, (m2 * G - mu * m1 * G) / (m1 + m2));
+  return { a, T: m2 * (G - a) };
+}
+
 /**
  * Aceleración de un bloque empujado con F en un piso con rozamiento μ.
  * Si F no vence al rozamiento, el bloque no se mueve (a = 0).
