@@ -153,16 +153,16 @@ export default function EtapaVelocidadVT() {
       </p>
       <div className="solo-movil">
         <div className="acciones">
-          <button className="btn" onClick={() => fijar(vs, sel - 1)} disabled={!motor.jugando}>
+          <button className="btn" onClick={() => fijar(vs, sel - 1)} disabled={!motor.jugando} aria-label="Tramo anterior">
             ◀
           </button>
-          <button className="btn" onClick={() => cambiar(sel, vs[sel] - PASO)} disabled={!motor.jugando}>
+          <button className="btn" onClick={() => cambiar(sel, vs[sel] - PASO)} disabled={!motor.jugando} aria-label="Bajar la velocidad 5 m/s">
             −
           </button>
-          <button className="btn" onClick={() => cambiar(sel, vs[sel] + PASO)} disabled={!motor.jugando}>
+          <button className="btn" onClick={() => cambiar(sel, vs[sel] + PASO)} disabled={!motor.jugando} aria-label="Subir la velocidad 5 m/s">
             +
           </button>
-          <button className="btn" onClick={() => fijar(vs, sel + 1)} disabled={!motor.jugando}>
+          <button className="btn" onClick={() => fijar(vs, sel + 1)} disabled={!motor.jugando} aria-label="Tramo siguiente">
             ▶
           </button>
           <button className="btn btn-pri" onClick={correr} disabled={!motor.jugando || corriendo}>
