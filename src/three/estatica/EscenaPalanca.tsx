@@ -37,6 +37,10 @@ const Y_BARRA = 0.55;
 const GIRO_MAX = 0.24; // rad (~14°)
 const DUR = 1.1;
 
+const CUERDA = 0.42; // largo de la cuerda de cada pesa
+/** Lado de la pesa: crece con el peso para que se distinga cuál pesa más. */
+const ladoPesa = (F: number) => 0.34 + F * 0.0032;
+
 const fmt = (n: number) => `${Math.round(Math.abs(n) * 10) / 10}`.replace(".", ",");
 
 export function EscenaPalanca({ pivote, cargas, media, escala, medios = false, verMomento = false, corrida = null, onFin, exito = false, previa }: Props) {
@@ -124,7 +128,8 @@ export function EscenaPalanca({ pivote, cargas, media, escala, medios = false, v
   return (
     <group>
       {/* piso y apoyo */}
-      <mesh geometry={geo.caja} material={mats.piso} position={[xp, Y_BARRA - 0.62, 0]} scale={[1.6, 0.1, 0.9]} />
+      {/* base angosta y hacia el fondo: las pesas que cuelgan cerca del apoyo pasan por delante */}
+      <mesh geometry={geo.caja} material={mats.piso} position={[xp, Y_BARRA - 0.62, -0.38]} scale={[0.85, 0.1, 0.4]} />
       <mesh geometry={geo.apoyo} material={mats.apoyo} position={[xp, Y_BARRA - 0.32, 0]} />
 
       {/* la barra gira alrededor del apoyo; lo que cuelga se mantiene vertical */}
@@ -152,10 +157,11 @@ export function EscenaPalanca({ pivote, cargas, media, escala, medios = false, v
               >
                 {c.tipo === "pesa" && (
                   <>
-                    <mesh geometry={geo.cuerda} material={mats.cuerda} position={[0, -0.25, 0]} scale={[1, 0.5, 1]} />
-                    <mesh geometry={geo.caja} material={c.incognita ? mats.pesaInc : mats.pesa} position={[0, -0.5 - (0.26 + c.F * 0.002) / 2, 0]} scale={0.26 + c.F * 0.002} />
+                    <mesh geometry={geo.cuerda} material={mats.cuerda} position={[0, -CUERDA / 2, 0]} scale={[1, CUERDA, 1]} />
+                    <mesh geometry={geo.caja} material={c.incognita ? mats.pesaInc : mats.pesa} position={[0, -CUERDA - ladoPesa(c.F) / 2, 0]} scale={ladoPesa(c.F)} />
                     {etiquetas && (
-                      <Etiqueta position={[0, -0.62 - (0.26 + c.F * 0.002), 0.3]} className={`etq-dato etq-centro ${c.incognita ? "etq-acento" : ""}`}>
+                      // debajo de la pesa y separada, para no taparla
+                      <Etiqueta position={[0, -CUERDA - ladoPesa(c.F) - 0.42, 0.3]} className={`etq-dato etq-centro ${c.incognita ? "etq-acento" : ""}`}>
                         {fmt(c.F)} N
                       </Etiqueta>
                     )}
@@ -195,7 +201,8 @@ export function EscenaPalanca({ pivote, cargas, media, escala, medios = false, v
       </group>
 
       {etiquetas && verMomento && (
-        <Etiqueta position={[xp, Y_BARRA - 0.95, 0.3]} className={`etq-dato etq-centro ${equilibrio ? "etq-acento" : "etq-mal"}`}>
+        // sobre la barra: bajo el apoyo chocaba con las pesas cercanas
+        <Etiqueta position={[xp, Y_BARRA + 0.7, 0.3]} className={`etq-dato etq-centro ${equilibrio ? "etq-acento" : "etq-mal"}`}>
           {equilibrio ? "ΣM = 0" : `ΣM = ${fmt(M)} N·m ${M > 0 ? "↺" : "↻"}`}
         </Etiqueta>
       )}
