@@ -180,6 +180,8 @@ Un nivel completo es un cambio grande. **Divídelo en varios PRs**, por ejemplo:
 
 Revisa esta lista. Los PRs que la cumplen se revisan mucho más rápido.
 
+> La **CI** ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) repite automáticamente los tres primeros puntos y construye la imagen Docker en cada PR, incluso en los que vienen de forks. Un PR con la CI en rojo no se integra.
+
 - [ ] `npx tsc -b` pasa sin errores.
 - [ ] `npm run build` termina correctamente.
 - [ ] `npm run lint` no agrega avisos nuevos.
