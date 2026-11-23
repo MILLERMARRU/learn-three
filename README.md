@@ -4,6 +4,7 @@
 
 **Aprende haciendo.** Física y matemáticas preuniversitarias por niveles, con escenas 3D interactivas que se manejan con el teclado y el mouse.
 
+[![CI](https://github.com/MILLERMARRU/learn-three/actions/workflows/ci.yml/badge.svg)](https://github.com/MILLERMARRU/learn-three/actions/workflows/ci.yml)
 [![React 19](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)](https://react.dev)
 [![Vite 8](https://img.shields.io/badge/Vite-8-646cff?logo=vite&logoColor=white)](https://vite.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-7-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -224,7 +225,7 @@ No necesita variables de entorno.
 
 **Plataforma**
 
-- [ ] CI con verificación de tipos, lint y build en cada PR.
+- [x] CI con verificación de tipos, lint, build e imagen Docker en cada PR.
 - [ ] División del bundle por nivel.
 
 Las tareas abiertas están en [Issues](https://github.com/MILLERMARRU/learn-three/issues). Las marcadas con [`good first issue`](https://github.com/MILLERMARRU/learn-three/issues?q=is%3Aopen+label%3A%22good+first+issue%22) son ideales para empezar.
