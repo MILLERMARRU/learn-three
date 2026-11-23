@@ -102,7 +102,10 @@ export function Mapa() {
               </div>
             )}
             <div className="carrusel-nav">
-              <span className="cn-cont">
+              <span className="sr-only" aria-live="polite">
+                {modo === "niveles" ? `Nivel ${actual + 1} de ${total}: ${NIVELES_FISICA[actual]}` : `Etapa ${etapas[actual]?.numero}: ${etapas[actual]?.titulo}`}
+              </span>
+              <span className="cn-cont" aria-hidden>
                 <b>{modo === "niveles" ? pad(actual + 1) : etapas[actual]?.numero}</b> / {modo === "niveles" ? total : `${n}.${total}`}
               </span>
               <button className="cn-btn" onClick={() => mover(-1)} disabled={actual === 0} aria-label="Anterior">
@@ -123,6 +126,8 @@ export function Mapa() {
               clave={(t) => t}
               clase={(_, i) => (disponible(i) ? "" : "nc-bloqueada")}
               onElegir={entrarNivel}
+              nombre="Niveles de Física"
+              etiqueta={(titulo, i) => `Nivel ${i + 1}: ${titulo}${disponible(i) ? "" : " (próximamente)"}`}
               render={(titulo, i, activa) => <TarjetaNivel titulo={titulo} i={i} activa={activa} prog={prog} onEtapa={(e) => jugar(i + 1, e)} />}
             />
           ) : (
@@ -134,6 +139,8 @@ export function Mapa() {
               clave={(e) => e.id}
               clase={(e) => (prog[e.clave] ? "nc-hecha" : e.id === sugerida?.id ? "nc-sugerida" : "")}
               onElegir={(i) => jugar(n, etapas[i])}
+              nombre={`Etapas del nivel ${n}`}
+              etiqueta={(e) => `Etapa ${e.numero}: ${e.titulo}${prog[e.clave] ? " (completada)" : ""}`}
               paso={320}
               render={(e, _i, activa) => <TarjetaEtapa e={e} prog={prog} activa={activa} sugerida={e.id === sugerida?.id} />}
             />
