@@ -18,6 +18,12 @@ export const vTangencial = (w: number, R: number) => w * R;
 /** Aceleración centrípeta: a꜀ = v² / R. */
 export const aCentripeta = (v: number, R: number) => (v * v) / R;
 
+/** Rapidez máxima en una curva sin peralte si la aceleración centrípeta no puede superar aMax: v = √(aMax · R). */
+export const vMaxCurva = (aMax: number, R: number) => Math.sqrt(aMax * R);
+
+/** Radio de la curva que describe un móvil a rapidez v cuando solo dispone de la aceleración aMax: R′ = v² / aMax. */
+export const radioConAceleracion = (v: number, aMax: number) => (v * v) / aMax;
+
 /** Transmisión por faja o por contacto (engranajes): la rapidez del borde se conserva, ω₁R₁ = ω₂R₂. */
 export const omegaTransmitida = (w1: number, R1: number, R2: number) => (w1 * R1) / R2;
 
