@@ -72,6 +72,24 @@ function distribucion(n: number) {
   return Array.from({ length: n }, (_, k) => ({ y0: tope - (k + 1) * h - k * hueco, h }));
 }
 
+/** Líneas de la cuadrícula de cada panel a partir de T y de los rangos ("yMin:yMax|…"). */
+function crearRejillas(T: number, clave: string) {
+  const rangos = clave.split("|").map((r) => r.split(":").map(Number));
+  const capas = distribucion(rangos.length);
+  const pasoT = pasoBonito(T, 8);
+  const TX = (t: number) => -ANCHO / 2 + (t / T) * ANCHO;
+  return rangos.map(([yMin, yMax], k) => {
+    const PY = (v: number) => capas[k].y0 + ((v - yMin) / (yMax - yMin)) * capas[k].h;
+    const v: number[] = [];
+    const pasoY = pasoBonito(yMax - yMin, 6);
+    for (let t = 0; t <= T + 1e-9; t += pasoT) v.push(TX(t), capas[k].y0, 0, TX(t), capas[k].y0 + capas[k].h, 0);
+    for (let y = Math.ceil(yMin / pasoY) * pasoY; y <= yMax + 1e-9; y += pasoY) v.push(-ANCHO / 2, PY(y), 0, ANCHO / 2, PY(y), 0);
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.Float32BufferAttribute(v, 3));
+    return { g, pasoY };
+  });
+}
+
 /** Polilínea gruesa hecha de tramos (cajas) y nudos redondos. */
 function Curva({ pts, mat, grosor = GROSOR, z = 0.02 }: { pts: [number, number][]; mat: THREE.Material; grosor?: number; z?: number }) {
   return (
@@ -130,34 +148,22 @@ export function EscenaGrafica({ T, paneles, pista = null, corrida = null, onFin,
     [],
   );
   // materiales de curvas por color (se crean al vuelo y se reutilizan)
-  const matsCurva = useRef(new Map<string, THREE.Material>());
+  const matsCurva = useMemo(() => new Map<string, THREE.Material>(), []);
   const matCurva = (color: string, tenue = false) => {
     const k = `${color}${tenue ? "~" : ""}`;
-    let m = matsCurva.current.get(k);
+    let m = matsCurva.get(k);
     if (!m) {
       m = tenue
         ? new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.3, depthWrite: false })
         : new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.35 });
-      matsCurva.current.set(k, m);
+      matsCurva.set(k, m);
     }
     return m;
   };
 
   // rejillas de cada panel (se rehacen solo si cambian T o los rangos)
   const claveRejilla = paneles.map((p) => `${p.yMin}:${p.yMax}`).join("|");
-  const rejillas = useMemo(
-    () =>
-      paneles.map((p, k) => {
-        const v: number[] = [];
-        const pasoY = pasoBonito(p.yMax - p.yMin, 6);
-        for (let t = 0; t <= T + 1e-9; t += pasoT) v.push(TX(t), capas[k].y0, 0, TX(t), capas[k].y0 + capas[k].h, 0);
-        for (let y = Math.ceil(p.yMin / pasoY) * pasoY; y <= p.yMax + 1e-9; y += pasoY) v.push(-ANCHO / 2, PY(k, y), 0, ANCHO / 2, PY(k, y), 0);
-        const g = new THREE.BufferGeometry();
-        g.setAttribute("position", new THREE.Float32BufferAttribute(v, 3));
-        return { g, pasoY };
-      }),
-    [T, claveRejilla],
-  );
+  const rejillas = useMemo(() => crearRejillas(T, claveRejilla), [T, claveRejilla]);
   useEffect(() => () => rejillas.forEach((r) => r.g.dispose()), [rejillas]);
 
   const geoArea = useMemo(() => {
@@ -172,11 +178,11 @@ export function EscenaGrafica({ T, paneles, pista = null, corrida = null, onFin,
   useEffect(
     () => () => {
       Object.values(mats).forEach((m) => m.dispose());
-      matsCurva.current.forEach((m) => m.dispose());
+      matsCurva.forEach((m) => m.dispose());
       geoArea.pos.dispose();
       geoArea.neg.dispose();
     },
-    [mats, geoArea],
+    [mats, matsCurva, geoArea],
   );
 
   /** Curva principal de cada panel (la editable si la hay; si no, la primera serie). */
