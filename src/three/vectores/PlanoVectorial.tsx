@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { emitirPolvo } from "@/lib/polvo";
 import { sfx } from "@/lib/sonido";
 import type { Vec } from "@/lib/vec";
+import { puntoDelPuntero, useArrastre } from "@/three/arrastre";
 import { Etiqueta } from "../Etiqueta";
 import { Flecha } from "./Flecha";
 
@@ -32,7 +33,7 @@ interface Props {
 
 export function PlanoVectorial({ rx = 7, ry = 5, fijos = [], editable, guias = [], exito = false, faseId = 0, previa }: Props) {
   const superficie = useRef<THREE.Mesh>(null!);
-  const arrastrando = useRef(false);
+  const arrastrando = useArrastre(false);
   const punto = useMemo(() => new THREE.Vector3(), []);
 
   // ══ Cuadrícula y ejes ───────
@@ -86,7 +87,7 @@ export function PlanoVectorial({ rx = 7, ry = 5, fijos = [], editable, guias = [
 
   const actualizar = (e: ThreeEvent<PointerEvent>) => {
     if (!editable?.activo) return;
-    punto.copy(e.point);
+    puntoDelPuntero(e, punto);
     superficie.current.worldToLocal(punto);
     const nv: Vec = [Math.max(-rx, Math.min(rx, Math.round(punto.x))), Math.max(-ry, Math.min(ry, Math.round(punto.y)))];
     if (nv[0] !== editable.v[0] || nv[1] !== editable.v[1]) {
