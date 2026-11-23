@@ -418,6 +418,20 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "aparejo") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="30" y1="4" x2="90" y2="4" className="ev-tenue" />
+        <circle cx="78" cy="14" r="8" className="ev-tenue" />
+        <circle cx="54" cy="34" r="8" className="ev-tenue" />
+        <line x1="46" y1="34" x2="46" y2="4" />
+        <line x1="62" y1="34" x2="70" y2="14" />
+        <line x1="86" y1="14" x2="86" y2="48" />
+        <rect x="47" y="46" width="14" height="12" rx="2" className="ev-acento" />
+        <circle cx="86" cy="50" r="3" className="ev-acento" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
