@@ -45,6 +45,7 @@ export const ETAPAS_N5: EtapaInfo[] = [
 
 export const ETAPAS_N6: EtapaInfo[] = [
   { id: "angular", clave: "n6-angular", numero: "6.1", titulo: "Velocidad angular", resumen: "Ajusta ω para que la marca de la rueda llegue a la meta: θ = ωt.", tipo: "Flechas ↑ ↓" },
+  { id: "poleas", clave: "n6-poleas", numero: "6.2", titulo: "Poleas y engranajes", resumen: "Fajas, engranajes y ejes: sincroniza la última rueda con ω_A R_A = ω_B R_B.", tipo: "Flechas ↑ ↓" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
