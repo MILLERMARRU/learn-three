@@ -47,7 +47,8 @@ function trazar(tipo: Props["tipo"], n: number) {
     });
     cables.push([x, 0, XB, 0]);
   } else if (tipo === "paralelo") {
-    const ys = n === 2 ? [0.42, -0.42] : [0.62, 0, -0.62];
+    // con tres ramas, más separación: el rótulo de cada componente cabe sin tocar la rama de arriba
+    const ys = n === 2 ? [0.42, -0.42] : [0.75, 0, -0.75];
     const xl = -1.9;
     const xr = 0.3;
     const cx = (xl + xr) / 2;
@@ -83,7 +84,7 @@ export function EscenaRed({ tipo, rs, componente = "resistencia", unidad = "Ω",
       resist: new THREE.CylinderGeometry(0.13, 0.13, LARGO_R, 20).rotateZ(Math.PI / 2),
       banda: new THREE.CylinderGeometry(0.14, 0.14, 0.05, 20).rotateZ(Math.PI / 2),
       borne: new THREE.SphereGeometry(0.08, 16, 12),
-      placa: new THREE.BoxGeometry(0.05, 0.42, 0.3),
+      placa: new THREE.BoxGeometry(0.05, 0.32, 0.3),
     }),
     [],
   );
@@ -176,7 +177,7 @@ export function EscenaRed({ tipo, rs, componente = "resistencia", unidad = "Ω",
       {etiquetas && (
         <>
           {pos.map(([x, y], i) => (
-            <Etiqueta key={`e${i}`} position={[x, y + (componente === "condensador" ? 0.27 : 0.2), 0.3]} className="etq-dato etq-centro">
+            <Etiqueta key={`e${i}`} position={[x, y + (componente === "condensador" ? 0.22 : 0.2), 0.3]} className="etq-dato etq-centro">
               {String(rs[i]).replace(".", ",")} {unidad}
             </Etiqueta>
           ))}

@@ -95,6 +95,7 @@ El inicio ya muestra las pestañas de los cinco cursos. Cada uno reutilizará el
 | 16 | Termodinámica | Gases ideales · Trabajo de un gas · Máquinas térmicas · Examen |
 | 17 | Electrostática | Ley de Coulomb · Campo eléctrico · Potencial eléctrico · Examen |
 | 18 | Electrodinámica | Ley de Ohm · Resistencias en serie y en paralelo · Potencia eléctrica · Examen |
+| 19 | Condensadores | Carga de un condensador · Asociación de condensadores · Energía almacenada · Examen |
 
 <details>
 <summary><b>Detalle de las mecánicas por nivel</b></summary>
@@ -155,6 +156,9 @@ El inicio ya muestra las pestañas de los cinco cursos. Cada uno reutilizará el
 | 18.1 Ley de Ohm | I, V o R con V = I·R | La aguja del multímetro (amperímetro, voltímetro u óhmetro) llega a la marca |
 | 18.2 Resistencias en serie y en paralelo | Resistencia equivalente de redes en serie, paralelo y mixtas | El óhmetro entre A y B llega a la marca |
 | 18.3 Potencia eléctrica | P = V·I = I²R = V²/R, y focos con otro voltaje | El foco brilla y el vatímetro llega a la marca |
+| 19.1 Carga de un condensador | Q = κ·C·V | Las placas se llenan de cargas y el medidor llega a la marca |
+| 19.2 Asociación de condensadores | Capacidad equivalente en paralelo, en serie y mixta | El capacímetro entre A y B llega a la marca |
+| 19.3 Energía almacenada | U = ½CV² = Q²/2C = ½QV | El foco destella al descargar y el medidor de energía llega a la marca |
 | N.4 Examen tipo admisión | 10 preguntas, 45 s cada una; la escena se reproduce en 3D | Una sola oportunidad |
 
 </details>
@@ -269,8 +273,8 @@ No necesita variables de entorno.
 
 **Física**
 
-- [x] Niveles 1–18: dimensional, vectorial, cinemática I y II, gráficas, movimiento circunferencial, estática, dinámica, gravitación universal, trabajo, energía y potencia, cantidad de movimiento, oscilaciones, ondas mecánicas, hidrostática, calor, termodinámica, electrostática y electrodinámica.
-- [ ] Niveles 19–23: condensadores, electromagnetismo, ondas electromagnéticas, óptica y física moderna.
+- [x] Niveles 1–19: dimensional, vectorial, cinemática I y II, gráficas, movimiento circunferencial, estática, dinámica, gravitación universal, trabajo, energía y potencia, cantidad de movimiento, oscilaciones, ondas mecánicas, hidrostática, calor, termodinámica, electrostática, electrodinámica y condensadores.
+- [ ] Niveles 20–23: electromagnetismo, ondas electromagnéticas, óptica y física moderna.
 
 **Matemáticas**
 
