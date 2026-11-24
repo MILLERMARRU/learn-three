@@ -639,6 +639,17 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "coulomb") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <circle cx="38" cy="34" r="9" className="ev-acento" />
+        <circle cx="82" cy="34" r="9" className="ev-tenue" />
+        <line x1="38" y1="18" x2="16" y2="18" />
+        <line x1="82" y1="18" x2="104" y2="18" />
+        <line x1="38" y1="56" x2="82" y2="56" className="ev-tenue" />
+      </svg>
+    );
+  }
   if (id === "maquina") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
