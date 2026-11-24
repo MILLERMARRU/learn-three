@@ -17,6 +17,7 @@ const META: MetaEtapa = {
   titulo: "Campo eléctrico",
   nivel: "Electrostática",
   nivelNum: 17,
+  siguiente: { ruta: "/nivel/17/potencial", titulo: "Etapa 17.3 · Potencial eléctrico" },
   intro: (
     <>
       Una carga crea a su alrededor un <b>campo eléctrico</b>: la fuerza que sentiría cada coulomb puesto allí. Para una carga puntual, <b>E = k·Q/d²</b>; apunta hacia afuera si Q es positiva y hacia la carga si es negativa. Con varias cargas, los campos se <b>suman como vectores</b>. Propón E en el punto P (en 10⁵ N/C): la flecha debe crecer hasta tu fantasma azul.

@@ -123,6 +123,7 @@ export const ETAPAS_N16: EtapaInfo[] = [
 export const ETAPAS_N17: EtapaInfo[] = [
   { id: "coulomb", clave: "n17-coulomb", numero: "17.1", titulo: "Ley de Coulomb", resumen: "Dos esferas cargadas se atraen o se repelen: F = k·q₁q₂/d², la flecha debe llegar a tu fantasma.", tipo: "Flechas ↑ ↓ ← →" },
   { id: "campo", clave: "n17-campo", numero: "17.2", titulo: "Campo eléctrico", resumen: "E = kQ/d² en un punto, y con dos cargas la suma de sus campos: la flecha debe llegar a tu fantasma.", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "potencial", clave: "n17-potencial", numero: "17.3", titulo: "Potencial eléctrico", resumen: "Anillos equipotenciales: V = kQ/d y el trabajo W = q·ΔV al mover una carga de prueba.", tipo: "Flechas ↑ ↓ ← →" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */

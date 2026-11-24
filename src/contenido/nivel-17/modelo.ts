@@ -1,6 +1,6 @@
 // ══ Nivel 17 · Electrostática: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { campo, coulomb, MICRO } from "@/lib/electro";
+import { campo, coulomb, MICRO, potencial } from "@/lib/electro";
 
 /** Valida que la respuesta sea un entero dentro de (min, max]. */
 function enAjuste(r: number, min: number, max: number, etapa: string, id: string): number {
@@ -60,4 +60,43 @@ export function crearCampo(id: string, cargas: ProblemaCampo["cargas"], pistas: 
   const total = componentes.reduce((a, b) => a + b, 0);
   if (total === 0) throw new Error(`17.2 ${id}: el campo total es nulo`);
   return { id, cargas, componentes, respuesta: enAjuste(Math.abs(total), E_MIN, E_MAX, "17.2", id), sentido: total > 0 ? 1 : -1, pistas };
+}
+
+// ══ 17.3 Potencial eléctrico y trabajo ───────
+/** Rango del ajuste: potencial en kV o trabajo en mJ (μC · kV = mJ), con signo. */
+export const V_MIN = -90;
+export const V_MAX = 90;
+
+export interface ProblemaPotencial {
+  id: string;
+  /** Qué se pide: el potencial en un punto (kV) o el trabajo del campo al llevar q de A a B (mJ). */
+  tipo: "V" | "W";
+  /** Carga fuente (μC) y distancias (m) del punto A (o P) y del punto B. */
+  Q: number;
+  dA: number;
+  dB: number | null;
+  /** Carga de prueba (μC) cuando se pide el trabajo. */
+  q: number | null;
+  /** Potenciales en A y B (kV). */
+  VA: number;
+  VB: number | null;
+  respuesta: number;
+  pistas: [string, string];
+}
+
+const kV = (Q: number, d: number) => Math.round((potencial(Q * MICRO, d) / 1000) * 1e9) / 1e9;
+
+/** Potencial de Q (μC) a la distancia d (m): V = kQ/d, en kV. */
+export function crearPotencial(id: string, Q: number, d: number, pistas: [string, string]): ProblemaPotencial {
+  const VA = kV(Q, d);
+  return { id, tipo: "V", Q, dA: d, dB: null, q: null, VA, VB: null, respuesta: enAjuste(VA, V_MIN - 1, V_MAX, "17.3", id), pistas };
+}
+
+/** Trabajo del campo de Q al llevar q (μC) de A a B: W = q·(V_A − V_B), en mJ. */
+export function crearTrabajoElectrico(id: string, Q: number, dA: number, dB: number, q: number, pistas: [string, string]): ProblemaPotencial {
+  const VA = kV(Q, dA);
+  const VB = kV(Q, dB);
+  const W = Math.round(q * (VA - VB) * 1e9) / 1e9;
+  if (W === 0) throw new Error(`17.3 ${id}: trabajo nulo`);
+  return { id, tipo: "W", Q, dA, dB, q, VA, VB, respuesta: enAjuste(W, V_MIN - 1, V_MAX, "17.3", id), pistas };
 }
