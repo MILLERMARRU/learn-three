@@ -131,6 +131,7 @@ export const ETAPAS_N18: EtapaInfo[] = [
   { id: "ohm", clave: "n18-ohm", numero: "18.1", titulo: "Ley de Ohm", resumen: "Cierra el circuito: con V = I·R, la aguja del multímetro debe llegar a tu marca.", tipo: "Flechas ↑ ↓ ← →" },
   { id: "red", clave: "n18-red", numero: "18.2", titulo: "Resistencias en serie y en paralelo", resumen: "Reduce la red a una sola resistencia: el óhmetro entre A y B debe llegar a tu marca.", tipo: "Flechas ↑ ↓ ← →" },
   { id: "potencia", clave: "n18-potencia", numero: "18.3", titulo: "Potencia eléctrica", resumen: "P = V·I = I²R = V²/R: el foco brilla según su potencia y el vatímetro llega a tu marca.", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "examen", clave: "n18-examen", numero: "18.4", titulo: "Examen tipo admisión", resumen: "10 preguntas de Ohm, serie, paralelo, potencia y energía con la escena en 3D.", tipo: "Opción múltiple" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
