@@ -636,6 +636,20 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "gas") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <path d="M40 8 V56 H80 V8" className="ev-tenue" fill="none" />
+        <rect x="41" y="26" width="38" height="5" />
+        <rect x="48" y="16" width="24" height="5" className="ev-acento" />
+        <rect x="48" y="21" width="24" height="5" className="ev-acento" />
+        <circle cx="52" cy="40" r="2" />
+        <circle cx="64" cy="46" r="2" />
+        <circle cx="70" cy="36" r="2" />
+        <circle cx="58" cy="52" r="2" />
+      </svg>
+    );
+  }
   if (id === "mezcla") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
