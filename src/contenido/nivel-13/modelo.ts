@@ -1,6 +1,6 @@
 // ══ Nivel 13 · Ondas mecánicas: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { frecuenciaOnda, longitudOnda, velocidadCuerda, velocidadOnda } from "@/lib/ondas";
+import { frecuenciaArmonico, frecuenciaOnda, longitudArmonico, longitudOnda, velocidadCuerda, velocidadOnda } from "@/lib/ondas";
 
 /** Rango del ajuste (m, Hz o m/s): ↑ ↓ de 1 en 1, ← → de 10 en 10. */
 export const O_MIN = 0;
@@ -49,6 +49,31 @@ export interface ProblemaPulso {
 
 export function crearPulso(id: string, T: number, mu: number, pistas: [string, string], masa?: number): ProblemaPulso {
   return { id, T, mu, masa, respuesta: enAjuste(velocidadCuerda(T, mu), "13.2", id), pistas };
+}
+
+// ══ 13.3 Ondas estacionarias ───────
+export interface ProblemaEstacionaria {
+  id: string;
+  /** f: frecuencia del armónico n · lambda: su longitud de onda. */
+  tipo: "f" | "lambda";
+  /** Armónico (número de vientres), largo de la cuerda (m) y velocidad de las ondas en ella (m/s). */
+  n: number;
+  L: number;
+  v: number;
+  /** El enunciado da la frecuencia fundamental en lugar de L y v. */
+  conF1: boolean;
+  respuesta: number;
+  pistas: [string, string];
+}
+
+export function crearEstacionaria(id: string, tipo: ProblemaEstacionaria["tipo"], n: number, L: number, v: number, pistas: [string, string], conF1 = false): ProblemaEstacionaria {
+  const r = tipo === "f" ? frecuenciaArmonico(n, v, L) : longitudArmonico(n, L);
+  return { id, tipo, n, L, v, conF1, respuesta: enAjuste(r, "13.3", id), pistas };
+}
+
+/** Número de vientres que tendría la cuerda con el valor propuesto (no entero si no encaja). */
+export function vientresPropuestos(p: Pick<ProblemaEstacionaria, "tipo" | "L" | "v">, valor: number): number {
+  return p.tipo === "f" ? (valor * 2 * p.L) / p.v : valor > 0 ? (2 * p.L) / valor : 0;
 }
 
 /** Número con coma decimal: «0,5». */

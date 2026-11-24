@@ -95,6 +95,7 @@ export const ETAPAS_N12: EtapaInfo[] = [
 export const ETAPAS_N13: EtapaInfo[] = [
   { id: "onda", clave: "n13-onda", numero: "13.1", titulo: "Longitud de onda, frecuencia y velocidad", resumen: "v = λ·f: una onda fantasma con tu valor viaja sobre la real.", tipo: "Flechas ↑ ↓ ← →" },
   { id: "pulso", clave: "n13-pulso", numero: "13.2", titulo: "Velocidad de una onda en una cuerda", resumen: "Un pulso recorre una cuerda tensa: v = √(T/μ).", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "estacionaria", clave: "n13-estacionaria", numero: "13.3", titulo: "Ondas estacionarias", resumen: "Nodos, vientres y armónicos de una cuerda fija: fₙ = n·v/2L.", tipo: "Flechas ↑ ↓ ← →" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
