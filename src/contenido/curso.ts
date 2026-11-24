@@ -102,6 +102,7 @@ export const ETAPAS_N13: EtapaInfo[] = [
 export const ETAPAS_N14: EtapaInfo[] = [
   { id: "presion", clave: "n14-presion", numero: "14.1", titulo: "Presión hidrostática", resumen: "Un sensor baja en el tanque: P = ρgh, la aguja del manómetro debe llegar a tu marca.", tipo: "Flechas ↑ ↓ ← →" },
   { id: "prensa", clave: "n14-prensa", numero: "14.2", titulo: "Principio de Pascal", resumen: "Prensa hidráulica: la fuerza justa en el émbolo chico sostiene el auto, F₁/A₁ = F₂/A₂.", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "flotacion", clave: "n14-flotacion", numero: "14.3", titulo: "Principio de Arquímedes", resumen: "El bloque cae al líquido: predice cuánto se hunde, h = H·ρc/ρl.", tipo: "Flechas ↑ ↓ ← →" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
