@@ -636,6 +636,18 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "calentador") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <rect x="18" y="50" width="54" height="8" className="ev-tenue" />
+        <path d="M26 20 V48 H64 V20" className="ev-tenue" fill="none" />
+        <rect x="28" y="30" width="34" height="18" className="ev-tenue" />
+        <line x1="92" y1="8" x2="92" y2="46" />
+        <line x1="92" y1="26" x2="92" y2="50" className="ev-acento" />
+        <circle cx="92" cy="52" r="5" className="ev-acento" />
+      </svg>
+    );
+  }
   if (id === "dilatacion") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>

@@ -1,6 +1,6 @@
 // ══ Nivel 15 · Calor: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { dilatacion } from "@/lib/calor";
+import { dilatacion, temperaturaFinal } from "@/lib/calor";
 
 /** Valida que la respuesta sea un entero dentro de (min, max]. */
 function enAjuste(r: number, min: number, max: number, etapa: string, id: string): number {
@@ -42,4 +42,38 @@ export interface ProblemaDilatacion {
 export function crearDilatacion(id: string, metal: Metal, L0: number, T0: number, T1: number, conTemps: boolean, pistas: [string, string]): ProblemaDilatacion {
   const dL = Math.abs(dilatacion(L0 * 1000, METALES[metal].alfa, T1 - T0));
   return { id, metal, L0, T0, T1, conTemps, respuesta: enAjuste(dL, D_MIN - 1, D_MAX, "15.1", id), pistas };
+}
+
+// ══ 15.2 Calor sensible ───────
+/** Sustancias del curso: nombre, calor específico (cal/g·°C), si es líquida y color. */
+export const SUSTANCIAS = {
+  agua: { nombre: "agua", c: 1, liquida: true, color: "#4f8fd1" },
+  aceite: { nombre: "aceite", c: 0.5, liquida: true, color: "#d9a441" },
+  alcohol: { nombre: "alcohol", c: 0.6, liquida: true, color: "#b8dcef" },
+  hierro: { nombre: "hierro", c: 0.11, liquida: false, color: "#8a929d" },
+  aluminio: { nombre: "aluminio", c: 0.22, liquida: false, color: "#cfd6df" },
+} as const;
+export type Sustancia = keyof typeof SUSTANCIAS;
+
+/** Rango del ajuste de la temperatura final (°C) y fondo de escala del termómetro. */
+export const T_MIN = 0;
+export const T_MAX = 150;
+
+export interface ProblemaCalentador {
+  id: string;
+  sustancia: Sustancia;
+  /** Masa (g), temperatura inicial (°C) y calor entregado (cal). */
+  m: number;
+  T0: number;
+  Q: number;
+  /** Si el enunciado da Q y m en kcal y kg. */
+  enKilo: boolean;
+  /** Temperatura final (°C). */
+  respuesta: number;
+  pistas: [string, string];
+}
+
+export function crearCalentador(id: string, sustancia: Sustancia, m: number, T0: number, Q: number, enKilo: boolean, pistas: [string, string]): ProblemaCalentador {
+  const T = temperaturaFinal(T0, Q, m, SUSTANCIAS[sustancia].c);
+  return { id, sustancia, m, T0, Q, enKilo, respuesta: enAjuste(T, T_MIN, T_MAX, "15.2", id), pistas };
 }
