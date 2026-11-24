@@ -96,6 +96,7 @@ export const ETAPAS_N13: EtapaInfo[] = [
   { id: "onda", clave: "n13-onda", numero: "13.1", titulo: "Longitud de onda, frecuencia y velocidad", resumen: "v = λ·f: una onda fantasma con tu valor viaja sobre la real.", tipo: "Flechas ↑ ↓ ← →" },
   { id: "pulso", clave: "n13-pulso", numero: "13.2", titulo: "Velocidad de una onda en una cuerda", resumen: "Un pulso recorre una cuerda tensa: v = √(T/μ).", tipo: "Flechas ↑ ↓ ← →" },
   { id: "estacionaria", clave: "n13-estacionaria", numero: "13.3", titulo: "Ondas estacionarias", resumen: "Nodos, vientres y armónicos de una cuerda fija: fₙ = n·v/2L.", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "examen", clave: "n13-examen", numero: "13.4", titulo: "Examen tipo admisión", resumen: "10 preguntas de v = λf, cuerdas, armónicos y nodos con la escena en 3D.", tipo: "Opción múltiple" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
@@ -152,4 +153,15 @@ export const TEASERS = [
   "Montañas rusas donde la energía se conserva (o no).",
   "Choques en una mesa de billar 3D.",
   "Resortes y péndulos que oscilan a tu ritmo.",
+  "Ondas que viajan, pulsos y cuerdas que vibran en armónicos.",
+  "Presión, empuje y objetos que flotan o se hunden.",
+  "Temperatura, dilatación y mezclas que llegan al equilibrio.",
+  "Gases que se expanden y máquinas que convierten calor en trabajo.",
+  "Cargas que se atraen y se repelen, y los campos que las empujan.",
+  "Circuitos con pilas y resistencias: la ley de Ohm a mano.",
+  "Placas que guardan carga y energía.",
+  "Imanes, corrientes y fuerzas magnéticas.",
+  "Luz, radio y el espectro electromagnético.",
+  "Espejos y lentes: la luz que se refleja y se refracta.",
+  "Fotones, átomos y relatividad.",
 ];
