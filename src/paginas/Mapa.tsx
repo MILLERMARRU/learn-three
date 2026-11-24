@@ -636,6 +636,17 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "trabajo") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="20" y1="54" x2="108" y2="54" />
+        <line x1="20" y1="54" x2="20" y2="8" />
+        <rect x="40" y="24" width="46" height="30" className="ev-acento" />
+        <line x1="40" y1="24" x2="86" y2="24" />
+        <line x1="92" y1="16" x2="92" y2="56" className="ev-tenue" strokeDasharray="3 3" />
+      </svg>
+    );
+  }
   if (id === "gas") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
