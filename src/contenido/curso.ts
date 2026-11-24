@@ -75,6 +75,7 @@ export const ETAPAS_N10: EtapaInfo[] = [
   { id: "trabajo", clave: "n10-trabajo", numero: "10.1", titulo: "Trabajo y energía cinética", resumen: "Una fuerza empuja el bloque en una zona: predice con qué rapidez sale (W neto = ΔEc).", tipo: "Flechas ↑ ↓" },
   { id: "energia", clave: "n10-energia", numero: "10.2", titulo: "Conservación de la energía mecánica", resumen: "Un carrito en una pista lisa: rapidez abajo o altura que alcanza, con barras de Ec y Ep.", tipo: "Flechas ↑ ↓" },
   { id: "potencia", clave: "n10-potencia", numero: "10.3", titulo: "Potencia", resumen: "Ajusta la potencia de la grúa para subir la carga justo a tiempo (P = mgh/t), con rendimiento.", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "examen", clave: "n10-examen", numero: "10.4", titulo: "Examen tipo admisión", resumen: "10 preguntas de trabajo, energía, conservación, potencia y rendimiento con la escena en 3D.", tipo: "Opción múltiple" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
