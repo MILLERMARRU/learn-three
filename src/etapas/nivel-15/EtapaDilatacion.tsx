@@ -16,6 +16,7 @@ const META: MetaEtapa = {
   titulo: "Dilatación térmica",
   nivel: "Calor",
   nivelNum: 15,
+  siguiente: { ruta: "/nivel/15/calentador", titulo: "Etapa 15.2 · Calor sensible" },
   intro: (
     <>
       Al calentarse, los átomos de un sólido vibran más y se separan: el cuerpo se <b>dilata</b>. En una barra, el alargamiento es <b>ΔL = L₀·α·ΔT</b>, donde α es el coeficiente de dilatación lineal del material. Si se enfría, ΔT es negativo y se acorta. Propón cuántos milímetros cambia: el extremo libre debe llegar a tu marca azul (el cambio se dibuja muy exagerado).
