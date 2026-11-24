@@ -39,3 +39,8 @@ export function velocidadOrbital(rR: number): number {
 
 /** Ángulo recorrido (rad) por un satélite de período T al cabo de un tiempo t (mismas unidades). */
 export const anguloOrbita = (T: number, t: number) => (T > 0 ? (2 * Math.PI * t) / T : 0);
+
+/** Velocidad orbital de otro satélite cuya órbita mide q veces la de referencia: v ∝ 1/√r → v₂ = v₁ / √q. */
+export function velocidadEscalada(v1: number, q: number): number {
+  return limpio(v1 / Math.sqrt(q));
+}

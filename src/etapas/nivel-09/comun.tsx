@@ -5,6 +5,8 @@ export { fmtNum, simularTecla, ValorTexto } from "../nivel-03/comun";
 export const ESCENARIO_ATRACCION = { encuadre: { w: 9.4, h: 5.6 }, balanceo: 0.04, arrastrable: false, centro: [-0.5, 0.55] as [number, number] };
 /** El planeta y el tubo de caída son más altos: el tubo va a la derecha del planeta. */
 export const ESCENARIO_GRAVEDAD = { encuadre: { w: 9.4, h: 6.2 }, balanceo: 0.04, arrastrable: false, centro: [-0.6, -0.1] as [number, number] };
+/** Las órbitas se ven un poco desde arriba; la mayor mide 2,25 u de radio. */
+export const ESCENARIO_ORBITAS = { encuadre: { w: 9.4, h: 6.4 }, balanceo: 0.04, arrastrable: false, centro: [-0.6, -0.05] as [number, number] };
 export const CARRUSEL_GRAVITACION = { paso: 8.3, escala: 0.33, fondo: 0, giro: 0, ancho: 7.4 };
 
 /** Un factor para las cuentas: 2 → «2», ½ → «½», 3/2 → «3/2». */

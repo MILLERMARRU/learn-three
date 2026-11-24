@@ -1,6 +1,6 @@
 // ══ Nivel 9 · Gravitación universal: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { fuerzaProporcional, gravedad } from "@/lib/gravitacion";
+import { fuerzaProporcional, gravedad, periodoKepler, velocidadEscalada } from "@/lib/gravitacion";
 
 // ══ 9.1 Ley de gravitación universal ───────
 /** Rango del ajuste de fuerza (N): ↑ ↓ de 1 en 1, ← → de 10 en 10. */
@@ -58,4 +58,50 @@ export function crearGravedad(id: string, kM: number, kR: number, hR: number, pi
   // la gravedad cae en el ajuste de 0,1 m/s²: si no, falla al cargar
   if (Math.abs(decimas - Math.round(decimas)) > 1e-9 || decimas < G10_MIN || decimas > G10_MAX) throw new Error(`9.2 ${id}: g = ${g} fuera del ajuste`);
   return { id, kM, kR, hR, respuesta: Math.round(decimas) / 10, pistas };
+}
+
+// ══ 9.3 Satélites y leyes de Kepler ───────
+/** Rango del ajuste (período en h o días, o velocidad en km/s): ↑ ↓ de 1 en 1, ← → de 10 en 10. */
+export const O_MIN = 1;
+export const O_MAX = 400;
+
+export interface ProblemaOrbita {
+  id: string;
+  /** T: período por la tercera ley de Kepler · v: velocidad orbital. */
+  tipo: "T" | "v";
+  /** Radio de la órbita pedida dividido entre el de la órbita de referencia. */
+  q: number;
+  /** Dato de la órbita de referencia: su período (tipo T) o su velocidad en km/s (tipo v). */
+  ref: number;
+  unidad: "h" | "días" | "km/s";
+  /** La órbita de referencia es rasante (r₁ = R): la pedida mide q radios terrestres. */
+  rasante: boolean;
+  /** Radio de la órbita de referencia en radios del planeta, si el enunciado da alturas. */
+  r1R?: number;
+  respuesta: number;
+  pistas: [string, string];
+}
+
+export function crearOrbita(
+  id: string,
+  tipo: ProblemaOrbita["tipo"],
+  q: number,
+  ref: number,
+  pistas: [string, string],
+  extra: { unidad?: ProblemaOrbita["unidad"]; rasante?: boolean; r1R?: number } = {},
+): ProblemaOrbita {
+  const r = tipo === "T" ? periodoKepler(ref, 1, q) : velocidadEscalada(ref, q);
+  // la respuesta es un entero dentro del ajuste: si no, falla al cargar
+  if (!Number.isInteger(r) || r < O_MIN || r > O_MAX) throw new Error(`9.3 ${id}: ${tipo} = ${r} fuera del ajuste`);
+  const unidad = extra.unidad ?? (tipo === "v" ? "km/s" : "h");
+  return { id, tipo, q, ref, unidad, rasante: extra.rasante ?? false, r1R: extra.r1R, respuesta: r, pistas };
+}
+
+/** q como fracción de enteros pequeños: 4 → [4, 1], 0,25 → [1, 4], 2,25 → [9, 4]. */
+export function fraccionQ(q: number): [number, number] {
+  for (let b = 1; b <= 16; b++) {
+    const a = q * b;
+    if (Math.abs(a - Math.round(a)) < 1e-9) return [Math.round(a), b];
+  }
+  return [q, 1];
 }
