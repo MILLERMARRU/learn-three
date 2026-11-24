@@ -639,6 +639,18 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "ohm") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <rect x="16" y="12" width="60" height="40" className="ev-tenue" fill="none" />
+        <line x1="10" y1="28" x2="22" y2="28" />
+        <line x1="13" y1="36" x2="19" y2="36" />
+        <rect x="36" y="8" width="20" height="8" className="ev-acento" />
+        <circle cx="96" cy="32" r="12" fill="none" />
+        <line x1="96" y1="32" x2="103" y2="25" className="ev-acento" />
+      </svg>
+    );
+  }
   if (id === "potencial") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
