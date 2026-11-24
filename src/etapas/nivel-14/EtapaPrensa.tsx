@@ -17,6 +17,7 @@ const META: MetaEtapa = {
   titulo: "Principio de Pascal",
   nivel: "Hidrostática",
   nivelNum: 14,
+  siguiente: { ruta: "/nivel/14/flotacion", titulo: "Etapa 14.3 · Principio de Arquímedes" },
   intro: (
     <>
       Un líquido encerrado transmite la presión <b>igual a todos sus puntos</b>: es el <b>principio de Pascal</b>. En una prensa hidráulica, la presión en el émbolo chico es la misma que en el grande, <b>F₁/A₁ = F₂/A₂</b>, así que una fuerza pequeña sostiene un auto. Propón la fuerza en el émbolo chico: si es la justa, el auto queda en equilibrio; si no, sube o baja.

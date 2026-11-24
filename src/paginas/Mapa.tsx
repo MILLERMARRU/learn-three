@@ -636,6 +636,16 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "flotacion") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <rect x="14" y="26" width="92" height="30" className="ev-tenue" />
+        <line x1="14" y1="26" x2="106" y2="26" />
+        <rect x="34" y="14" width="20" height="24" className="ev-acento" />
+        <rect x="68" y="18" width="20" height="24" className="ev-tenue" fill="none" strokeDasharray="3 3" />
+      </svg>
+    );
+  }
   if (id === "prensa") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
