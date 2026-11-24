@@ -17,6 +17,7 @@ const META: MetaEtapa = {
   titulo: "Calor sensible",
   nivel: "Calor",
   nivelNum: 15,
+  siguiente: { ruta: "/nivel/15/mezcla", titulo: "Etapa 15.3 · Equilibrio térmico" },
   intro: (
     <>
       El calor es energía que pasa de un cuerpo caliente a uno frío. Si no cambia de estado, sube su temperatura: <b>Q = m·c·ΔT</b>, donde c es el <b>calor específico</b> (para el agua, 1 cal/g·°C). Cuanto menor es c, más se calienta con el mismo calor. Propón la temperatura final: la columna del termómetro debe detenerse en tu marca azul.
