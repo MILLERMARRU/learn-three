@@ -1,6 +1,6 @@
 // ══ Etapa 9.3 · Satélites y leyes de Kepler: propone el período o la velocidad y un satélite fantasma gira junto al real ───────
 import { useState } from "react";
-import { F_KEPLER, F_V_ORBITAL, fraccionQ, O_MAX, O_MIN, RONDAS_ORBITAS, type ProblemaOrbita } from "@/contenido/nivel-09/orbitas";
+import { conUnidad, F_KEPLER, F_V_ORBITAL, fraccionQ, O_MAX, O_MIN, RONDAS_ORBITAS, textoPedida, textoRef, type ProblemaOrbita } from "@/contenido/nivel-09/orbitas";
 import { sfx } from "@/lib/sonido";
 import { useTeclas } from "@/lib/teclado";
 import { useEtapa } from "@/motor/etapa";
@@ -27,6 +27,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡lanza! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/9/examen", titulo: "Etapa 9.4 · Examen tipo admisión" },
   descRondas: {
     guiado: "Períodos con Kepler. La tecla que brilla te guía.",
     pista: "Velocidad orbital: más lejos, más lento.",
@@ -43,9 +44,6 @@ const TECLAS_ORBITA: Record<string, DecoTecla> = {
   h: { sub: "pista" },
 };
 
-/** «1 día», «27 días», «16 h». */
-const conUnidad = (n: number, u: ProblemaOrbita["unidad"]) => `${String(n).replace(".", ",")} ${u === "días" && n === 1 ? "día" : u}`;
-
 const ORDINAL: Record<number, string> = { 2: "mitad", 3: "tercera parte", 4: "cuarta parte", 9: "novena parte" };
 const dec = (n: number) => String(n).replace(".", ",");
 
@@ -57,15 +55,6 @@ function radioPedido(p: ProblemaOrbita): string {
   if (a === 1 && ORDINAL[b]) return `la ${ORDINAL[b]} del radio`;
   return `un radio ${a}/${b} veces mayor`;
 }
-
-/** «r₂ = 4r₁», «r₂ = r₁/9», «r₂ = 9r₁/4» o «r = 16R». */
-function textoPedida(p: ProblemaOrbita): string {
-  if (p.rasante) return `r = ${p.q}R`;
-  const [a, b] = fraccionQ(p.q);
-  return `r₂ = ${a === 1 ? "" : a}r₁${b === 1 ? "" : `/${b}`}`;
-}
-
-const textoRef = (p: ProblemaOrbita) => (p.tipo === "T" ? `T₁ = ${conUnidad(p.ref, p.unidad)}` : p.rasante ? `rasante · ${p.ref} km/s` : `v₁ = ${p.ref} km/s`);
 
 /** La cuenta completa: «T = 2 · 4^(3/2) = 2 · 8 = 16 h» o «v = 8 / √4 = 4 km/s». */
 function cuenta(p: ProblemaOrbita): string {
