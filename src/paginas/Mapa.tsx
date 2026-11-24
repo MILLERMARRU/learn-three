@@ -636,6 +636,18 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "mezcla") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <path d="M44 22 V56 H82 V22" className="ev-tenue" fill="none" />
+        <rect x="46" y="38" width="34" height="18" className="ev-tenue" />
+        <path d="M14 10 L30 10 L34 26 L18 26 Z" className="ev-acento" />
+        <line x1="36" y1="24" x2="52" y2="38" className="ev-acento" strokeDasharray="3 3" />
+        <line x1="100" y1="10" x2="100" y2="50" />
+        <circle cx="100" cy="52" r="5" className="ev-acento" />
+      </svg>
+    );
+  }
   if (id === "calentador") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>

@@ -1,6 +1,6 @@
 // ══ Nivel 15 · Calor: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { dilatacion, temperaturaFinal } from "@/lib/calor";
+import { dilatacion, equilibrio, temperaturaFinal } from "@/lib/calor";
 
 /** Valida que la respuesta sea un entero dentro de (min, max]. */
 function enAjuste(r: number, min: number, max: number, etapa: string, id: string): number {
@@ -76,4 +76,31 @@ export interface ProblemaCalentador {
 export function crearCalentador(id: string, sustancia: Sustancia, m: number, T0: number, Q: number, enKilo: boolean, pistas: [string, string]): ProblemaCalentador {
   const T = temperaturaFinal(T0, Q, m, SUSTANCIAS[sustancia].c);
   return { id, sustancia, m, T0, Q, enKilo, respuesta: enAjuste(T, T_MIN, T_MAX, "15.2", id), pistas };
+}
+
+// ══ 15.3 Equilibrio térmico ───────
+export interface CuerpoMezcla {
+  sustancia: Sustancia;
+  /** Masa (g) y temperatura inicial (°C). */
+  m: number;
+  T: number;
+}
+
+export interface ProblemaMezcla {
+  id: string;
+  /** El cuerpo caliente que se vierte (o se sumerge, si es metal) y el líquido que ya está en el calorímetro. */
+  a: CuerpoMezcla;
+  b: CuerpoMezcla;
+  /** Temperatura de equilibrio (°C). */
+  respuesta: number;
+  pistas: [string, string];
+}
+
+export function crearMezcla(id: string, a: CuerpoMezcla, b: CuerpoMezcla, pistas: [string, string]): ProblemaMezcla {
+  if (!SUSTANCIAS[b.sustancia].liquida || a.T <= b.T) throw new Error(`15.3 ${id}: el calorímetro tiene el líquido frío y se le agrega el cuerpo caliente`);
+  const Te = equilibrio([
+    { m: a.m, c: SUSTANCIAS[a.sustancia].c, T: a.T },
+    { m: b.m, c: SUSTANCIAS[b.sustancia].c, T: b.T },
+  ]);
+  return { id, a, b, respuesta: enAjuste(Te, T_MIN, T_MAX, "15.3", id), pistas };
 }
