@@ -28,6 +28,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡mueve la carga! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/17/examen", titulo: "Etapa 17.4 · Examen tipo admisión" },
   descRondas: {
     guiado: "Potencial de una carga positiva, en kV. La tecla que brilla te guía.",
     pista: "Cargas negativas: el potencial es negativo.",
