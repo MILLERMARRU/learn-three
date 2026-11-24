@@ -1,4 +1,4 @@
-// ══ Escena de la red de resistencias (Nivel 18): la red se ilumina y el óhmetro, conectado entre A y B, marca la equivalente ───────
+// ══ Escena de una red entre A y B (Niveles 18 y 19): resistencias o condensadores se iluminan y el medidor marca la equivalente ───────
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
@@ -9,7 +9,12 @@ import { anguloMedidor, Medidor } from "./Medidor";
 interface Props {
   tipo: "serie" | "paralelo" | "mixta";
   rs: number[];
-  /** Resistencia equivalente real y propuesta (Ω; null = sin marca) y fondo de escala del óhmetro. */
+  /** Qué componentes forman la red (resistencias por defecto), su unidad, el símbolo de la equivalente y el nombre del medidor. */
+  componente?: "resistencia" | "condensador";
+  unidad?: string;
+  simbolo?: string;
+  textoMedidor?: string;
+  /** Equivalente real y propuesta (null = sin marca) y fondo de escala del medidor. */
   R: number;
   propuesta: number | null;
   escala: number;
@@ -66,7 +71,7 @@ function trazar(tipo: Props["tipo"], n: number) {
   return { pos, cables };
 }
 
-export function EscenaRed({ tipo, rs, R, propuesta, escala, verValor = false, corrida = null, onFin, exito = false, previa }: Props) {
+export function EscenaRed({ tipo, rs, componente = "resistencia", unidad = "Ω", simbolo = "R", textoMedidor = "óhmetro", R, propuesta, escala, verValor = false, corrida = null, onFin, exito = false, previa }: Props) {
   const etiquetas = previa === undefined;
   const sim = useRef({ id: -1, t: 0, fin: false });
   const aguja = useRef<THREE.Group>(null!);
@@ -78,11 +83,12 @@ export function EscenaRed({ tipo, rs, R, propuesta, escala, verValor = false, co
       resist: new THREE.CylinderGeometry(0.13, 0.13, LARGO_R, 20).rotateZ(Math.PI / 2),
       banda: new THREE.CylinderGeometry(0.14, 0.14, 0.05, 20).rotateZ(Math.PI / 2),
       borne: new THREE.SphereGeometry(0.08, 16, 12),
+      placa: new THREE.BoxGeometry(0.05, 0.42, 0.3),
     }),
     [],
   );
   // un material por resistencia: se encienden una tras otra
-  const matsR = useMemo(() => rs.map(() => new THREE.MeshStandardMaterial({ color: "#d9c3a0", roughness: 0.6, emissive: "#f0b44c", emissiveIntensity: 0 })), [rs]);
+  const matsR = useMemo(() => rs.map(() => new THREE.MeshStandardMaterial({ color: componente === "condensador" ? "#a9b4c0" : "#d9c3a0", metalness: componente === "condensador" ? 0.5 : 0, roughness: 0.5, emissive: "#f0b44c", emissiveIntensity: 0 })), [rs, componente]);
   const mats = useMemo(
     () => ({
       cable: new THREE.MeshStandardMaterial({ color: "#c98b4a", metalness: 0.4, roughness: 0.5 }),
@@ -140,10 +146,22 @@ export function EscenaRed({ tipo, rs, R, propuesta, escala, verValor = false, co
       {cables.map((c, i) => cable(c, mats.cable, `c${i}`))}
       {pos.map(([x, y], i) => (
         <group key={i} position={[x, y, 0]}>
-          <mesh geometry={geo.resist} material={matsR[i]} />
-          {[-0.18, -0.06, 0.06].map((dx) => (
-            <mesh key={dx} geometry={geo.banda} material={mats.banda} position={[dx, 0, 0]} />
-          ))}
+          {componente === "condensador" ? (
+            <>
+              {/* condensador: dos placas con sus terminales */}
+              <mesh geometry={geo.placa} material={matsR[i]} position={[-0.07, 0, 0]} />
+              <mesh geometry={geo.placa} material={matsR[i]} position={[0.07, 0, 0]} />
+              <mesh geometry={geo.caja} material={mats.cable} position={[-(LARGO_R / 2 + 0.07) / 2, 0, 0]} scale={[LARGO_R / 2 - 0.07, 0.035, 0.035]} />
+              <mesh geometry={geo.caja} material={mats.cable} position={[(LARGO_R / 2 + 0.07) / 2, 0, 0]} scale={[LARGO_R / 2 - 0.07, 0.035, 0.035]} />
+            </>
+          ) : (
+            <>
+              <mesh geometry={geo.resist} material={matsR[i]} />
+              {[-0.18, -0.06, 0.06].map((dx) => (
+                <mesh key={dx} geometry={geo.banda} material={mats.banda} position={[dx, 0, 0]} />
+              ))}
+            </>
+          )}
         </group>
       ))}
       {/* bornes A y B */}
@@ -158,8 +176,8 @@ export function EscenaRed({ tipo, rs, R, propuesta, escala, verValor = false, co
       {etiquetas && (
         <>
           {pos.map(([x, y], i) => (
-            <Etiqueta key={`e${i}`} position={[x, y + 0.2, 0.3]} className="etq-dato etq-centro">
-              {rs[i]} Ω
+            <Etiqueta key={`e${i}`} position={[x, y + (componente === "condensador" ? 0.27 : 0.2), 0.3]} className="etq-dato etq-centro">
+              {String(rs[i]).replace(".", ",")} {unidad}
             </Etiqueta>
           ))}
           <Etiqueta position={[XA - 0.12, 0, 0.3]} className="etq-dato etq-izq">
@@ -169,7 +187,7 @@ export function EscenaRed({ tipo, rs, R, propuesta, escala, verValor = false, co
             B
           </Etiqueta>
           <Etiqueta position={[XM + 0.58, 0, 0.3]} className={`etq-dato ${exito ? "etq-acento" : ""}`}>
-            {verValor ? `R = ${R} Ω` : "óhmetro"}
+            {verValor ? `${simbolo} = ${String(R).replace(".", ",")} ${unidad}` : textoMedidor}
           </Etiqueta>
         </>
       )}
