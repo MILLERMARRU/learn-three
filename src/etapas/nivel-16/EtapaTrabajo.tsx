@@ -17,6 +17,7 @@ const META: MetaEtapa = {
   titulo: "Trabajo de un gas",
   nivel: "Termodinámica",
   nivelNum: 16,
+  siguiente: { ruta: "/nivel/16/maquina", titulo: "Etapa 16.3 · Máquinas térmicas" },
   intro: (
     <>
       Cuando un gas se expande empuja el pistón y hace <b>trabajo</b>. A presión constante, <b>W = P·ΔV</b>: es el <b>área bajo la línea</b> del diagrama P–V. Si el gas se comprime, ΔV es negativo y su trabajo también (lo hacen sobre él). Con kPa y m³ el trabajo sale en kJ. Propón W: el área se llenará y debe terminar en tu marca azul.
