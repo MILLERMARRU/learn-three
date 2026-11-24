@@ -1,6 +1,6 @@
 // ══ Nivel 14 · Hidrostática: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { presionAbsoluta, presionManometrica } from "@/lib/fluidos";
+import { fuerzaPrensa, G, presionAbsoluta, presionManometrica } from "@/lib/fluidos";
 
 /** Valida que la respuesta sea un entero positivo dentro de [min, max]. */
 function enAjuste(r: number, min: number, max: number, etapa: string, id: string): number {
@@ -37,6 +37,34 @@ export function crearPresion(id: string, liquido: Liquido, h: number, absoluta: 
   const rho = LIQUIDOS[liquido].rho;
   const P = (absoluta ? presionAbsoluta(rho, h) : presionManometrica(rho, h)) / 1000;
   return { id, liquido, h, absoluta, respuesta: enAjuste(P, P_MIN, P_MAX, "14.1", id), pistas };
+}
+
+// ══ 14.2 Principio de Pascal (prensa hidráulica) ───────
+/** Paso y rango del ajuste de fuerza (N): ↑ ↓ de 10 en 10, ← → de 100 en 100. */
+export const F_PASO = 10;
+export const F_MIN = 10;
+export const F_MAX = 1000;
+
+export interface ProblemaPrensa {
+  id: string;
+  /** Masa del auto (kg) sobre el émbolo grande. */
+  masa: number;
+  /** Cómo da los émbolos el enunciado: áreas en m², áreas en cm² o radios en cm. */
+  dato: "m2" | "cm2" | "radio";
+  /** Valores del émbolo chico y del grande, en la unidad del dato. */
+  a1: number;
+  a2: number;
+  /** Fuerza en el émbolo chico (N). */
+  respuesta: number;
+  pistas: [string, string];
+}
+
+export function crearPrensa(id: string, masa: number, dato: ProblemaPrensa["dato"], a1: number, a2: number, pistas: [string, string]): ProblemaPrensa {
+  // con radios, las áreas van con el cuadrado (π se simplifica en el cociente)
+  const [A1, A2] = dato === "radio" ? [a1 * a1, a2 * a2] : [a1, a2];
+  const F = fuerzaPrensa(masa * G, A1, A2);
+  if (Math.abs(F - Math.round(F)) > 1e-9 || Math.round(F) % F_PASO !== 0 || F < F_MIN || F > F_MAX) throw new Error(`14.2 ${id}: F = ${F} fuera del ajuste`);
+  return { id, masa, dato, a1, a2, respuesta: Math.round(F), pistas };
 }
 
 /** Número con coma decimal: «0,25». */

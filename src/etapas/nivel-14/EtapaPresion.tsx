@@ -16,6 +16,7 @@ const META: MetaEtapa = {
   titulo: "Presión hidrostática",
   nivel: "Hidrostática",
   nivelNum: 14,
+  siguiente: { ruta: "/nivel/14/prensa", titulo: "Etapa 14.2 · Principio de Pascal" },
   intro: (
     <>
       Dentro de un líquido, el peso del líquido de arriba empuja en todas direcciones: es la <b>presión hidrostática, P = ρ·g·h</b>. Crece con la profundidad y con la densidad del líquido, y no depende de la forma del recipiente. La presión <b>absoluta</b> le suma la del aire (100 kPa). Propón la presión: el sensor bajará y la aguja del manómetro debe llegar a tu marca.
