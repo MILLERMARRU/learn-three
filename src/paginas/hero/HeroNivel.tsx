@@ -21,6 +21,7 @@ const CARGAR: Record<number, () => Promise<Hero>> = {
   7: () => import("./estatica").then((m) => m.heroEstatica),
   8: () => import("./dinamica").then((m) => m.heroDinamica),
   9: () => import("./gravitacion").then((m) => m.heroGravitacion),
+  10: () => import("./energia").then((m) => m.heroEnergia),
 };
 
 /** Mientras se descarga el hero: el nombre del tema, sin escena. */
