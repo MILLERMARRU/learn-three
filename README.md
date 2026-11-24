@@ -97,6 +97,7 @@ El inicio ya muestra las pestañas de los cinco cursos. Cada uno reutilizará el
 | 18 | Electrodinámica | Ley de Ohm · Resistencias en serie y en paralelo · Potencia eléctrica · Examen |
 | 19 | Condensadores | Carga de un condensador · Asociación de condensadores · Energía almacenada · Examen |
 | 20 | Electromagnetismo | Fuerza sobre un conductor · Campo de un conductor recto · Inducción electromagnética · Examen |
+| 21 | Ondas electromagnéticas | Espectro electromagnético · Polarización · Radar · Examen |
 
 <details>
 <summary><b>Detalle de las mecánicas por nivel</b></summary>
@@ -277,8 +278,8 @@ No necesita variables de entorno.
 
 **Física**
 
-- [x] Niveles 1–20: dimensional, vectorial, cinemática I y II, gráficas, movimiento circunferencial, estática, dinámica, gravitación universal, trabajo, energía y potencia, cantidad de movimiento, oscilaciones, ondas mecánicas, hidrostática, calor, termodinámica, electrostática, electrodinámica, condensadores y electromagnetismo.
-- [ ] Niveles 21–23: ondas electromagnéticas, óptica y física moderna.
+- [x] Niveles 1–21: dimensional, vectorial, cinemática I y II, gráficas, movimiento circunferencial, estática, dinámica, gravitación universal, trabajo, energía y potencia, cantidad de movimiento, oscilaciones, ondas mecánicas, hidrostática, calor, termodinámica, electrostática, electrodinámica, condensadores, electromagnetismo y ondas electromagnéticas.
+- [ ] Niveles 22–23: óptica y física moderna.
 
 **Matemáticas**
 
