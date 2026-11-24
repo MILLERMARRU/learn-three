@@ -1,6 +1,6 @@
 // ══ Nivel 21 · Ondas electromagnéticas: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { frecuenciaEM, longitudEM, regionEspectro } from "@/lib/ondasEM";
+import { COS2, frecuenciaEM, longitudEM, malus, regionEspectro } from "@/lib/ondasEM";
 
 /** Valida que la respuesta sea un entero dentro de (min, max]. */
 function enAjuste(r: number, min: number, max: number, etapa: string, id: string): number {
@@ -43,4 +43,25 @@ export function crearEspectro(id: string, pide: PideEspectro, dato: number, pist
   const res = enAjuste(Math.round(r * 1e6) / 1e6, 0, m.escala, "21.1", id);
   if (res % m.paso !== 0) throw new Error(`21.1 ${id}: la respuesta no cae en un paso del ajuste`);
   return { id, pide, f, lambda, region: regionEspectro(lambda), respuesta: res, pistas };
+}
+
+// ══ 21.2 Polarización ───────
+/** Fondo de escala del luxómetro (W/m²). */
+export const I_ESCALA = 100;
+
+export interface ProblemaPolarizacion {
+  id: string;
+  /** Intensidad que llega (W/m²), ángulo del analizador (°) y si la luz llega sin polarizar (el primer polarizador deja la mitad). */
+  I0: number;
+  theta: number;
+  noPolarizada: boolean;
+  /** Intensidad transmitida (W/m²). */
+  respuesta: number;
+  pistas: [string, string];
+}
+
+export function crearPolarizacion(id: string, I0: number, theta: number, noPolarizada: boolean, pistas: [string, string]): ProblemaPolarizacion {
+  if (COS2[theta] === undefined) throw new Error(`21.2 ${id}: ángulo sin cos² exacto`);
+  const I = malus(noPolarizada ? I0 / 2 : I0, theta);
+  return { id, I0, theta, noPolarizada, respuesta: enAjuste(I, 0, I_ESCALA, "21.2", id), pistas };
 }
