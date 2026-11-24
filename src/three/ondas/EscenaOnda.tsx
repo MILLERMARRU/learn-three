@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { emitirPolvo } from "@/lib/polvo";
 import { Etiqueta } from "../Etiqueta";
+import { crearCinta, escribirCinta } from "./cinta";
 
 interface Props {
   tipo: "lambda" | "v" | "f";
@@ -30,34 +31,12 @@ const DUR = 3.2;
 const GROSOR = 0.035;
 const fmt = (n: number) => String(n).replace(".", ",");
 
-/** Cinta delgada (2 filas de vértices) que sigue el perfil y(x) de la cuerda. */
-function crearCinta(): THREE.BufferGeometry {
-  const g = new THREE.BufferGeometry();
-  const pos = new Float32Array(N * 2 * 3);
-  const idx: number[] = [];
-  for (let i = 0; i < N - 1; i++) {
-    const a = i * 2;
-    idx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2);
-  }
-  g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-  g.setIndex(idx);
-  return g;
-}
-
-/** Escribe el perfil y = A·sen(k(x − x0) − ωt) en la cinta (la onda solo existe hasta donde llegó el frente). */
+/** Perfil y = A·sen(k(x − x0) − ωt); la onda solo existe hasta donde llegó el frente. */
 function perfil(g: THREE.BufferGeometry, lamVis: number, fVis: number, t: number, z: number) {
-  const pos = g.getAttribute("position") as THREE.BufferAttribute;
   const k = (2 * Math.PI) / lamVis;
   const w = 2 * Math.PI * fVis;
   const frente = X0 + lamVis * fVis * t + 2 * lamVis; // ya hay dos longitudes de onda al empezar
-  for (let i = 0; i < N; i++) {
-    const x = X0 + ((X1 - X0) * i) / (N - 1);
-    const y = x <= frente ? AMP * Math.sin(k * (x - X0) - w * t) : 0;
-    pos.setXYZ(i * 2, x, y + GROSOR, z);
-    pos.setXYZ(i * 2 + 1, x, y - GROSOR, z);
-  }
-  pos.needsUpdate = true;
-  g.computeBoundingSphere();
+  escribirCinta(g, X0, X1, (x) => (x <= frente ? AMP * Math.sin(k * (x - X0) - w * t) : 0), z, GROSOR);
 }
 
 export function EscenaOnda({ tipo, lambda, f, v, conT, propuesta, verValor = false, corrida = null, onFin, exito = false, previa }: Props) {
@@ -68,7 +47,7 @@ export function EscenaOnda({ tipo, lambda, f, v, conT, propuesta, verValor = fal
   const fFan = tipo === "lambda" ? F_VIS : F_VIS * r;
 
   const sim = useRef({ id: -1, t: 0, fin: false });
-  const geo = useMemo(() => ({ real: crearCinta(), fan: crearCinta(), caja: new THREE.BoxGeometry(1, 1, 1) }), []);
+  const geo = useMemo(() => ({ real: crearCinta(N), fan: crearCinta(N), caja: new THREE.BoxGeometry(1, 1, 1) }), []);
   const mats = useMemo(
     () => ({
       cuerda: new THREE.MeshStandardMaterial({ color: "#d9c3a0", side: THREE.DoubleSide, emissive: "#6fd6a8", emissiveIntensity: 0 }),
