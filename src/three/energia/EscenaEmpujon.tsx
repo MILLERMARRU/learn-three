@@ -161,7 +161,8 @@ export function EscenaEmpujon({ m, F, theta, d, mu, v0, vReal, vFantasma, verVal
         </group>
       )}
       {etiquetas && verValor && (
-        <Etiqueta position={[X_FIN, L + 0.08, 0.3]} className={`etq-dato etq-centro ${exito ? "etq-acento" : ""}`}>
+        // sobre la salida de la zona, donde alcanza esa rapidez (al final del piso aparecía antes de que llegara el bloque)
+        <Etiqueta position={[ZB, Math.max(L, 0.5) + 0.6, 0.3]} className={`etq-dato etq-centro ${exito ? "etq-acento" : ""}`}>
           v = {vReal} m/s
         </Etiqueta>
       )}
