@@ -87,6 +87,7 @@ export const ETAPAS_N11: EtapaInfo[] = [
 
 export const ETAPAS_N12: EtapaInfo[] = [
   { id: "resorte", clave: "n12-resorte", numero: "12.1", titulo: "Sistema masa-resorte", resumen: "Predice el período del bloque con resorte (T = 2π√(m/k)): un fantasma oscila con tu valor.", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "pendulo", clave: "n12-pendulo", numero: "12.2", titulo: "Péndulo simple", resumen: "El período solo depende del largo y de la gravedad: T = 2π√(L/g), en la Tierra y en otros planetas.", tipo: "Flechas ↑ ↓ ← →" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
