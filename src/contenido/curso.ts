@@ -73,6 +73,7 @@ export const ETAPAS_N9: EtapaInfo[] = [
 
 export const ETAPAS_N10: EtapaInfo[] = [
   { id: "trabajo", clave: "n10-trabajo", numero: "10.1", titulo: "Trabajo y energía cinética", resumen: "Una fuerza empuja el bloque en una zona: predice con qué rapidez sale (W neto = ΔEc).", tipo: "Flechas ↑ ↓" },
+  { id: "energia", clave: "n10-energia", numero: "10.2", titulo: "Conservación de la energía mecánica", resumen: "Un carrito en una pista lisa: rapidez abajo o altura que alcanza, con barras de Ec y Ep.", tipo: "Flechas ↑ ↓" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
