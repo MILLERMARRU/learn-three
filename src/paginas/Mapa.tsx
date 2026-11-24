@@ -574,6 +574,16 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "resorte") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="10" y1="12" x2="10" y2="52" className="ev-tenue" />
+        <polyline points="10,38 18,30 26,46 34,30 42,46 50,30 58,46 64,38" fill="none" />
+        <rect x="64" y="28" width="20" height="20" rx="2" className="ev-acento" />
+        <line x1="10" y1="52" x2="112" y2="52" className="ev-tenue" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
