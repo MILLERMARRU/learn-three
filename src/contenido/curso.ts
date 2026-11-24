@@ -143,6 +143,7 @@ export const ETAPAS_N19: EtapaInfo[] = [
 
 export const ETAPAS_N20: EtapaInfo[] = [
   { id: "conductor", clave: "n20-conductor", numero: "20.1", titulo: "Fuerza sobre un conductor", resumen: "El cable entre los polos se desvía: F = B·I·L·sen θ, el dinamómetro debe llegar a tu marca.", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "campo-recto", clave: "n20-campo-recto", numero: "20.2", titulo: "Campo de un conductor recto", resumen: "B = μ₀I/2πd: aparecen los círculos del campo, la brújula gira y el teslámetro llega a tu marca.", tipo: "Flechas ↑ ↓ ← →" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */

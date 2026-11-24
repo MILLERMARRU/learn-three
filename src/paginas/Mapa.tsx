@@ -639,6 +639,18 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "campo-recto") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <circle cx="44" cy="32" r="4" className="ev-acento" />
+        <circle cx="44" cy="32" r="12" className="ev-tenue" fill="none" />
+        <circle cx="44" cy="32" r="22" className="ev-tenue" fill="none" />
+        <line x1="66" y1="40" x2="66" y2="24" />
+        <circle cx="96" cy="32" r="11" fill="none" />
+        <line x1="96" y1="32" x2="102" y2="26" className="ev-acento" />
+      </svg>
+    );
+  }
   if (id === "conductor") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
