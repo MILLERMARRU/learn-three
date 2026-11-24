@@ -129,6 +129,7 @@ export const ETAPAS_N17: EtapaInfo[] = [
 
 export const ETAPAS_N18: EtapaInfo[] = [
   { id: "ohm", clave: "n18-ohm", numero: "18.1", titulo: "Ley de Ohm", resumen: "Cierra el circuito: con V = I·R, la aguja del multímetro debe llegar a tu marca.", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "red", clave: "n18-red", numero: "18.2", titulo: "Resistencias en serie y en paralelo", resumen: "Reduce la red a una sola resistencia: el óhmetro entre A y B debe llegar a tu marca.", tipo: "Flechas ↑ ↓ ← →" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
