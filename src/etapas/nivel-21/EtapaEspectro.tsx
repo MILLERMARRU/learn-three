@@ -16,6 +16,7 @@ const META: MetaEtapa = {
   titulo: "Espectro electromagnético",
   nivel: "Ondas electromagnéticas",
   nivelNum: 21,
+  siguiente: { ruta: "/nivel/21/polarizacion", titulo: "Etapa 21.2 · Polarización" },
   intro: (
     <>
       Una <b>onda electromagnética</b> son un campo eléctrico E y uno magnético B que oscilan perpendiculares entre sí y a la dirección en que viajan. No necesitan un medio: en el vacío todas van a <b>c = 3 × 10⁸ m/s</b>, y cumplen <b>c = λ·f</b>. Según su λ forman el <b>espectro</b>: radio, microondas, infrarrojo, luz visible, ultravioleta, rayos X y gamma. Propón el valor: el medidor debe llegar a tu marca azul.
