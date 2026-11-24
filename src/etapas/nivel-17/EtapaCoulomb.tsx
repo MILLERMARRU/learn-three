@@ -16,6 +16,7 @@ const META: MetaEtapa = {
   titulo: "Ley de Coulomb",
   nivel: "Electrostática",
   nivelNum: 17,
+  siguiente: { ruta: "/nivel/17/campo", titulo: "Etapa 17.2 · Campo eléctrico" },
   intro: (
     <>
       Dos cargas se ejercen fuerzas <b>iguales y opuestas</b>: se repelen si tienen el mismo signo y se atraen si tienen signos contrarios. Su valor es <b>F = k·q₁·q₂/d²</b>, con k = 9 × 10⁹ N·m²/C²: crece con las cargas y cae con el cuadrado de la distancia. Propón la fuerza: la flecha debe crecer hasta tu fantasma azul.
