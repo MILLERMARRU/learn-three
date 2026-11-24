@@ -29,6 +29,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡suelta! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/12/circulo", titulo: "Etapa 12.3 · MAS y movimiento circular" },
   descRondas: {
     guiado: "En la Tierra: T = 2√L. La tecla que brilla te guía.",
     pista: "¿Qué pasa si alargas o acortas el hilo?",
