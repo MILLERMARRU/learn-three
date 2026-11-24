@@ -89,6 +89,7 @@ export const ETAPAS_N12: EtapaInfo[] = [
   { id: "resorte", clave: "n12-resorte", numero: "12.1", titulo: "Sistema masa-resorte", resumen: "Predice el período del bloque con resorte (T = 2π√(m/k)): un fantasma oscila con tu valor.", tipo: "Flechas ↑ ↓ ← →" },
   { id: "pendulo", clave: "n12-pendulo", numero: "12.2", titulo: "Péndulo simple", resumen: "El período solo depende del largo y de la gravedad: T = 2π√(L/g), en la Tierra y en otros planetas.", tipo: "Flechas ↑ ↓ ← →" },
   { id: "circulo", clave: "n12-circulo", numero: "12.3", titulo: "MAS y movimiento circular", resumen: "La sombra de un punto que gira hace un MAS: velocidad y aceleración máximas.", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "examen", clave: "n12-examen", numero: "12.4", titulo: "Examen tipo admisión", resumen: "10 preguntas de resorte, péndulo, velocidad y aceleración máximas y energía con la escena en 3D.", tipo: "Opción múltiple" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */

@@ -88,6 +88,7 @@ El inicio ya muestra las pestañas de los cinco cursos. Cada uno reutilizará el
 | 9 | Gravitación universal | Ley de gravitación universal · Gravedad en la altura y en otros planetas · Satélites y leyes de Kepler · Examen |
 | 10 | Trabajo, energía y potencia | Trabajo y energía cinética · Conservación de la energía mecánica · Potencia · Examen |
 | 11 | Cantidad de movimiento y choques | Impulso · Conservación de la cantidad de movimiento · Choques elásticos e inelásticos · Examen |
+| 12 | Oscilaciones (MAS) | Sistema masa-resorte · Péndulo simple · MAS y movimiento circular · Examen |
 
 <details>
 <summary><b>Detalle de las mecánicas por nivel</b></summary>
@@ -127,6 +128,9 @@ El inicio ya muestra las pestañas de los cinco cursos. Cada uno reutilizará el
 | 11.1 Impulso y cantidad de movimiento | Velocidad tras el golpe (F·Δt = Δp), con la gráfica F–t | Un disco fantasma sale junto al real |
 | 11.2 Conservación de la cantidad de movimiento | Choques plásticos y explosiones | El fantasma sale del choque junto al real |
 | 11.3 Choques elásticos e inelásticos | Velocidad tras un choque con coeficiente de restitución | El fantasma del carrito pedido sale junto al real |
+| 12.1 Sistema masa-resorte | Período (T = 2π√(m/k), π² ≈ 10) | Un bloque fantasma oscila en fase con el real |
+| 12.2 Péndulo simple | Período en la Tierra y en otros planetas | La lenteja fantasma oscila junto a la real |
+| 12.3 MAS y movimiento circular | v máx, a máx y rapidez en x con el círculo de referencia | El punto fantasma gira junto al real |
 | N.4 Examen tipo admisión | 10 preguntas, 45 s cada una; la escena se reproduce en 3D | Una sola oportunidad |
 
 </details>
@@ -241,8 +245,8 @@ No necesita variables de entorno.
 
 **Física**
 
-- [x] Niveles 1–11: dimensional, vectorial, cinemática I y II, gráficas, movimiento circunferencial, estática, dinámica, gravitación universal, trabajo, energía y potencia, y cantidad de movimiento.
-- [ ] Niveles 12–23: MAS, ondas, hidrostática, calor, termodinámica, electricidad, magnetismo, óptica y física moderna.
+- [x] Niveles 1–12: dimensional, vectorial, cinemática I y II, gráficas, movimiento circunferencial, estática, dinámica, gravitación universal, trabajo, energía y potencia, cantidad de movimiento y oscilaciones.
+- [ ] Niveles 13–23: ondas, hidrostática, calor, termodinámica, electricidad, magnetismo, óptica y física moderna.
 
 **Matemáticas**
 
