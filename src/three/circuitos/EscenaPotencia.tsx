@@ -132,7 +132,8 @@ export function EscenaPotencia({ P, propuesta, escala, textoFuente, textoFoco, t
           <Etiqueta position={[XF - 0.45, 0, 0.4]} className="etq-dato etq-izq">
             {textoFuente}
           </Etiqueta>
-          <Etiqueta position={[XL - R_FOCO - 0.12, yBase + 0.12 + R_FOCO, 0.4]} className="etq-dato etq-izq">
+          {/* bajo el foco, a la derecha de su cable (a la izquierda chocaría con la fuente si el rótulo es largo) */}
+          <Etiqueta position={[XL + 0.15, yBase - 0.4, 0.4]} className="etq-dato">
             {textoFoco}
           </Etiqueta>
           <Etiqueta position={[(XF + XL) / 2, Y_ABA - 0.08, 0.4]} className="etq-dato etq-abajo">
