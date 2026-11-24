@@ -17,6 +17,7 @@ const META: MetaEtapa = {
   titulo: "Polarización",
   nivel: "Ondas electromagnéticas",
   nivelNum: 21,
+  siguiente: { ruta: "/nivel/21/radar", titulo: "Etapa 21.3 · Radar" },
   intro: (
     <>
       En la luz <b>polarizada</b>, el campo eléctrico oscila en una sola dirección. Un polarizador solo deja pasar la componente paralela a su eje: si está girado un ángulo θ, la intensidad cae a <b>I = I₀·cos²θ</b> (<b>ley de Malus</b>). La luz común no está polarizada: un primer polarizador deja pasar la mitad. Propón la intensidad: el luxómetro debe llegar a tu marca azul.

@@ -1,6 +1,6 @@
 // ══ Nivel 21 · Ondas electromagnéticas: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { COS2, frecuenciaEM, longitudEM, malus, regionEspectro } from "@/lib/ondasEM";
+import { C, COS2, distanciaRadar, frecuenciaEM, longitudEM, malus, regionEspectro } from "@/lib/ondasEM";
 
 /** Valida que la respuesta sea un entero dentro de (min, max]. */
 function enAjuste(r: number, min: number, max: number, etapa: string, id: string): number {
@@ -64,4 +64,35 @@ export function crearPolarizacion(id: string, I0: number, theta: number, noPolar
   if (COS2[theta] === undefined) throw new Error(`21.2 ${id}: ángulo sin cos² exacto`);
   const I = malus(noPolarizada ? I0 / 2 : I0, theta);
   return { id, I0, theta, noPolarizada, respuesta: enAjuste(I, 0, I_ESCALA, "21.2", id), pistas };
+}
+
+// ══ 21.3 Radar ───────
+/** Qué se pide: la distancia (km) a partir del tiempo del eco, o el tiempo del eco (µs) a partir de la distancia. */
+export type PideRadar = "dKm" | "tUs";
+
+export const MAGNITUDES_RADAR: Record<PideRadar, { simbolo: string; unidad: string; escala: number; paso: number; salto: number }> = {
+  dKm: { simbolo: "d", unidad: "km", escala: 100, paso: 1, salto: 10 },
+  tUs: { simbolo: "t", unidad: "µs", escala: 1000, paso: 10, salto: 100 },
+};
+
+export interface ProblemaRadar {
+  id: string;
+  pide: PideRadar;
+  /** Tiempo de ida y vuelta del eco (s) y distancia al objeto (m). */
+  t: number;
+  d: number;
+  /** Unidad en que se da el tiempo del eco en el enunciado. */
+  unidadT: "µs" | "ms";
+  respuesta: number;
+  pistas: [string, string];
+}
+
+/** pide d: se da t (s) · pide t: se da d (m). */
+export function crearRadar(id: string, pide: PideRadar, dato: number, pistas: [string, string], unidadT: "µs" | "ms" = "µs"): ProblemaRadar {
+  const [t, d] = pide === "dKm" ? [dato, distanciaRadar(dato)] : [(2 * dato) / C, dato];
+  const r = pide === "dKm" ? d / 1000 : t * 1e6;
+  const m = MAGNITUDES_RADAR[pide];
+  const res = enAjuste(Math.round(r * 1e6) / 1e6, 0, m.escala, "21.3", id);
+  if (res % m.paso !== 0) throw new Error(`21.3 ${id}: la respuesta no cae en un paso del ajuste`);
+  return { id, pide, t, d, unidadT, respuesta: res, pistas };
 }

@@ -151,6 +151,7 @@ export const ETAPAS_N20: EtapaInfo[] = [
 export const ETAPAS_N21: EtapaInfo[] = [
   { id: "espectro", clave: "n21-espectro", numero: "21.1", titulo: "Espectro electromagnético", resumen: "Una onda con E y B viaja sobre el espectro: con c = λf, el medidor debe llegar a tu marca.", tipo: "Flechas ↑ ↓ ← →" },
   { id: "polarizacion", clave: "n21-polarizacion", numero: "21.2", titulo: "Polarización", resumen: "Ley de Malus, I = I₀cos²θ: el haz se atenúa en los polarizadores y el luxómetro llega a tu marca.", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "radar", clave: "n21-radar", numero: "21.3", titulo: "Radar", resumen: "El pulso va al avión y vuelve: con d = c·t/2 halla la distancia o el tiempo del eco.", tipo: "Flechas ↑ ↓ ← →" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
