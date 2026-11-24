@@ -639,6 +639,24 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "asociacion") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="8" y1="32" x2="30" y2="32" />
+        <line x1="30" y1="16" x2="30" y2="48" />
+        <line x1="84" y1="16" x2="84" y2="48" />
+        <line x1="30" y1="16" x2="54" y2="16" />
+        <line x1="60" y1="16" x2="84" y2="16" />
+        <line x1="30" y1="48" x2="54" y2="48" />
+        <line x1="60" y1="48" x2="84" y2="48" />
+        <line x1="54" y1="8" x2="54" y2="24" className="ev-acento" />
+        <line x1="60" y1="8" x2="60" y2="24" className="ev-acento" />
+        <line x1="54" y1="40" x2="54" y2="56" className="ev-tenue" />
+        <line x1="60" y1="40" x2="60" y2="56" className="ev-tenue" />
+        <line x1="84" y1="32" x2="112" y2="32" />
+      </svg>
+    );
+  }
   if (id === "carga") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>

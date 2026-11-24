@@ -16,6 +16,7 @@ const META: MetaEtapa = {
   titulo: "Carga de un condensador",
   nivel: "Condensadores",
   nivelNum: 19,
+  siguiente: { ruta: "/nivel/19/asociacion", titulo: "Etapa 19.2 · Asociación de condensadores" },
   intro: (
     <>
       Un <b>condensador</b> son dos placas conductoras separadas: al conectarlo a una pila, una se carga con +Q y la otra con −Q. La carga es proporcional al voltaje, <b>Q = C·V</b>, donde C es la <b>capacidad</b> (en faradios; aquí, μF). Un <b>dieléctrico</b> entre las placas multiplica la capacidad por su constante κ. Propón la carga: el medidor debe llegar a tu marca azul.
