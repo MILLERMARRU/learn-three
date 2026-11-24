@@ -553,6 +553,16 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "conservacion") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="8" y1="48" x2="112" y2="48" className="ev-tenue" />
+        <rect x="34" y="30" width="24" height="16" rx="2" className="ev-acento" />
+        <rect x="58" y="32" width="18" height="14" rx="2" className="ev-tenue" />
+        <line x1="80" y1="38" x2="100" y2="38" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>

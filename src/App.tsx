@@ -68,6 +68,7 @@ const NIVELES: Record<string, Record<string, Etapa>> = {
   },
   "11": {
     impulso: lazy(() => import("@/etapas/nivel-11/EtapaImpulso")),
+    conservacion: lazy(() => import("@/etapas/nivel-11/EtapaConservacion")),
   },
 };
 
