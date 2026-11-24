@@ -17,6 +17,7 @@ const META: MetaEtapa = {
   titulo: "Gases ideales",
   nivel: "Termodinámica",
   nivelNum: 16,
+  siguiente: { ruta: "/nivel/16/trabajo", titulo: "Etapa 16.2 · Trabajo de un gas" },
   intro: (
     <>
       Un gas ideal cumple <b>P·V/T = constante</b>, con T en kelvin (T = t + 273). A temperatura constante, P y V son inversos (<b>Boyle</b>); a presión constante, V crece con T (<b>Charles</b>). En el cilindro, cada pesa sobre el pistón es 1 atm y el mechero calienta o enfría el gas. Propón el volumen final: el pistón debe detenerse en tu aro azul.
