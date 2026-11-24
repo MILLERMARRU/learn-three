@@ -27,6 +27,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡sube! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/10/examen", titulo: "Etapa 10.4 · Examen tipo admisión" },
   descRondas: {
     guiado: "P = mgh / t. La tecla que brilla te guía.",
     pista: "Te dan la velocidad: P = mg · v.",
