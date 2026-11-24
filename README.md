@@ -85,6 +85,7 @@ El inicio ya muestra las pestañas de los cinco cursos. Cada uno reutilizará el
 | 6 | Movimiento circunferencial | Velocidad angular · Poleas y engranajes · Aceleración centrípeta · Examen |
 | 7 | Estática | Primera condición de equilibrio · Poleas fijas y móviles · Momento de una fuerza · Examen |
 | 8 | Dinámica | Segunda ley de Newton · Plano inclinado con rozamiento · Sistemas de bloques · Examen |
+| 9 | Gravitación universal | Ley de gravitación universal · Gravedad en la altura y en otros planetas · Satélites y leyes de Kepler · Examen |
 
 <details>
 <summary><b>Detalle de las mecánicas por nivel</b></summary>
@@ -115,6 +116,9 @@ El inicio ya muestra las pestañas de los cinco cursos. Cada uno reutilizará el
 | 8.1 Segunda ley de Newton | Fuerza para que el bloque llegue a la bandera en t segundos (con rozamiento en «solo») | El bloque llega justo a tiempo |
 | 8.2 Plano inclinado con rozamiento | Predecir la aceleración del bloque que baja | Un fantasma con la aceleración propuesta corre junto al real |
 | 8.3 Sistemas de bloques | Aceleración (Atwood, mesa con pesa colgante) y tensión | Fantasmas junto al sistema; dinamómetro para la tensión |
+| 9.1 Ley de gravitación universal | Nueva fuerza de atracción cuando cambian las masas o la distancia | Las flechas reales crecen junto a las propuestas |
+| 9.2 Gravedad en la altura y en otros planetas | Predecir g a una altura o en otro planeta | Una bola fantasma cae junto a la real en el tubo de caída |
+| 9.3 Satélites y leyes de Kepler | Período (T² ∝ r³) y velocidad orbital | Un satélite fantasma gira junto al real |
 | N.4 Examen tipo admisión | 10 preguntas, 45 s cada una; la escena se reproduce en 3D | Una sola oportunidad |
 
 </details>
@@ -229,8 +233,8 @@ No necesita variables de entorno.
 
 **Física**
 
-- [x] Niveles 1–8: dimensional, vectorial, cinemática I y II, gráficas, movimiento circunferencial, estática y dinámica.
-- [ ] Niveles 9–23: gravitación, energía, choques, MAS, ondas, hidrostática, calor, termodinámica, electricidad, magnetismo, óptica y física moderna.
+- [x] Niveles 1–9: dimensional, vectorial, cinemática I y II, gráficas, movimiento circunferencial, estática, dinámica y gravitación universal.
+- [ ] Niveles 10–23: energía, choques, MAS, ondas, hidrostática, calor, termodinámica, electricidad, magnetismo, óptica y física moderna.
 
 **Matemáticas**
 
