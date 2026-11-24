@@ -17,6 +17,7 @@ const META: MetaEtapa = {
   titulo: "Asociación de condensadores",
   nivel: "Condensadores",
   nivelNum: 19,
+  siguiente: { ruta: "/nivel/19/energia", titulo: "Etapa 19.3 · Energía almacenada" },
   intro: (
     <>
       Con los condensadores las reglas van <b>al revés que con las resistencias</b>. En <b>paralelo</b> es como juntar sus placas: las capacidades se suman, C = C₁ + C₂. En <b>serie</b> se suman los inversos, 1/C = 1/C₁ + 1/C₂, y la equivalente es menor que la menor. Propón la capacidad entre A y B: el medidor debe llegar a tu marca azul.

@@ -1,6 +1,6 @@
 // ══ Nivel 19 · Condensadores: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { capParalelo, capSerie, carga } from "@/lib/condensadores";
+import { capParalelo, capSerie, carga, energiaCV, energiaQC, energiaQV } from "@/lib/condensadores";
 
 /** Valida que la respuesta sea un entero dentro de (min, max]. */
 function enAjuste(r: number, min: number, max: number, etapa: string, id: string): number {
@@ -51,4 +51,41 @@ export function crearAsociacion(id: string, tipo: TipoAsociacion, cs: number[], 
   if (tipo === "mixta" && cs.length !== 3) throw new Error(`19.2 ${id}: la mixta lleva tres condensadores`);
   const C = tipo === "paralelo" ? capParalelo(cs) : tipo === "serie" ? capSerie(cs) : capSerie([cs[0], capParalelo(cs.slice(1))]);
   return { id, tipo, cs, respuesta: enAjuste(C, Q_MIN, C_ESCALA, "19.2", id), pistas };
+}
+
+// ══ 19.3 Energía almacenada ───────
+/** Fondo de escala del medidor de energía (mJ). */
+export const U_ESCALA = 60;
+
+/** Qué da el enunciado: C y V, Q y C, Q y V, o una asociación (serie o paralelo) conectada a V. */
+export type DatoEnergia = "CV" | "QC" | "QV" | "serie" | "paralelo";
+
+export interface ProblemaEnergiaC {
+  id: string;
+  dato: DatoEnergia;
+  /** CV: (C μF, V) · QC: (Q μC, C μF) · QV: (Q μC, V) · serie/paralelo: capacidades (μF) y V. */
+  a: number;
+  b: number;
+  cs: number[] | null;
+  /** Capacidad (equivalente) en μF, para la escena. */
+  C: number;
+  /** Energía (mJ). */
+  respuesta: number;
+  pistas: [string, string];
+}
+
+/** Con μF, μC y V, las fórmulas dan μJ: se pasa a mJ. */
+const aMJ = (uJ: number) => Math.round((uJ / 1000) * 1e9) / 1e9;
+
+export function crearEnergiaC(id: string, dato: DatoEnergia, a: number, b: number, pistas: [string, string], cs: number[] | null = null): ProblemaEnergiaC {
+  let C: number, U: number;
+  if (dato === "CV") [C, U] = [a, energiaCV(a, b)];
+  else if (dato === "QC") [C, U] = [b, energiaQC(a, b)];
+  else if (dato === "QV") [C, U] = [a / b, energiaQV(a, b)];
+  else {
+    if (!cs) throw new Error(`19.3 ${id}: faltan las capacidades`);
+    C = dato === "serie" ? capSerie(cs) : capParalelo(cs);
+    U = energiaCV(C, b);
+  }
+  return { id, dato, a, b, cs, C, respuesta: enAjuste(aMJ(U), Q_MIN, U_ESCALA, "19.3", id), pistas };
 }
