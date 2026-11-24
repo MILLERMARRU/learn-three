@@ -639,6 +639,17 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "radar") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="6" y1="56" x2="114" y2="56" className="ev-tenue" />
+        <line x1="20" y1="56" x2="20" y2="42" />
+        <path d="M10 34 Q20 50 32 36" fill="none" />
+        <line x1="28" y1="36" x2="88" y2="16" className="ev-acento" strokeDasharray="4 4" />
+        <path d="M84 14 L104 14 M92 9 L96 19" fill="none" />
+      </svg>
+    );
+  }
   if (id === "polarizacion") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
