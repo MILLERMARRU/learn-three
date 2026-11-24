@@ -3,7 +3,7 @@ import type { RondaDef } from "@/motor/etapa";
 import { Frac, Op, Raiz, Sub, Sup, V } from "@/ui/Formula";
 import { crearOrbita, type ProblemaOrbita } from "./modelo";
 
-export { crearOrbita, fraccionQ, O_MAX, O_MIN } from "./modelo";
+export { conUnidad, crearOrbita, fraccionQ, O_MAX, O_MIN, textoPedida, textoRef } from "./modelo";
 export type { ProblemaOrbita } from "./modelo";
 
 export const RONDAS_ORBITAS: RondaDef<ProblemaOrbita>[] = [

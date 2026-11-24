@@ -105,3 +105,16 @@ export function fraccionQ(q: number): [number, number] {
   }
   return [q, 1];
 }
+
+// ══ Textos de las órbitas (leyenda de la escena, compartida por la etapa, el examen y el hero) ───────
+/** «1 día», «27 días», «16 h». */
+export const conUnidad = (n: number, u: ProblemaOrbita["unidad"]) => `${String(n).replace(".", ",")} ${u === "días" && n === 1 ? "día" : u}`;
+
+/** «r₂ = 4r₁», «r₂ = r₁/9», «r₂ = 9r₁/4» o «r = 16R». */
+export function textoPedida(p: ProblemaOrbita): string {
+  if (p.rasante) return `r = ${p.q}R`;
+  const [a, b] = fraccionQ(p.q);
+  return `r₂ = ${a === 1 ? "" : a}r₁${b === 1 ? "" : `/${b}`}`;
+}
+
+export const textoRef = (p: ProblemaOrbita) => (p.tipo === "T" ? `T₁ = ${conUnidad(p.ref, p.unidad)}` : p.rasante ? `rasante · ${p.ref} km/s` : `v₁ = ${p.ref} km/s`);

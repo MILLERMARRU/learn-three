@@ -68,6 +68,7 @@ export const ETAPAS_N9: EtapaInfo[] = [
   { id: "atraccion", clave: "n9-atraccion", numero: "9.1", titulo: "Ley de gravitación universal", resumen: "Cambian las masas o la distancia: ajusta la nueva fuerza de atracción (F ∝ m₁m₂/d²).", tipo: "Flechas ↑ ↓ ← →" },
   { id: "gravedad", clave: "n9-gravedad", numero: "9.2", titulo: "Gravedad en la altura y en otros planetas", resumen: "Predice g lejos de la superficie o en otro planeta: una bola fantasma cae con tu valor.", tipo: "Flechas ↑ ↓ ← →" },
   { id: "orbitas", clave: "n9-orbitas", numero: "9.3", titulo: "Satélites y leyes de Kepler", resumen: "Período (T² ∝ r³) y velocidad orbital: un satélite fantasma gira con tu valor.", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "examen", clave: "n9-examen", numero: "9.4", titulo: "Examen tipo admisión", resumen: "10 preguntas de la ley de gravitación, gravedad en la altura, Kepler y satélites con la escena en 3D.", tipo: "Opción múltiple" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
