@@ -639,6 +639,17 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "conductor") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <rect x="34" y="8" width="40" height="10" className="ev-acento" />
+        <rect x="34" y="46" width="40" height="10" className="ev-tenue" />
+        <line x1="14" y1="32" x2="96" y2="32" />
+        <line x1="54" y1="18" x2="54" y2="46" className="ev-tenue" strokeDasharray="3 3" />
+        <line x1="100" y1="32" x2="110" y2="24" className="ev-acento" />
+      </svg>
+    );
+  }
   if (id === "energia-condensador") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
