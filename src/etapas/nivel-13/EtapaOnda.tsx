@@ -27,6 +27,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡suelta! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/13/pulso", titulo: "Etapa 13.2 · Velocidad de una onda en una cuerda" },
   descRondas: {
     guiado: "Longitud de onda: λ = v / f. La tecla que brilla te guía.",
     pista: "Velocidad: v = λ·f (o λ/T).",
