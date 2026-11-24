@@ -606,6 +606,15 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "onda") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <path d="M10 32 Q 22 12, 34 32 T 58 32 T 82 32 T 106 32" fill="none" />
+        <line x1="22" y1="10" x2="46" y2="10" className="ev-tenue" />
+        <rect x="6" y="26" width="6" height="12" className="ev-acento" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
