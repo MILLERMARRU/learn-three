@@ -498,6 +498,16 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "orbitas") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <circle cx="60" cy="32" r="7" className="ev-tenue" />
+        <ellipse cx="60" cy="32" rx="18" ry="9" className="ev-tenue" />
+        <ellipse cx="60" cy="32" rx="40" ry="22" />
+        <rect x="96" y="28" width="7" height="7" rx="1" className="ev-acento" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
