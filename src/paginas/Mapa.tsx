@@ -639,6 +639,17 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "espectro") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <path d="M10 22 Q20 6 30 22 T50 22 T70 22 T90 22" fill="none" className="ev-acento" />
+        <line x1="10" y1="22" x2="96" y2="22" className="ev-tenue" />
+        <rect x="10" y="44" width="24" height="8" className="ev-tenue" />
+        <rect x="46" y="44" width="16" height="8" className="ev-acento" />
+        <rect x="74" y="44" width="28" height="8" className="ev-tenue" />
+      </svg>
+    );
+  }
   if (id === "induccion") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
