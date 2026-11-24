@@ -28,6 +28,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡suelta! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/9/orbitas", titulo: "Etapa 9.3 · Satélites y leyes de Kepler" },
   descRondas: {
     guiado: "Sobre la Tierra, a una altura h. La tecla que brilla te guía.",
     pista: "En la superficie de otros planetas.",
