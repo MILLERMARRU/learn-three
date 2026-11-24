@@ -82,6 +82,7 @@ export const ETAPAS_N11: EtapaInfo[] = [
   { id: "impulso", clave: "n11-impulso", numero: "11.1", titulo: "Impulso y cantidad de movimiento", resumen: "Un golpe cambia la cantidad de movimiento del disco: F·Δt = mv − mv₀ (el área de F–t).", tipo: "Flechas ↑ ↓" },
   { id: "conservacion", clave: "n11-conservacion", numero: "11.2", titulo: "Conservación de la cantidad de movimiento", resumen: "Choques plásticos y explosiones: la cantidad de movimiento total no cambia.", tipo: "Flechas ↑ ↓" },
   { id: "choques", clave: "n11-choques", numero: "11.3", titulo: "Choques elásticos e inelásticos", resumen: "Con el coeficiente de restitución: ¿con qué velocidad sale cada carrito tras el choque?", tipo: "Flechas ↑ ↓" },
+  { id: "examen", clave: "n11-examen", numero: "11.4", titulo: "Examen tipo admisión", resumen: "10 preguntas de impulso, choques, explosiones y restitución con la escena en 3D.", tipo: "Opción múltiple" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
