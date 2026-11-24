@@ -108,6 +108,7 @@ export const ETAPAS_N14: EtapaInfo[] = [
 
 export const ETAPAS_N15: EtapaInfo[] = [
   { id: "dilatacion", clave: "n15-dilatacion", numero: "15.1", titulo: "Dilatación térmica", resumen: "La barra se calienta o se enfría: ΔL = L₀·α·ΔT, su extremo debe llegar a tu marca.", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "calentador", clave: "n15-calentador", numero: "15.2", titulo: "Calor sensible", resumen: "La placa entrega Q: predice la temperatura final con Q = m·c·ΔT y mira subir el termómetro.", tipo: "Flechas ↑ ↓ ← →" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
