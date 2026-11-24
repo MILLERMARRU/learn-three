@@ -529,6 +529,18 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "potencia") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="34" y1="58" x2="34" y2="8" className="ev-tenue" />
+        <line x1="20" y1="8" x2="84" y2="8" className="ev-tenue" />
+        <line x1="70" y1="8" x2="70" y2="30" />
+        <rect x="62" y="30" width="16" height="14" rx="2" className="ev-acento" />
+        <line x1="92" y1="20" x2="92" y2="58" className="ev-tenue" />
+        <rect x="92" y="18" width="12" height="7" className="ev-tenue" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>

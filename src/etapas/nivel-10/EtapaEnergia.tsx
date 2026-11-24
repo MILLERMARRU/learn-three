@@ -26,6 +26,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡suelta! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/10/potencia", titulo: "Etapa 10.3 · Potencia" },
   descRondas: {
     guiado: "Baja desde el reposo: rapidez abajo. La tecla que brilla te guía.",
     pista: "Sube con una rapidez: ¿hasta qué altura llega?",

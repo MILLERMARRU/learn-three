@@ -1847,6 +1847,11 @@ kbd {
   .solo-movil {
     display: block;
   }
+  /* con muchos botones (−500 −50 +50 +500 ¡Sube!) la fila se parte en vez de desbordar */
+  .solo-movil .acciones {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
   .etapa-panel {
     border-left: 0;
     border-top: 1px solid var(--line);
