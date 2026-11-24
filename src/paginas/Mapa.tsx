@@ -584,6 +584,16 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "pendulo") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="40" y1="8" x2="80" y2="8" className="ev-tenue" />
+        <line x1="60" y1="8" x2="74" y2="46" />
+        <line x1="60" y1="8" x2="60" y2="50" className="ev-tenue" />
+        <circle cx="75" cy="49" r="6" className="ev-acento" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
