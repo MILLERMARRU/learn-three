@@ -17,6 +17,7 @@ const META: MetaEtapa = {
   titulo: "Fuerza sobre un conductor",
   nivel: "Electromagnetismo",
   nivelNum: 20,
+  siguiente: { ruta: "/nivel/20/campo-recto", titulo: "Etapa 20.2 · Campo de un conductor recto" },
   intro: (
     <>
       Un cable con corriente dentro de un campo magnético recibe una <b>fuerza</b>: es el principio de los motores eléctricos. Si el cable es perpendicular al campo, <b>F = B·I·L</b>; si forma un ángulo θ, <b>F = B·I·L·sen θ</b> (paralelo al campo, no hay fuerza). Su dirección la da la regla de la mano derecha. Propón la fuerza: el dinamómetro debe llegar a tu marca azul.
