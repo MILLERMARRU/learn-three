@@ -1,6 +1,6 @@
 // ══ Nivel 16 · Termodinámica: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { kelvin, volumenFinal } from "@/lib/termo";
+import { kelvin, trabajoIsobarico, volumenFinal } from "@/lib/termo";
 
 /** Valida que la respuesta sea un entero dentro de (min, max]. */
 function enAjuste(r: number, min: number, max: number, etapa: string, id: string): number {
@@ -38,4 +38,36 @@ export function crearGas(id: string, proceso: Proceso, P1: number, V1: number, t
   const V2 = volumenFinal(P1, V1, kelvin(t1), P2, kelvin(t2));
   if (V2 === V1) throw new Error(`16.1 ${id}: el pistón no se movería`);
   return { id, proceso, P1, V1, t1, P2, t2, respuesta: enAjuste(V2, V_MIN - 1, V_MAX, "16.1", id), pistas };
+}
+
+// ══ 16.2 Trabajo de un gas ───────
+/** Rango del ajuste del trabajo (kJ): negativo si el gas se comprime (el trabajo lo hacen sobre él). */
+export const W_MIN = -30;
+export const W_MAX = 30;
+
+/** Cómo da los datos el enunciado: kPa y m³, kPa y litros, o atm y litros (1 atm = 100 kPa). */
+export type UnidadesTrabajo = "kPa-m3" | "kPa-L" | "atm-L";
+
+export interface ProblemaTrabajo {
+  id: string;
+  unidades: UnidadesTrabajo;
+  /** Presión y volúmenes como los da el enunciado. */
+  P: number;
+  V1: number;
+  V2: number;
+  /** Los mismos en kPa y m³ (para la escena y la cuenta). */
+  Pk: number;
+  V1m: number;
+  V2m: number;
+  /** Trabajo del gas (kJ). */
+  respuesta: number;
+  pistas: [string, string];
+}
+
+export function crearTrabajo(id: string, unidades: UnidadesTrabajo, P: number, V1: number, V2: number, pistas: [string, string]): ProblemaTrabajo {
+  const Pk = unidades === "atm-L" ? P * 100 : P;
+  const [V1m, V2m] = unidades === "kPa-m3" ? [V1, V2] : [V1 / 1000, V2 / 1000];
+  const W = trabajoIsobarico(Pk, V1m, V2m);
+  if (Math.abs(W - Math.round(W)) > 1e-9 || W === 0 || W < W_MIN || W > W_MAX) throw new Error(`16.2 ${id}: W = ${W} fuera del ajuste`);
+  return { id, unidades, P, V1, V2, Pk, V1m, V2m, respuesta: Math.round(W), pistas };
 }
