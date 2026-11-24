@@ -28,6 +28,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡suelta el bloque! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/14/examen", titulo: "Etapa 14.4 · Examen tipo admisión" },
   descRondas: {
     guiado: "Bloques en agua: h = H·ρc/1000. La tecla que brilla te guía.",
     pista: "Otros líquidos: aceite, mercurio y glicerina.",
