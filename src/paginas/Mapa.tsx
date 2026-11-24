@@ -639,6 +639,19 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "polarizacion") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="8" y1="32" x2="40" y2="32" className="ev-acento" />
+        <ellipse cx="44" cy="32" rx="6" ry="18" fill="none" />
+        <line x1="44" y1="16" x2="44" y2="48" />
+        <line x1="48" y1="32" x2="74" y2="32" className="ev-acento" />
+        <ellipse cx="78" cy="32" rx="6" ry="18" fill="none" />
+        <line x1="72" y1="22" x2="84" y2="42" />
+        <line x1="82" y1="32" x2="110" y2="32" className="ev-tenue" />
+      </svg>
+    );
+  }
   if (id === "espectro") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
