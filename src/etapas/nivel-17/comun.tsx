@@ -5,6 +5,8 @@ export { simularTecla, ValorTexto } from "../nivel-03/comun";
 
 /** Encuadre de las dos esferas con sus flechas encima. */
 export const ESCENARIO_COULOMB = { encuadre: { w: 8.4, h: 4.4 }, balanceo: 0.04, arrastrable: false, centro: [0, 0.05] as [number, number] };
+/** Encuadre de las cargas con el punto P y la flecha del campo encima. */
+export const ESCENARIO_CAMPO = { encuadre: { w: 7.6, h: 4.4 }, balanceo: 0.04, arrastrable: false, centro: [0.1, -0.35] as [number, number] };
 export const CARRUSEL_ELECTRO = { paso: 9, escala: 0.33, fondo: 0, giro: 0, ancho: 7.6 };
 
 /** Teclas del ajuste entero de 1 en 1 y de 10 en 10 (la tecla Intro la nombra cada etapa). */
