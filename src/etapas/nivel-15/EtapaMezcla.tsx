@@ -28,6 +28,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡mezcla! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/15/examen", titulo: "Etapa 15.4 · Examen tipo admisión" },
   descRondas: {
     guiado: "Agua con agua: promedio pesado por las masas. La tecla que brilla te guía.",
     pista: "Masas muy distintas y aceite con agua (pesa m·c).",
