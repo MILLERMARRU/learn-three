@@ -16,6 +16,7 @@ const META: MetaEtapa = {
   titulo: "Radar",
   nivel: "Ondas electromagnéticas",
   nivelNum: 21,
+  siguiente: { ruta: "/nivel/21/examen", titulo: "Etapa 21.4 · Examen tipo admisión" },
   intro: (
     <>
       Un <b>radar</b> emite un pulso de ondas de radio que viaja a <b>c = 3 × 10⁸ m/s</b>, rebota en el objeto y vuelve como <b>eco</b>. El tiempo t que mide es de ida y vuelta: el pulso recorre 2d, así que <b>d = c·t / 2</b>. Propón el valor: el medidor debe llegar a tu marca azul.
