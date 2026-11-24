@@ -116,6 +116,7 @@ export const ETAPAS_N15: EtapaInfo[] = [
 export const ETAPAS_N16: EtapaInfo[] = [
   { id: "gas", clave: "n16-gas", numero: "16.1", titulo: "Gases ideales", resumen: "Pesas y mechero cambian P y T: con PV/T constante, el pistón debe detenerse en tu aro.", tipo: "Flechas ↑ ↓ ← →" },
   { id: "trabajo", clave: "n16-trabajo", numero: "16.2", titulo: "Trabajo de un gas", resumen: "A presión constante, W = P·ΔV: el área del diagrama P–V se llena hasta tu marca.", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "maquina", clave: "n16-maquina", numero: "16.3", titulo: "Máquinas térmicas", resumen: "Q₁ entra, sale W y Q₂: predice la eficiencia η = W/Q₁ (o la de Carnot) y mira el medidor.", tipo: "Flechas ↑ ↓ ← →" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */

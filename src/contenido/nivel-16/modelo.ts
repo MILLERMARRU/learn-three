@@ -1,6 +1,6 @@
 // ══ Nivel 16 · Termodinámica: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { kelvin, trabajoIsobarico, volumenFinal } from "@/lib/termo";
+import { carnot, eficiencia, kelvin, trabajoIsobarico, volumenFinal } from "@/lib/termo";
 
 /** Valida que la respuesta sea un entero dentro de (min, max]. */
 function enAjuste(r: number, min: number, max: number, etapa: string, id: string): number {
@@ -70,4 +70,29 @@ export function crearTrabajo(id: string, unidades: UnidadesTrabajo, P: number, V
   const W = trabajoIsobarico(Pk, V1m, V2m);
   if (Math.abs(W - Math.round(W)) > 1e-9 || W === 0 || W < W_MIN || W > W_MAX) throw new Error(`16.2 ${id}: W = ${W} fuera del ajuste`);
   return { id, unidades, P, V1, V2, Pk, V1m, V2m, respuesta: Math.round(W), pistas };
+}
+
+// ══ 16.3 Máquinas térmicas ───────
+/** Rango del ajuste de la eficiencia (%). */
+export const E_MIN = 0;
+export const E_MAX = 100;
+
+/** Qué da el enunciado: el trabajo y Q₁, los dos calores, o las temperaturas de los focos (Carnot, en °C). */
+export type DatoMaquina = "trabajo" | "calores" | "carnot";
+
+export interface ProblemaMaquina {
+  id: string;
+  dato: DatoMaquina;
+  /** Calor tomado del foco caliente y trabajo o calor cedido (J), o temperaturas de los focos (°C). */
+  a: number;
+  b: number;
+  /** Eficiencia (%). */
+  respuesta: number;
+  pistas: [string, string];
+}
+
+export function crearMaquina(id: string, dato: DatoMaquina, a: number, b: number, pistas: [string, string]): ProblemaMaquina {
+  // trabajo: a = Q₁, b = W · calores: a = Q₁, b = Q₂ · carnot: a = t₁, b = t₂ (°C)
+  const eta = dato === "trabajo" ? b / a : dato === "calores" ? eficiencia(a, b) : carnot(kelvin(a), kelvin(b));
+  return { id, dato, a, b, respuesta: enAjuste(Math.round(eta * 1e9) / 1e7, E_MIN, E_MAX - 1, "16.3", id), pistas };
 }

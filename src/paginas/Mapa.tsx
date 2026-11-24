@@ -212,7 +212,7 @@ function TarjetaEtapa({ e, prog, activa, sugerida }: { e: EtapaInfo; prog: Progr
       <h3 className="nc-titulo">{e.titulo}</h3>
       <p className="nc-teaser">{e.resumen}</p>
       <div className="ec-visual">
-        <VisualEtapa id={e.id} />
+        <VisualEtapa id={ICONO_POR_CLAVE[e.clave] ?? e.id} />
       </div>
       <div className="nc-pie">
         <Estrellas n={p?.estrellas ?? 0} />
@@ -227,6 +227,9 @@ function TarjetaEtapa({ e, prog, activa, sugerida }: { e: EtapaInfo; prog: Progr
 }
 
 // pequeño dibujo de cada mecánica
+// ══ Ícono de cada etapa: por id; si dos niveles repiten un id, la clave decide ───────
+const ICONO_POR_CLAVE: Record<string, string> = { "n16-trabajo": "trabajo-gas" };
+
 function VisualEtapa({ id }: { id: string }) {
   if (id === "moleculas") {
     return (
@@ -636,7 +639,19 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
-  if (id === "trabajo") {
+  if (id === "maquina") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <rect x="20" y="4" width="44" height="10" className="ev-acento" />
+        <rect x="20" y="50" width="44" height="10" className="ev-tenue" />
+        <circle cx="42" cy="32" r="9" />
+        <line x1="42" y1="14" x2="42" y2="23" />
+        <line x1="42" y1="41" x2="42" y2="50" />
+        <line x1="51" y1="32" x2="100" y2="32" className="ev-acento" />
+      </svg>
+    );
+  }
+  if (id === "trabajo-gas") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
         <line x1="20" y1="54" x2="108" y2="54" />
