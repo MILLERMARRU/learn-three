@@ -137,6 +137,7 @@ export const ETAPAS_N18: EtapaInfo[] = [
 export const ETAPAS_N19: EtapaInfo[] = [
   { id: "carga", clave: "n19-carga", numero: "19.1", titulo: "Carga de un condensador", resumen: "La pila llena las placas de cargas: Q = κ·C·V, el medidor debe llegar a tu marca.", tipo: "Flechas ↑ ↓ ← →" },
   { id: "asociacion", clave: "n19-asociacion", numero: "19.2", titulo: "Asociación de condensadores", resumen: "En paralelo se suman y en serie se suman los inversos: el capacímetro debe llegar a tu marca.", tipo: "Flechas ↑ ↓ ← →" },
+  { id: "energia", clave: "n19-energia", numero: "19.3", titulo: "Energía almacenada", resumen: "U = ½CV²: al descargar en el foco destella y el medidor de energía llega a tu marca.", tipo: "Flechas ↑ ↓ ← →" },
 ];
 
 /** Etapas de cada nivel disponible (la clave es el número de nivel). */
