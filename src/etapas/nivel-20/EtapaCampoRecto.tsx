@@ -17,6 +17,7 @@ const META: MetaEtapa = {
   titulo: "Campo de un conductor recto",
   nivel: "Electromagnetismo",
   nivelNum: 20,
+  siguiente: { ruta: "/nivel/20/induccion", titulo: "Etapa 20.3 · Inducción electromagnética" },
   intro: (
     <>
       Una corriente crea un <b>campo magnético</b> a su alrededor (lo descubrió Ørsted al ver girar una brújula). Para un cable recto largo, el campo forma círculos y vale <b>B = μ₀·I/(2π·d) = 2 × 10⁻⁷·I/d</b>; su sentido lo da la regla de la mano derecha. Con dos cables, los campos se suman o se restan. Propón B en P (en μT): el teslámetro debe llegar a tu marca azul.

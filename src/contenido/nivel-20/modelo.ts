@@ -1,6 +1,6 @@
 // ══ Nivel 20 · Electromagnetismo: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { campoRecto, fuerzaConductor, SENO } from "@/lib/magnetismo";
+import { campoRecto, femFaraday, femMovimiento, fuerzaConductor, SENO } from "@/lib/magnetismo";
 
 /** Valida que la respuesta sea un entero dentro de (min, max]. */
 function enAjuste(r: number, min: number, max: number, etapa: string, id: string): number {
@@ -66,4 +66,36 @@ export function crearCampoRecto(id: string, cables: ProblemaCampoRecto["cables"]
   const total = componentes.reduce((a, b) => a + b, 0);
   if (total === 0) throw new Error(`20.2 ${id}: el campo total es nulo`);
   return { id, cables, d, componentes, respuesta: enAjuste(Math.abs(total), F_MIN, B_ESCALA, "20.2", id), sentidoB: total > 0 ? 1 : -1, pistas };
+}
+
+// ══ 20.3 Inducción electromagnética ───────
+/** Fondo de escala del voltímetro (V). */
+export const E_ESCALA = 30;
+
+export interface ProblemaInduccion {
+  id: string;
+  /** Una barra que se desliza sobre rieles (ε = B·L·v) o una bobina con flujo variable (ε = N·ΔB·A/Δt). */
+  modo: "barra" | "bobina";
+  /** Barra: campo (T), longitud (m), rapidez (m/s) y si la longitud se da en cm. */
+  B: number;
+  L: number;
+  v: number;
+  enCm: boolean;
+  /** Bobina: espiras, área (m²), cambio del campo (T) y tiempo (s). */
+  N: number;
+  A: number;
+  dB: number;
+  dt: number;
+  /** Fem inducida (V). */
+  respuesta: number;
+  pistas: [string, string];
+}
+
+export function crearBarra(id: string, B: number, L: number, v: number, enCm: boolean, pistas: [string, string]): ProblemaInduccion {
+  return { id, modo: "barra", B, L, v, enCm, N: 0, A: 0, dB: 0, dt: 0, respuesta: enAjuste(femMovimiento(B, L, v), F_MIN, E_ESCALA, "20.3", id), pistas };
+}
+
+export function crearBobina(id: string, N: number, A: number, dB: number, dt: number, pistas: [string, string]): ProblemaInduccion {
+  const dPhi = Math.round(dB * A * 1e12) / 1e12;
+  return { id, modo: "bobina", B: 0, L: 0, v: 0, enCm: false, N, A, dB, dt, respuesta: enAjuste(femFaraday(N, dPhi, dt), F_MIN, E_ESCALA, "20.3", id), pistas };
 }
