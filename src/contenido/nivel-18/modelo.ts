@@ -1,6 +1,6 @@
 // ══ Nivel 18 · Electrodinámica: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { corriente, resistencia, voltaje } from "@/lib/circuitos";
+import { corriente, paralelo, resistencia, serie, voltaje } from "@/lib/circuitos";
 
 /** Valida que la respuesta sea un entero dentro de (min, max]. */
 function enAjuste(r: number, min: number, max: number, etapa: string, id: string): number {
@@ -40,4 +40,26 @@ export function crearOhm(id: string, pide: Magnitud, a: number, b: number, pista
   const [V, I, R] = pide === "I" ? [a, corriente(a, b), b] : pide === "V" ? [voltaje(a, b), a, b] : [a, b, resistencia(a, b)];
   const r = pide === "I" ? I : pide === "V" ? V : R;
   return { id, pide, V, I, R, respuesta: enAjuste(r, O_MIN, MEDIDORES[pide].escala, "18.1", id), pistas };
+}
+
+// ══ 18.2 Resistencias en serie y en paralelo ───────
+/** Fondo de escala del óhmetro (Ω). */
+export const RED_ESCALA = 60;
+
+export type TipoRed = "serie" | "paralelo" | "mixta";
+
+export interface ProblemaRed {
+  id: string;
+  tipo: TipoRed;
+  /** Resistencias (Ω). En la mixta: R₁ en serie con el paralelo de R₂ y R₃. */
+  rs: number[];
+  /** Resistencia equivalente (Ω). */
+  respuesta: number;
+  pistas: [string, string];
+}
+
+export function crearRed(id: string, tipo: TipoRed, rs: number[], pistas: [string, string]): ProblemaRed {
+  if (tipo === "mixta" && rs.length !== 3) throw new Error(`18.2 ${id}: la mixta lleva tres resistencias`);
+  const R = tipo === "serie" ? serie(rs) : tipo === "paralelo" ? paralelo(rs) : serie([rs[0], paralelo(rs.slice(1))]);
+  return { id, tipo, rs, respuesta: enAjuste(R, O_MIN, RED_ESCALA, "18.2", id), pistas };
 }
