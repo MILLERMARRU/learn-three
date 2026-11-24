@@ -92,6 +92,7 @@ El inicio ya muestra las pestañas de los cinco cursos. Cada uno reutilizará el
 | 13 | Ondas mecánicas | Longitud de onda, frecuencia y velocidad · Velocidad en una cuerda · Ondas estacionarias · Examen |
 | 14 | Hidrostática | Presión hidrostática · Principio de Pascal · Principio de Arquímedes · Examen |
 | 15 | Calor | Dilatación térmica · Calor sensible · Equilibrio térmico · Examen |
+| 16 | Termodinámica | Gases ideales · Trabajo de un gas · Máquinas térmicas · Examen |
 
 <details>
 <summary><b>Detalle de las mecánicas por nivel</b></summary>
@@ -143,6 +144,9 @@ El inicio ya muestra las pestañas de los cinco cursos. Cada uno reutilizará el
 | 15.1 Dilatación térmica | Cuánto se alarga o se acorta una barra, ΔL = L₀·α·ΔT | El extremo libre llega a la marca propuesta |
 | 15.2 Calor sensible | Temperatura final con Q = m·c·ΔT | La columna del termómetro se detiene en la marca |
 | 15.3 Equilibrio térmico | Temperatura de equilibrio de una mezcla en un calorímetro | Tras verter o sumergir, el termómetro se detiene en la marca |
+| 16.1 Gases ideales | Volumen final con P₁V₁/T₁ = P₂V₂/T₂ | Cambian las pesas y el mechero; el pistón se detiene en el aro |
+| 16.2 Trabajo de un gas | W = P·ΔV, el área bajo el diagrama P–V | El área se llena hasta la marca propuesta |
+| 16.3 Máquinas térmicas | Eficiencia η = W/Q₁ = 1 − Q₂/Q₁ y de Carnot | El medidor de eficiencia llega a la marca |
 | N.4 Examen tipo admisión | 10 preguntas, 45 s cada una; la escena se reproduce en 3D | Una sola oportunidad |
 
 </details>
@@ -257,8 +261,8 @@ No necesita variables de entorno.
 
 **Física**
 
-- [x] Niveles 1–15: dimensional, vectorial, cinemática I y II, gráficas, movimiento circunferencial, estática, dinámica, gravitación universal, trabajo, energía y potencia, cantidad de movimiento, oscilaciones, ondas mecánicas, hidrostática y calor.
-- [ ] Niveles 16–23: termodinámica, electricidad, magnetismo, óptica y física moderna.
+- [x] Niveles 1–16: dimensional, vectorial, cinemática I y II, gráficas, movimiento circunferencial, estática, dinámica, gravitación universal, trabajo, energía y potencia, cantidad de movimiento, oscilaciones, ondas mecánicas, hidrostática, calor y termodinámica.
+- [ ] Niveles 17–23: electricidad, magnetismo, óptica y física moderna.
 
 **Matemáticas**
 
