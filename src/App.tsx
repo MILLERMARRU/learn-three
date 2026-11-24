@@ -106,6 +106,7 @@ const NIVELES: Record<string, Record<string, Etapa>> = {
     coulomb: lazy(() => import("@/etapas/nivel-17/EtapaCoulomb")),
     campo: lazy(() => import("@/etapas/nivel-17/EtapaCampo")),
     potencial: lazy(() => import("@/etapas/nivel-17/EtapaPotencial")),
+    examen: lazy(() => import("@/etapas/nivel-17/EtapaExamenElectro")),
   },
 };
 

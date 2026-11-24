@@ -93,6 +93,7 @@ El inicio ya muestra las pestañas de los cinco cursos. Cada uno reutilizará el
 | 14 | Hidrostática | Presión hidrostática · Principio de Pascal · Principio de Arquímedes · Examen |
 | 15 | Calor | Dilatación térmica · Calor sensible · Equilibrio térmico · Examen |
 | 16 | Termodinámica | Gases ideales · Trabajo de un gas · Máquinas térmicas · Examen |
+| 17 | Electrostática | Ley de Coulomb · Campo eléctrico · Potencial eléctrico · Examen |
 
 <details>
 <summary><b>Detalle de las mecánicas por nivel</b></summary>
@@ -147,6 +148,9 @@ El inicio ya muestra las pestañas de los cinco cursos. Cada uno reutilizará el
 | 16.1 Gases ideales | Volumen final con P₁V₁/T₁ = P₂V₂/T₂ | Cambian las pesas y el mechero; el pistón se detiene en el aro |
 | 16.2 Trabajo de un gas | W = P·ΔV, el área bajo el diagrama P–V | El área se llena hasta la marca propuesta |
 | 16.3 Máquinas térmicas | Eficiencia η = W/Q₁ = 1 − Q₂/Q₁ y de Carnot | El medidor de eficiencia llega a la marca |
+| 17.1 Ley de Coulomb | Fuerza entre dos cargas, F = k·q₁q₂/d² | La flecha de la fuerza llega a la fantasma |
+| 17.2 Campo eléctrico | E = kQ/d² y superposición de dos cargas | La flecha del campo en P llega a la fantasma |
+| 17.3 Potencial eléctrico | V = kQ/d y el trabajo W = q·(V(A) − V(B)) | El medidor (con cero central) llega a la marca |
 | N.4 Examen tipo admisión | 10 preguntas, 45 s cada una; la escena se reproduce en 3D | Una sola oportunidad |
 
 </details>
@@ -261,8 +265,8 @@ No necesita variables de entorno.
 
 **Física**
 
-- [x] Niveles 1–16: dimensional, vectorial, cinemática I y II, gráficas, movimiento circunferencial, estática, dinámica, gravitación universal, trabajo, energía y potencia, cantidad de movimiento, oscilaciones, ondas mecánicas, hidrostática, calor y termodinámica.
-- [ ] Niveles 17–23: electricidad, magnetismo, óptica y física moderna.
+- [x] Niveles 1–17: dimensional, vectorial, cinemática I y II, gráficas, movimiento circunferencial, estática, dinámica, gravitación universal, trabajo, energía y potencia, cantidad de movimiento, oscilaciones, ondas mecánicas, hidrostática, calor, termodinámica y electrostática.
+- [ ] Niveles 18–23: electrodinámica, condensadores, electromagnetismo, ondas electromagnéticas, óptica y física moderna.
 
 **Matemáticas**
 
