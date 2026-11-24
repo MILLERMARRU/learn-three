@@ -1,6 +1,6 @@
 // ══ Nivel 11 · Cantidad de movimiento y choques: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { choquePlastico, explosion, impulso, velocidadTrasImpulso } from "@/lib/momento";
+import { choque, choquePlastico, explosion, impulso, velocidadTrasImpulso } from "@/lib/momento";
 
 // ══ 11.1 Impulso y cantidad de movimiento ───────
 /** Rango del ajuste de velocidad (m/s, con signo: positivo = hacia la derecha). */
@@ -55,4 +55,30 @@ export function crearConservacion(id: string, tipo: ProblemaConservacion["tipo"]
   // la velocidad es un entero no nulo dentro del ajuste: si no, falla al cargar
   if (!Number.isInteger(v) || v === 0 || v < V_MIN || v > V_MAX) throw new Error(`11.2 ${id}: v = ${v} fuera del ajuste`);
   return { id, tipo, m1, m2, u1, u2, w1, respuesta: v, pistas };
+}
+
+// ══ 11.3 Choques elásticos e inelásticos ───────
+export interface ProblemaChoque {
+  id: string;
+  m1: number;
+  m2: number;
+  /** Velocidades antes (m/s, con signo) y coeficiente de restitución (1 = elástico). */
+  u1: number;
+  u2: number;
+  e: number;
+  /** De qué carrito se pide la velocidad después. */
+  pedido: 1 | 2;
+  /** Velocidades reales después (m/s). */
+  w1: number;
+  w2: number;
+  respuesta: number;
+  pistas: [string, string];
+}
+
+export function crearChoque(id: string, m1: number, m2: number, u1: number, u2: number, e: number, pedido: 1 | 2, pistas: [string, string]): ProblemaChoque {
+  const { v1, v2 } = choque(m1, u1, m2, u2, e);
+  // las dos velocidades después son enteras (se muestran las dos al acertar) y la pedida no es nula
+  const r = pedido === 1 ? v1 : v2;
+  if (!Number.isInteger(v1) || !Number.isInteger(v2) || r === 0 || r < V_MIN || r > V_MAX) throw new Error(`11.3 ${id}: v₁′ = ${v1}, v₂′ = ${v2} fuera del ajuste`);
+  return { id, m1, m2, u1, u2, e, pedido, w1: v1, w2: v2, respuesta: r, pistas };
 }
