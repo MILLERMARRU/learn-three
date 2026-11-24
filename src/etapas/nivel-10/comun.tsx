@@ -1,0 +1,6 @@
+// ══ Piezas compartidas por las etapas de trabajo, energía y potencia ───────
+export { fmtNum, simularTecla, ValorTexto } from "../nivel-03/comun";
+
+/** Encuadre de la escena del empujón (piso largo y bajo; el contenido se corre a la derecha por el enunciado). */
+export const ESCENARIO_EMPUJON = { encuadre: { w: 9.8, h: 4.6 }, balanceo: 0.04, arrastrable: false, centro: [-0.4, 0.3] as [number, number] };
+export const CARRUSEL_ENERGIA = { paso: 8.3, escala: 0.33, fondo: 0, giro: 0, ancho: 8.8 };
