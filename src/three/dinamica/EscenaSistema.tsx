@@ -149,8 +149,9 @@ export function EscenaSistema({ tipo, m1, m2, mu, aReal, aFantasma, tension, cor
   });
 
   const bloque = (l: number, mat: THREE.Material) => <mesh geometry={geo.caja} material={mat} scale={[l, l, 0.5]} />;
-  // dinamómetro en el tramo de cuerda del bloque 2, cerca de la polea
-  const dina: [number, number] = tipo === "atwood" ? [R, geom.polea[1] - 0.75] : [geom.polea[0] + R, geom.polea[1] - 0.55];
+  // dinamómetro cerca de la polea, en la cuerda del bloque que baja: el que sube lo atravesaría al final
+  const dinaIzq = tipo === "atwood" && m1 >= m2;
+  const dina: [number, number] = tipo === "atwood" ? [dinaIzq ? -R : R, geom.polea[1] - 0.75] : [geom.polea[0] + R, geom.polea[1] - 0.55];
 
   return (
     <group position={[0, -0.25, 0]}>
@@ -185,13 +186,19 @@ export function EscenaSistema({ tipo, m1, m2, mu, aReal, aFantasma, tension, cor
 
       <group ref={g1} position={[geom.b1[0], geom.b1[1], 0]}>
         {bloque(l1, mats.b1)}
-        {etiquetas && (
-          <Etiqueta position={[0, 0, 0.35]} className="etq-dato etq-centro">
-            {m1} kg
-          </Etiqueta>
-        )}
+        {/* los rótulos van al costado del bloque, hacia afuera: nunca encima */}
+        {etiquetas &&
+          (tipo === "atwood" ? (
+            <Etiqueta position={[-l1 / 2, 0, 0.35]} className="etq-dato etq-izq">
+              {m1} kg
+            </Etiqueta>
+          ) : (
+            <Etiqueta position={[0, l1 / 2 + 0.06, 0.35]} className="etq-dato etq-centro">
+              {m1} kg
+            </Etiqueta>
+          ))}
         {etiquetas && tipo === "mesa" && mu > 0 && (
-          <Etiqueta position={[0, -l1 / 2 - 0.25, 0.35]} className="etq-dato etq-centro">
+          <Etiqueta position={[-l1 / 2, 0, 0.35]} className="etq-dato etq-izq">
             μ = {String(mu).replace(".", ",")}
           </Etiqueta>
         )}
@@ -199,7 +206,7 @@ export function EscenaSistema({ tipo, m1, m2, mu, aReal, aFantasma, tension, cor
       <group ref={g2} position={[geom.b2[0], geom.b2[1], 0]}>
         {bloque(l2, mats.b2)}
         {etiquetas && (
-          <Etiqueta position={[0, 0, 0.35]} className="etq-dato etq-centro">
+          <Etiqueta position={[l2 / 2, 0, 0.35]} className="etq-dato">
             {m2} kg
           </Etiqueta>
         )}
@@ -221,7 +228,7 @@ export function EscenaSistema({ tipo, m1, m2, mu, aReal, aFantasma, tension, cor
         <group position={[dina[0], dina[1], 0.15]}>
           <mesh geometry={geo.dina} material={mats.dina} />
           {etiquetas && (
-            <Etiqueta position={[0.6, 0, 0.2]} className="etq-dato etq-acento etq-centro">
+            <Etiqueta position={[dinaIzq ? -0.1 : 0.1, 0, 0.2]} className={`etq-dato etq-acento ${dinaIzq ? "etq-izq" : ""}`}>
               T = {Math.round(tension * 10) / 10} N
             </Etiqueta>
           )}
