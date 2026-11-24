@@ -130,6 +130,7 @@ const NIVELES: Record<string, Record<string, Etapa>> = {
     espectro: lazy(() => import("@/etapas/nivel-21/EtapaEspectro")),
     polarizacion: lazy(() => import("@/etapas/nivel-21/EtapaPolarizacion")),
     radar: lazy(() => import("@/etapas/nivel-21/EtapaRadar")),
+    examen: lazy(() => import("@/etapas/nivel-21/EtapaExamenOndasEM")),
   },
 };
 
