@@ -28,6 +28,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡golpea! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/13/estacionaria", titulo: "Etapa 13.3 · Ondas estacionarias" },
   descRondas: {
     guiado: "v = √(T/μ) con T y μ dados. La tecla que brilla te guía.",
     pista: "La tensión la da la pesa: T = m·g.",
