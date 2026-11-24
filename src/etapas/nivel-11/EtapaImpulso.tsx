@@ -26,6 +26,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡golpea! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/11/conservacion", titulo: "Etapa 11.2 · Conservación de la cantidad de movimiento" },
   descRondas: {
     guiado: "Desde el reposo: v = I / m. La tecla que brilla te guía.",
     pista: "El disco ya se movía: suma el impulso a lo que traía.",
