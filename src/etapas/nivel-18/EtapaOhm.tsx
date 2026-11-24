@@ -16,6 +16,7 @@ const META: MetaEtapa = {
   titulo: "Ley de Ohm",
   nivel: "Electrodinámica",
   nivelNum: 18,
+  siguiente: { ruta: "/nivel/18/red", titulo: "Etapa 18.2 · Resistencias en serie y en paralelo" },
   intro: (
     <>
       Una pila empuja a los electrones por el circuito: eso es la <b>corriente</b> I (en amperes). La resistencia R (en ohm) se opone a su paso, y el voltaje V (en voltios) es el empuje. Los tres se relacionan con la <b>ley de Ohm, V = I·R</b>. Propón el valor que se pide: la aguja del multímetro debe llegar a tu marca azul.

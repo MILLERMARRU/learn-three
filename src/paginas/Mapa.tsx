@@ -639,6 +639,22 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "red") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <line x1="8" y1="32" x2="30" y2="32" />
+        <line x1="30" y1="16" x2="30" y2="48" />
+        <line x1="74" y1="16" x2="74" y2="48" />
+        <rect x="42" y="12" width="20" height="8" className="ev-acento" />
+        <rect x="42" y="44" width="20" height="8" className="ev-tenue" />
+        <line x1="30" y1="16" x2="42" y2="16" />
+        <line x1="62" y1="16" x2="74" y2="16" />
+        <line x1="30" y1="48" x2="42" y2="48" />
+        <line x1="62" y1="48" x2="74" y2="48" />
+        <line x1="74" y1="32" x2="112" y2="32" />
+      </svg>
+    );
+  }
   if (id === "ohm") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
