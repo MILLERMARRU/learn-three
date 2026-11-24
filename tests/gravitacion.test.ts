@@ -1,7 +1,7 @@
 // ══ Pruebas de la gravitación universal ───────
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { anguloOrbita, fuerzaProporcional, G0, gravedad, periodoKepler, velocidadOrbital } from "../src/lib/gravitacion.ts";
+import { anguloOrbita, fuerzaProporcional, G0, gravedad, periodoKepler, velocidadEscalada, velocidadOrbital } from "../src/lib/gravitacion.ts";
 
 test("la fuerza baja con el cuadrado de la distancia", () => {
   assert.equal(fuerzaProporcional(36, 1, 1, 3), 4);
@@ -48,4 +48,15 @@ test("velocidad orbital", () => {
 test("ángulo recorrido en una órbita", () => {
   assert.equal(anguloOrbita(4, 1), Math.PI / 2);
   assert.equal(anguloOrbita(0, 3), 0);
+});
+
+test("velocidad orbital escalada", () => {
+  assert.equal(velocidadEscalada(6, 9), 2);
+  assert.equal(velocidadEscalada(4, 0.25), 8);
+  assert.equal(velocidadEscalada(8, 64), 1);
+});
+
+test("Kepler con razones fraccionarias", () => {
+  assert.equal(periodoKepler(8, 4, 9), 27);
+  assert.equal(periodoKepler(27, 9, 1), 1);
 });
