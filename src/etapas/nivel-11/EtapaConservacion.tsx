@@ -27,6 +27,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡suelta! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/11/choques", titulo: "Etapa 11.3 · Choques elásticos e inelásticos" },
   descRondas: {
     guiado: "Choque plástico con uno en reposo. La tecla que brilla te guía.",
     pista: "Los dos se mueven: ojo con los signos.",
