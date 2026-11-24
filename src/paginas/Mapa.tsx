@@ -519,6 +519,16 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "energia") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <path d="M8 14 C 30 14, 34 52, 52 52 L 68 52 C 86 52, 92 20, 112 20" className="ev-tenue" fill="none" />
+        <rect x="12" y="6" width="12" height="7" rx="2" className="ev-acento" />
+        <line x1="48" y1="8" x2="72" y2="8" />
+        <line x1="48" y1="14" x2="62" y2="14" className="ev-tenue" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>

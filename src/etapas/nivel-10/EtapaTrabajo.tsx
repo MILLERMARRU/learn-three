@@ -26,6 +26,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡empuja! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/10/energia", titulo: "Etapa 10.2 · Conservación de la energía mecánica" },
   descRondas: {
     guiado: "Fuerza horizontal, desde el reposo. La tecla que brilla te guía.",
     pista: "Fuerza inclinada: solo trabaja F cos θ.",
