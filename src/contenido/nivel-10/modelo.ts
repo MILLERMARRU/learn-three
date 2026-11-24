@@ -1,6 +1,6 @@
 // ══ Nivel 10 · Trabajo, energía y potencia: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { alturaMaxima, G, rapidezEnergia, rapidezTrasTrabajo, trabajoNeto } from "@/lib/energia";
+import { alturaMaxima, G, potenciaElevar, potenciaEntregada, rapidezEnergia, rapidezTrasTrabajo, trabajoNeto } from "@/lib/energia";
 
 // ══ 10.1 Trabajo y energía cinética ───────
 /** Rango del ajuste de rapidez (m/s, de 1 en 1). */
@@ -56,4 +56,32 @@ export function crearEnergia(id: string, tipo: ProblemaEnergia["tipo"], h1: numb
   // la respuesta es un entero positivo dentro del ajuste: si no, falla al cargar
   if (Math.abs(r - Math.round(r)) > 1e-9 || r <= E_MIN || r > E_MAX) throw new Error(`10.2 ${id}: ${tipo} = ${r} fuera del ajuste`);
   return { id, tipo, h1, v0, h2, respuesta: Math.round(r), pistas };
+}
+
+// ══ 10.3 Potencia ───────
+/** Paso y rango del ajuste de potencia (W): ↑ ↓ de 50 en 50, ← → de 500 en 500. */
+export const P_PASO = 50;
+export const P_MIN = 50;
+export const P_MAX = 5000;
+
+export interface ProblemaPotencia {
+  id: string;
+  /** Masa de la carga (kg), altura de la bandera (m) y tiempo en que debe llegar (s). */
+  m: number;
+  h: number;
+  t: number;
+  /** Rendimiento del motor (1 = 100 %). */
+  eta: number;
+  /** El enunciado da la velocidad de subida (v = h/t) en lugar del tiempo. */
+  conV: boolean;
+  /** Potencia que debe entregar el motor (W). */
+  respuesta: number;
+  pistas: [string, string];
+}
+
+export function crearPotencia(id: string, m: number, h: number, t: number, eta: number, conV: boolean, pistas: [string, string]): ProblemaPotencia {
+  const P = potenciaEntregada(potenciaElevar(m, h, t), eta);
+  // la potencia es exacta y cae en el ajuste (múltiplo de 50 W): si no, falla al cargar
+  if (Math.abs(P - Math.round(P)) > 1e-9 || Math.round(P) % P_PASO !== 0 || P < P_MIN || P > P_MAX) throw new Error(`10.3 ${id}: P = ${P} fuera del ajuste`);
+  return { id, m, h, t, eta, conV, respuesta: Math.round(P), pistas };
 }
