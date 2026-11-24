@@ -615,6 +615,16 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "pulso") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <path d="M10 28 L 40 28 Q 50 10, 60 28 L 96 28" fill="none" />
+        <circle cx="100" cy="32" r="5" className="ev-tenue" />
+        <line x1="105" y1="32" x2="105" y2="50" className="ev-tenue" />
+        <rect x="100" y="50" width="10" height="9" className="ev-acento" />
+      </svg>
+    );
+  }
   if (id === "area") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
