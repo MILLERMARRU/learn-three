@@ -1,6 +1,6 @@
 // ══ Nivel 20 · Electromagnetismo: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { fuerzaConductor, SENO } from "@/lib/magnetismo";
+import { campoRecto, fuerzaConductor, SENO } from "@/lib/magnetismo";
 
 /** Valida que la respuesta sea un entero dentro de (min, max]. */
 function enAjuste(r: number, min: number, max: number, etapa: string, id: string): number {
@@ -34,4 +34,36 @@ export function crearConductor(id: string, B: number, I: number, L: number, thet
   if (SENO[theta] === undefined) throw new Error(`20.1 ${id}: ángulo sin seno exacto`);
   const mN = Math.round(fuerzaConductor(B, I, L, theta) * 1000 * 1e9) / 1e9;
   return { id, B, I, L, theta, enMili, respuesta: enAjuste(mN, F_MIN, F_ESCALA, "20.1", id), pistas };
+}
+
+// ══ 20.2 Campo de un conductor recto ───────
+/** Fondo de escala del teslámetro (μT). */
+export const B_ESCALA = 100;
+
+export interface CableRecto {
+  /** Corriente (A) y su sentido: +1 saliendo de la mesa (⊙), −1 entrando (⊗). */
+  I: number;
+  sentido: 1 | -1;
+}
+
+export interface ProblemaCampoRecto {
+  id: string;
+  /** Uno o dos cables; con dos, P está en el punto medio, a la distancia d de cada uno. */
+  cables: [CableRecto] | [CableRecto, CableRecto];
+  /** Distancia de cada cable a P (cm). */
+  d: number;
+  /** Campo de cada cable en P (μT, con signo según el eje y de la mesa). */
+  componentes: number[];
+  /** Módulo del campo total (μT) y su sentido (+1 hacia arriba en la mesa). */
+  respuesta: number;
+  sentidoB: 1 | -1;
+  pistas: [string, string];
+}
+
+export function crearCampoRecto(id: string, cables: ProblemaCampoRecto["cables"], d: number, pistas: [string, string]): ProblemaCampoRecto {
+  // regla de la mano derecha: un cable a la izquierda de P con corriente saliente da campo hacia +y en P; uno a la derecha, hacia −y
+  const componentes = cables.map((c, i) => Math.round(c.sentido * (i === 0 ? 1 : -1) * campoRecto(c.I, d / 100) * 1e6 * 1e9) / 1e9);
+  const total = componentes.reduce((a, b) => a + b, 0);
+  if (total === 0) throw new Error(`20.2 ${id}: el campo total es nulo`);
+  return { id, cables, d, componentes, respuesta: enAjuste(Math.abs(total), F_MIN, B_ESCALA, "20.2", id), sentidoB: total > 0 ? 1 : -1, pistas };
 }
