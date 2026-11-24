@@ -636,6 +636,18 @@ function VisualEtapa({ id }: { id: string }) {
       </svg>
     );
   }
+  if (id === "prensa") {
+    return (
+      <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
+        <path d="M18 18 V54 H102 V30" className="ev-tenue" fill="none" />
+        <path d="M30 18 V44 H72 V30" className="ev-tenue" fill="none" />
+        <line x1="18" y1="26" x2="30" y2="26" />
+        <line x1="24" y1="6" x2="24" y2="22" className="ev-acento" />
+        <rect x="76" y="16" width="22" height="10" className="ev-acento" />
+        <line x1="72" y1="30" x2="102" y2="30" />
+      </svg>
+    );
+  }
   if (id === "presion") {
     return (
       <svg viewBox="0 0 120 64" className="ev-svg" aria-hidden>
