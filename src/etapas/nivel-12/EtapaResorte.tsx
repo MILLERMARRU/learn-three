@@ -28,6 +28,7 @@ const META: MetaEtapa = {
     { teclas: ["⏎"], texto: "¡suelta! y se comprueba" },
     { teclas: ["H"], texto: "pista" },
   ],
+  siguiente: { ruta: "/nivel/12/pendulo", titulo: "Etapa 12.2 · Péndulo simple" },
   descRondas: {
     guiado: "Período directo. La tecla que brilla te guía.",
     pista: "¿Qué pasa si cambias la masa o el resorte?",
