@@ -135,7 +135,7 @@ export function EscenaRiel({ m1, m2, modo, u1, u2, w1, w2, fantasmaDe, propuesta
 
   return (
     <group>
-      <mesh geometry={geo.caja} material={mats.riel} position={[0, -0.03, 0]} scale={[8.8, 0.06, 0.6]} />
+      <mesh geometry={geo.caja} material={mats.riel} position={[0, -0.03, 0]} scale={[8.2, 0.06, 0.6]} />
       <group ref={g1} position={[x1At(0), 0, 0]}>
         {carrito(L1, mats.c1)}
       </group>
