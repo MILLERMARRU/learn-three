@@ -1,6 +1,6 @@
 // ══ Nivel 18 · Electrodinámica: modelo de los problemas (tipos y constructores), sin rondas ni textos ───────
 // El hero y la vista del examen importan solo este módulo, así el inicio no arrastra el contenido de las etapas.
-import { corriente, paralelo, resistencia, serie, voltaje } from "@/lib/circuitos";
+import { corriente, paralelo, potenciaIR, potenciaVI, potenciaVR, resistencia, serie, voltaje } from "@/lib/circuitos";
 
 /** Valida que la respuesta sea un entero dentro de (min, max]. */
 function enAjuste(r: number, min: number, max: number, etapa: string, id: string): number {
@@ -62,4 +62,43 @@ export function crearRed(id: string, tipo: TipoRed, rs: number[], pistas: [strin
   if (tipo === "mixta" && rs.length !== 3) throw new Error(`18.2 ${id}: la mixta lleva tres resistencias`);
   const R = tipo === "serie" ? serie(rs) : tipo === "paralelo" ? paralelo(rs) : serie([rs[0], paralelo(rs.slice(1))]);
   return { id, tipo, rs, respuesta: enAjuste(R, O_MIN, RED_ESCALA, "18.2", id), pistas };
+}
+
+// ══ 18.3 Potencia eléctrica ───────
+/** Fondo de escala del vatímetro (W). */
+export const P_ESCALA = 200;
+
+/** Qué da el enunciado: V e I, I y R, V y R, o los datos nominales de un foco (P y V) y el voltaje aplicado. */
+export type DatoPotencia = "VI" | "IR" | "VR" | "nominal";
+
+export interface ProblemaPotenciaE {
+  id: string;
+  dato: DatoPotencia;
+  /** VI: (V, I) · IR: (I, R) · VR: (V, R) · nominal: (P nominal, V nominal, V aplicado). */
+  a: number;
+  b: number;
+  c: number | null;
+  /** Voltaje, corriente y resistencia del foco en el circuito (para la escena). */
+  V: number;
+  I: number;
+  R: number;
+  /** Potencia (W). */
+  respuesta: number;
+  pistas: [string, string];
+}
+
+export function crearPotenciaE(id: string, dato: DatoPotencia, a: number, b: number, c: number | null, pistas: [string, string]): ProblemaPotenciaE {
+  let V: number, I: number, R: number, P: number;
+  if (dato === "VI") [V, I, R, P] = [a, b, resistencia(a, b), potenciaVI(a, b)];
+  else if (dato === "IR") [V, I, R, P] = [voltaje(a, b), a, b, potenciaIR(a, b)];
+  else if (dato === "VR") [V, I, R, P] = [a, corriente(a, b), b, potenciaVR(a, b)];
+  else {
+    // la resistencia del foco sale de sus datos nominales; luego la potencia con el voltaje aplicado
+    if (c === null) throw new Error(`18.3 ${id}: falta el voltaje aplicado`);
+    R = (b * b) / a;
+    V = c;
+    I = corriente(c, R);
+    P = potenciaVR(c, R);
+  }
+  return { id, dato, a, b, c, V, I, R, respuesta: enAjuste(P, O_MIN, P_ESCALA, "18.3", id), pistas };
 }

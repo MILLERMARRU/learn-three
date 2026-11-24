@@ -17,6 +17,7 @@ const META: MetaEtapa = {
   titulo: "Resistencias en serie y en paralelo",
   nivel: "Electrodinámica",
   nivelNum: 18,
+  siguiente: { ruta: "/nivel/18/potencia", titulo: "Etapa 18.3 · Potencia eléctrica" },
   intro: (
     <>
       Varias resistencias se pueden reemplazar por una sola, la <b>equivalente</b>. En <b>serie</b> (una tras otra) se suman: R = R₁ + R₂ + … En <b>paralelo</b> (lado a lado) la corriente se reparte y se suman los inversos: 1/R = 1/R₁ + 1/R₂; la equivalente es menor que la menor. Propón la resistencia entre A y B: el óhmetro debe llegar a tu marca azul.
